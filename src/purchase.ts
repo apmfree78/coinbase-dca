@@ -1,13 +1,13 @@
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
+import {v4 as uuidv4} from 'uuid';
 import {axiosInstance} from './axios/config';
 import {AppResult, AppState, panic, sleep} from './utils';
 import {
   coins,
   CoinbaseCurrency,
   CoinbaseOrderRequest,
-  OrderStatus,
+  OrderResponseStatus,
 } from './coin.config';
-import {AxiosResponse} from 'axios';
 
 export async function purchaseCrypto(): Promise<AppResult> {
   const orders: string[] = [];
@@ -22,22 +22,23 @@ export async function purchaseCrypto(): Promise<AppResult> {
 
 export async function marketBuy(coin: CoinbaseCurrency): Promise<string> {
   const coinData: CoinbaseOrderRequest = {
-    type: 'market',
+    client_order_id: uuidv4(),
     product_id: coin.productId,
-    funds: coin.funds,
-    side: 'buy',
+    side: 'BUY',
+    market_market_ioc: {
+      quote_size: coin.funds,
+    },
   };
 
   try {
-    const response: AxiosResponse<OrderStatus> = await axiosInstance.post(
-      'orders',
-      coinData,
-    );
+    const response: AxiosResponse<OrderResponseStatus> =
+      await axiosInstance.post('orders', coinData);
     await sleep(1000);
-    const order = response.data;
-    return `✅ Order(${order.id}) - Purchased ${coin.funds} of ${order.product_id}`;
-    //Error handling below
+    const order = response.data as OrderResponseStatus;
+    return `✅ Order(${order.order_id}) - Purchased ${coin.funds} of ${order.success_response.order_id}`;
+    // Error handling below
   } catch (err: unknown) {
+    console.warn(err);
     const message = axios.isAxiosError(err)
       ? err?.response?.data.message
       : err instanceof Error

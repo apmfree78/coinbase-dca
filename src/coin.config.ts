@@ -5,36 +5,42 @@ export interface CoinbaseCurrency {
 
 export const coins: CoinbaseCurrency[] = [
   {
-    funds: '5.00',
+    funds: '10.00',
     productId: 'BTC-USD',
   },
 ];
 
-export interface OrderStatus {
-  id: string;
+export interface CoinbaseOrderRequest {
+  client_order_id: string;
+  side: 'BUY' | 'SELL';
   product_id: string;
-  side: string;
-  status: string;
-  created_at: string;
-  filled_size: string;
-  size: string;
-  type: string;
-  price?: string;
+  market_market_ioc: {
+    quote_size?: string; // required for BUY order
+    base_size?: string; // required for SELL order
+  };
 }
 
-export interface CoinbaseOrderRequest {
-  profile_id?: string;
-  type: 'limit' | 'market' | 'stop';
-  side: 'buy' | 'sell';
-  product_id: string;
-  stp?: 'dc' | 'co' | 'cn' | 'cb';
-  stop?: 'loss' | 'entry';
-  stop_price?: string;
-  price?: 'limit' | 'stop';
-  size?: string;
-  funds?: string;
-  time_in_force?: 'GTC' | 'GTT' | 'IOC' | 'FOk';
-  cancel_after?: 'min' | 'hour' | 'day';
-  post_only?: boolean;
-  client_oid?: string;
+export interface OrderResponseStatus {
+  success: boolean;
+  failure_reason: 'string';
+  order_id: 'string';
+  success_response: {
+    order_id: 'string';
+    product_id: 'string';
+    side: 'string';
+    client_order_id: 'string';
+  };
+  error_response?: {
+    error: 'string';
+    message: 'string';
+    error_details: 'string';
+    preview_failure_reason: 'string';
+    new_order_failure_reason: 'string';
+  };
+  order_configuration: {
+    market_market_ioc: {
+      quote_size: 'string';
+      base_size: 'string';
+    };
+  };
 }

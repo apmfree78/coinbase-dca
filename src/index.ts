@@ -5,4 +5,4 @@ import {setupEnvironment} from './env';
   setupEnvironment();
   const {message} = await purchaseCrypto();
   console.info(message);
-});
+})();

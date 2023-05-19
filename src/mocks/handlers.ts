@@ -1,5 +1,5 @@
-import {rest} from 'msw';
 import {
+  rest,
   RequestHandler,
   RestContext,
   MockedRequest,
@@ -15,7 +15,7 @@ export const handlers: RequestHandler[] = [
       res: ResponseComposition,
       ctx: RestContext,
     ) => {
-      if (req?.body?.type === 'market' && req?.body?.side === 'buy') {
+      if (req?.body?.client_order_id && req?.body?.side === 'BUY') {
         // Validate that headers are present
         const cbAccessKey = req.headers.get('cb-access-key');
         const cbAccessSign = req.headers.get('cb-access-sign');

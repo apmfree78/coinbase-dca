@@ -1,4 +1,4 @@
-import {CoinbaseCurrency, OrderStatus} from './coin.config';
+import {CoinbaseCurrency} from './coin.config';
 import {panic, AppState} from './utils';
 import {purchaseCrypto, marketBuy} from './purchase';
 import {server} from './mocks/server';
