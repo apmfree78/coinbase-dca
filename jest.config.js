@@ -13,10 +13,5 @@ module.exports = {
       statements: 80,
     },
   },
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.json',
-    },
-  },
   testPathIgnorePatterns: ['/node_modules/', '/dist/', '/build/'],
 };

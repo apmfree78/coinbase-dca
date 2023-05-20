@@ -13,13 +13,16 @@ axiosInstance.interceptors.request.use(
     console.log('body', config.data);
     console.log('method', config.method?.toUpperCase());
     console.log('url', config.url);
+    const method = config.method?.toUpperCase();
+    let body = method === 'POST' ? JSON.stringify(config.data) : '';
+
     const {signature, timestamp} = generateSignature(
       config.method?.toUpperCase() || 'GET',
       config.url as string,
-      config.data as CoinbaseOrderRequest,
+      body,
     );
 
-    config.headers['accept'] = 'application/json';
+    config.headers.accept = 'application/json';
     config.headers['CB-ACCESS-KEY'] = process.env.API_KEY;
     config.headers['CB-ACCESS-SIGN'] = signature;
     config.headers['CB-ACCESS-TIMESTAMP'] = parseInt(timestamp);

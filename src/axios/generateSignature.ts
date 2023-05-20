@@ -5,7 +5,7 @@ import {CoinbaseOrderRequest} from '../coin.config';
 export function generateSignature(
   method: string,
   apiUrl: string,
-  requestBody: CoinbaseOrderRequest,
+  requestBody: string,
 ): {
   signature: string;
   timestamp: string;
@@ -18,7 +18,7 @@ export function generateSignature(
   console.log('path', path);
   console.log('requestBody', requestBody);
   console.log('secret', process.env.API_SECRET);
-  const str = timestamp + method + path + JSON.stringify(requestBody);
+  const str = timestamp + method + path + requestBody;
   const sig = sign(str, process.env.API_SECRET || '');
   return {signature: sig, timestamp};
 }

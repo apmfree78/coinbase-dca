@@ -6,7 +6,8 @@ import {
   coins,
   CoinbaseCurrency,
   CoinbaseOrderRequest,
-  OrderResponseStatus,
+  OrderResponseSuccess,
+  OrderResponseError,
 } from './coin.config';
 
 export async function purchaseCrypto(): Promise<AppResult> {
@@ -25,18 +26,20 @@ export async function marketBuy(coin: CoinbaseCurrency): Promise<string> {
     client_order_id: uuidv4(),
     product_id: coin.productId,
     side: 'BUY',
-    market_market_ioc: {
-      quote_size: coin.funds,
+    order_configuration: {
+      market_market_ioc: {
+        quote_size: coin.funds,
+      },
     },
   };
 
   try {
-    const response: AxiosResponse<OrderResponseStatus> =
+    const response: AxiosResponse<OrderResponseSuccess> =
       await axiosInstance.post('api/v3/brokerage/orders', coinData);
     await sleep(1000);
-    const order = response.data as OrderResponseStatus;
-    console.log('response', response.data);
-    return `✅ Order(${order.order_id}) - Purchased ${coin.funds} of ${order.success_response.product_id}`;
+    const order = response.data as OrderResponseSuccess;
+    console.log('response', order);
+    return `✅ Order(${order.order_id}) - Purchased ${coin.funds} of ${order.product_id}`;
     // Error handling below
   } catch (err: unknown) {
     console.warn(err);

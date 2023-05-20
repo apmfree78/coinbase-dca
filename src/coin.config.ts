@@ -22,27 +22,43 @@ export interface CoinbaseOrderRequest {
   };
 }
 
-export interface OrderResponseStatus {
-  success: boolean;
-  failure_reason: 'string';
+export interface OrderResponseError {
+  error: 'string';
+  message: 'string';
+  error_details: 'string';
+  preview_failure_reason: 'string';
+  new_order_failure_reason: 'string';
+}
+
+export interface OrderResponseSuccess {
   order_id: 'string';
-  success_response: {
-    order_id: 'string';
-    product_id: 'string';
-    side: 'string';
-    client_order_id: 'string';
-  };
-  error_response?: {
-    error: 'string';
-    message: 'string';
-    error_details: 'string';
-    preview_failure_reason: 'string';
-    new_order_failure_reason: 'string';
-  };
-  order_configuration: {
-    market_market_ioc: {
-      quote_size: 'string';
-      base_size: 'string';
+  product_id: 'string';
+  side: 'string';
+  client_order_id: 'string';
+}
+
+export interface AccountStatus {
+  accounts: {
+    uuid: string;
+    name: string;
+    currency: string;
+    available_balance: {
+      value: string;
+      currency: string;
+    };
+    default: boolean;
+    active: boolean;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+    type: string;
+    ready: boolean;
+    hold: {
+      value: string;
+      currency: string;
     };
   };
+  has_next: boolean;
+  cursor: string;
+  size: string;
 }

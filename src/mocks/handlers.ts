@@ -26,14 +26,10 @@ export const handlers: RequestHandler[] = [
         else
           return res(
             ctx.json({
-              success: true,
               order_id: '1',
-              success_response: {
-                order_id: '1',
-                product_id: req.body.product_id,
-                side: req.body.side,
-                client_order_id: req.body.client_order_id,
-              },
+              product_id: req.body.product_id,
+              side: req.body.side,
+              client_order_id: req.body.client_order_id,
             }),
           );
       } else {
