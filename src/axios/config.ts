@@ -3,25 +3,29 @@ import {generateSignature} from './generateSignature';
 import {CoinbaseOrderRequest} from '../coin.config';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://api.coinbase.com/api/v3/brokerage',
+  baseURL: 'https://api.coinbase.com',
   responseType: 'json',
 });
 
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig<CoinbaseOrderRequest>) => {
     // geting signature for axios call using api secret
+    console.log('body', config.data);
+    console.log('method', config.method?.toUpperCase());
+    console.log('url', config.url);
     const {signature, timestamp} = generateSignature(
-      config.method || 'get',
+      config.method?.toUpperCase() || 'GET',
       config.url as string,
       config.data as CoinbaseOrderRequest,
     );
 
-    config.headers['cb-access-key'] = process.env.API_KEY;
-    config.headers['cb-access-sign'] = signature;
-    config.headers['cb-access-timestamp'] = timestamp;
-    console.log('API KEY', config.headers['cb-access-key']);
-    console.log('signature', config.headers['cb-access-sign']);
-    console.log('timestamp', config.headers['cb-access-timestamp']);
+    config.headers['accept'] = 'application/json';
+    config.headers['CB-ACCESS-KEY'] = process.env.API_KEY;
+    config.headers['CB-ACCESS-SIGN'] = signature;
+    config.headers['CB-ACCESS-TIMESTAMP'] = parseInt(timestamp);
+    console.log('API KEY', config.headers['CB-ACCESS-KEY']);
+    console.log('signature', config.headers['CB-ACCESS-SIGN']);
+    console.log('timestamp', config.headers['CB-ACCESS-TIMESTAMP']);
     return config;
   },
   (error) => {

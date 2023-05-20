@@ -1,4 +1,5 @@
 import {CoinbaseCurrency} from './coin.config';
+import {coinbaseURL} from './mocks/constants';
 import {panic, AppState} from './utils';
 import {purchaseCrypto, marketBuy} from './purchase';
 import {server} from './mocks/server';
@@ -28,7 +29,7 @@ describe('purchaseCrypto', () => {
 
   it('should panic when marketBuy fails', async () => {
     server.use(
-      rest.post('https://api.exchange.coinbase.com/orders', (req, res, ctx) => {
+      rest.post(coinbaseURL, (req, res, ctx) => {
         return res(ctx.status(400), ctx.json({message: 'buy failure'}));
       }),
     );

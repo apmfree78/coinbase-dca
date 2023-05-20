@@ -1,10 +1,6 @@
 import dotenv from 'dotenv';
 import {AppResult, AppState, panic} from './utils';
-import {fileURLToPath} from 'url';
-import path, {dirname} from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import path from 'path';
 
 function validateEnvironment(): void {
   const invalidArgs = ['API_KEY', 'API_SECRET', 'NODE_ENV'].filter(

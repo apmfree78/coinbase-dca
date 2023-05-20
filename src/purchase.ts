@@ -32,10 +32,11 @@ export async function marketBuy(coin: CoinbaseCurrency): Promise<string> {
 
   try {
     const response: AxiosResponse<OrderResponseStatus> =
-      await axiosInstance.post('orders', coinData);
+      await axiosInstance.post('api/v3/brokerage/orders', coinData);
     await sleep(1000);
     const order = response.data as OrderResponseStatus;
-    return `✅ Order(${order.order_id}) - Purchased ${coin.funds} of ${order.success_response.order_id}`;
+    console.log('response', response.data);
+    return `✅ Order(${order.order_id}) - Purchased ${coin.funds} of ${order.success_response.product_id}`;
     // Error handling below
   } catch (err: unknown) {
     console.warn(err);

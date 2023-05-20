@@ -14,9 +14,11 @@ export interface CoinbaseOrderRequest {
   client_order_id: string;
   side: 'BUY' | 'SELL';
   product_id: string;
-  market_market_ioc: {
-    quote_size?: string; // required for BUY order
-    base_size?: string; // required for SELL order
+  order_configuration: {
+    market_market_ioc: {
+      quote_size?: string; // required for BUY order
+      base_size?: string; // required for SELL order
+    };
   };
 }
 
