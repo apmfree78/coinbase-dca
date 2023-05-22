@@ -9,8 +9,18 @@ export async function checkAccountStatus(): Promise<void> {
       'api/v3/brokerage/accounts',
     );
     await sleep(1000);
-    const order = response.data as AccountStatus;
-    console.log('order status', order);
+    const info = response.data as AccountStatus;
+    info.accounts.map((account) => {
+      console.log('--------------------------------');
+      console.log('name:', account.name);
+      console.log('currency:', account.currency);
+      console.log('is active?', account.active);
+      console.log(
+        'Available Balance',
+        parseFloat(account.available_balance.value).toFixed(5),
+      );
+      console.log('--------------------------------');
+    });
     // Error handling below
   } catch (err: unknown) {
     console.warn(err);

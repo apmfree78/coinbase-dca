@@ -31,10 +31,21 @@ export interface OrderResponseError {
 }
 
 export interface OrderResponseSuccess {
+  success: boolean;
+  failure_reason: string;
   order_id: 'string';
-  product_id: 'string';
-  side: 'string';
-  client_order_id: 'string';
+  success_response: {
+    order_id: 'string';
+    product_id: 'string';
+    side: 'string';
+    client_order_id: 'string';
+  };
+  order_configuration: {
+    market_market_ioc: {
+      quote_size: 'string';
+      base_size?: 'string';
+    };
+  };
 }
 
 export interface AccountStatus {
@@ -57,7 +68,7 @@ export interface AccountStatus {
       value: string;
       currency: string;
     };
-  };
+  }[];
   has_next: boolean;
   cursor: string;
   size: string;

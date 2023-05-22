@@ -39,7 +39,7 @@ export async function marketBuy(coin: CoinbaseCurrency): Promise<string> {
     await sleep(1000);
     const order = response.data as OrderResponseSuccess;
     console.log('response', order);
-    return `✅ Order(${order.order_id}) - Purchased ${coin.funds} of ${order.product_id}`;
+    return `✅ Order(${order.order_id}) - Purchased ${coin.funds} of ${order.success_response.product_id}`;
     // Error handling below
   } catch (err: unknown) {
     console.warn(err);
