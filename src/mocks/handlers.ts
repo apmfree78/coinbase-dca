@@ -22,9 +22,9 @@ export const handlers: RequestHandler[] = [
     ) => {
       if (req?.body?.client_order_id && req?.body?.side === 'BUY') {
         // Validate that headers are present
-        const cbAccessKey = req.headers.get('cb-access-key');
-        const cbAccessSign = req.headers.get('cb-access-sign');
-        const cbAccessTimeStamp = req.headers.get('cb-access-timestamp');
+        const cbAccessKey = req.headers.get('CB-ACCESS-KEY');
+        const cbAccessSign = req.headers.get('CB-ACCESS-SIGN');
+        const cbAccessTimeStamp = req.headers.get('CB-ACCESS-TIMESTAMP');
         if (!cbAccessTimeStamp || !cbAccessSign || !cbAccessKey)
           return res(ctx.status(400), ctx.json({message: 'buy failure'}));
         else
