@@ -10,6 +10,12 @@ export const coins: CoinbaseCurrency[] = [
   },
 ];
 
+export type AccountStatusSuccessResponse = {
+  name: string;
+  active: boolean;
+  balance: string;
+};
+
 export interface CoinbaseOrderRequest {
   client_order_id: string;
   side: 'BUY' | 'SELL';
