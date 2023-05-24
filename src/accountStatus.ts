@@ -19,8 +19,8 @@ export async function checkAccountStatus(): Promise<
       const balance = parseFloat(account.available_balance.value).toFixed(5);
       console.log('--------------------------------');
       console.log('name:', account.name);
-      console.log('currency:', account.currency);
-      console.log('is active?', account.active);
+      // console.log('currency:', account.currency);
+      // console.log('is active?', account.active);
       console.log('Available Balance', balance);
       console.log('--------------------------------');
       // TODO refactor to return json

@@ -1,5 +1,13 @@
-import {CoinbaseCurrency} from './coin.config';
-import {buyOrderURL} from './mocks/constants';
+import {
+  CoinbaseCurrency,
+  PriceData,
+  PriceDataSuccessResponse,
+} from './coin.config';
+import {
+  accountstatusURL,
+  buyOrderURL,
+  productPriceURL,
+} from './mocks/constants';
 import {panic, AppState} from './utils';
 import {purchaseCrypto, marketBuy} from './purchase';
 import {server} from './mocks/server';
@@ -7,6 +15,7 @@ import {rest} from 'msw';
 import {setupEnvironment} from './env';
 import {checkAccountStatus} from './accountStatus';
 import type {AccountStatusSuccessResponse} from './coin.config';
+import {getPriceData} from './getPriceData';
 
 beforeAll(() => {
   server.listen();
@@ -55,7 +64,7 @@ describe('marketBuy', () => {
 
   it('should panic on failed buy', async () => {
     server.use(
-      rest.post('https://api.exchange.coinbase.com/orders', (req, res, ctx) => {
+      rest.post(buyOrderURL, (req, res, ctx) => {
         return res(ctx.status(400), ctx.json({message: 'buy failure'}));
       }),
     );
@@ -71,7 +80,7 @@ describe('marketBuy', () => {
 });
 
 describe('accountStatus', () => {
-  it('should return success message on successful buy', async () => {
+  it('should successfully return account data', async () => {
     const accountData: AccountStatusSuccessResponse[] =
       (await checkAccountStatus()) as AccountStatusSuccessResponse[];
 
@@ -84,5 +93,43 @@ describe('accountStatus', () => {
     expect(accountData[2].name).toEqual('BTC Wallet');
     expect(accountData[2].active).toEqual(true);
     expect(accountData[2].balance).toEqual(parseFloat('10000000').toFixed(5));
+  });
+
+  it('should panic on failed call', async () => {
+    server.use(
+      rest.post(accountstatusURL, (req, res, ctx) => {
+        return res(ctx.status(400), ctx.json({message: 'request failed'}));
+      }),
+    );
+
+    await checkAccountStatus();
+    expect(panic).toHaveBeenCalled();
+  });
+});
+
+describe('getPriceData', () => {
+  it('should return correct product id and price', async () => {
+    const productPriceData: PriceDataSuccessResponse = (await getPriceData(
+      'BTC-USD',
+    )) as PriceDataSuccessResponse;
+
+    expect(productPriceData.product_id).toEqual('BTC-USD');
+    expect(productPriceData.price.toFixed(2)).toEqual('100000.21');
+  });
+
+  it('should panic on failed call', async () => {
+    server.use(
+      rest.post(productPriceURL, (req, res, ctx) => {
+        return res(ctx.status(400), ctx.json({message: 'request failed'}));
+      }),
+    );
+
+    await getPriceData('BTC-USD');
+    expect(panic).toHaveBeenCalled();
+  });
+
+  it('should panic when invalid product id is submitted', async () => {
+    await getPriceData('abcxyz-USD');
+    expect(panic).toHaveBeenCalled();
   });
 });
