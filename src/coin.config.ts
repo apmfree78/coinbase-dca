@@ -57,9 +57,14 @@ export interface CoinbaseOrderRequest {
   side: 'BUY' | 'SELL';
   product_id: string;
   order_configuration: {
-    market_market_ioc: {
+    market_market_ioc?: {
       quote_size?: string; // required for BUY order
       base_size?: string; // required for SELL order
+    };
+    limit_limit_gtc?: {
+      base_size?: string; // required for BUY order
+      limit_price?: string; // required for SELL order
+      post_only?: boolean;
     };
   };
 }
@@ -83,9 +88,14 @@ export interface OrderResponseSuccess {
     client_order_id: string;
   };
   order_configuration: {
-    market_market_ioc: {
+    market_market_ioc?: {
       quote_size: string;
       base_size?: string;
+    };
+    limit_limit_gtc?: {
+      base_size: string; // required for BUY order
+      limit_price: string; // required for SELL order
+      post_only?: boolean;
     };
   };
 }
