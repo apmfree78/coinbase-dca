@@ -7,7 +7,6 @@ import {
   CoinbaseCurrency,
   CoinbaseOrderRequest,
   OrderResponseSuccess,
-  OrderResponseError,
 } from './coin.config';
 import {getPriceData} from './getPriceData';
 
@@ -37,7 +36,7 @@ export async function marketBuy(coin: CoinbaseCurrency): Promise<string> {
   try {
     const response: AxiosResponse<OrderResponseSuccess> =
       await axiosInstance.post('api/v3/brokerage/orders', coinData);
-    await sleep(1000);
+    await sleep(200);
     const order = response.data as OrderResponseSuccess;
     console.log('response', order);
     return `✅ Order(${order.order_id}) - Purchased ${coin.funds} of ${order.success_response.product_id}`;
@@ -67,7 +66,14 @@ export async function limitOrderBuy(coin: CoinbaseCurrency): Promise<string> {
       message: `failed to retrieve price of ${coin.productId} for limit order`,
     };
     panic(data);
+    return 'failed to retrieve market price';
   }
+
+  // convert coin.funds to base_size
+  const base_size = (parseFloat(coin.funds) / priceData.price).toString();
+
+  // set limit price 0.1% below market price
+  const limitPrice = parseFloat((0.999 * priceData.price).toFixed(2));
 
   const coinData: CoinbaseOrderRequest = {
     client_order_id: uuidv4(),
@@ -75,8 +81,8 @@ export async function limitOrderBuy(coin: CoinbaseCurrency): Promise<string> {
     side: 'BUY',
     order_configuration: {
       limit_limit_gtc: {
-        base_size: coin.funds,
-        limit_price: '26000',
+        base_size,
+        limit_price: limitPrice.toString(),
         post_only: true,
       },
     },
@@ -88,12 +94,20 @@ export async function limitOrderBuy(coin: CoinbaseCurrency): Promise<string> {
     await sleep(1000);
     const order = response.data as OrderResponseSuccess;
     console.log('response', order);
-    const {
-      success_response: {product_id},
-      order_configuration: {limit_limit_gtc},
-    } = order;
 
-    return `✅ Limit Order(${order.order_id}) Submitted - For ${coin.funds} of ${product_id} at ${limit_limit_gtc?.limit_price} `;
+    if (order.order_id) {
+      const {
+        success_response: {product_id},
+        order_configuration: {limit_limit_gtc},
+      } = order;
+
+      return `✅ Limit Order(${order.order_id}) Submitted - For ${
+        coin.funds
+      } of ${product_id} at ${parseFloat(
+        limit_limit_gtc?.limit_price || '',
+      ).toFixed(2)}`;
+    }
+    return 'something went wrong!';
     // Error handling below
   } catch (err: unknown) {
     console.warn(err);

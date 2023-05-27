@@ -9,13 +9,14 @@ import {
   productPriceURL,
 } from './mocks/constants';
 import {panic, AppState} from './utils';
-import {purchaseCrypto, marketBuy} from './purchase';
+import {purchaseCrypto, marketBuy, limitOrderBuy} from './purchase';
 import {server} from './mocks/server';
 import {rest} from 'msw';
 import {setupEnvironment} from './env';
 import {checkAccountStatus} from './accountStatus';
 import type {AccountStatusSuccessResponse} from './coin.config';
 import {getPriceData} from './getPriceData';
+import {mockPriceDataResponse} from './mocks/mockData';
 
 beforeAll(() => {
   server.listen();
@@ -75,6 +76,39 @@ describe('marketBuy', () => {
     };
 
     await marketBuy(coin);
+    expect(panic).toHaveBeenCalled();
+  });
+});
+
+describe('limitOrderBuy', () => {
+  jest.mock('./getPriceData', () => {
+    getPriceData: (productId: string) => mockPriceDataResponse;
+  });
+  const coin: CoinbaseCurrency = {
+    productId: 'BTC-USD',
+    funds: '100',
+  };
+
+  it('should return success message on successful buy', async () => {
+    const limitPrice = parseFloat(mockPriceDataResponse.price) * 0.999;
+
+    const result = await limitOrderBuy(coin);
+
+    expect(result).toEqual(
+      `✅ Limit Order(1) Submitted - For ${coin.funds} of ${
+        coin.productId
+      } at ${limitPrice.toFixed(2)}`,
+    );
+  });
+
+  it('should panic on failed buy', async () => {
+    server.use(
+      rest.post(buyOrderURL, (req, res, ctx) => {
+        return res(ctx.status(400), ctx.json({message: 'buy failure'}));
+      }),
+    );
+
+    await limitOrderBuy(coin);
     expect(panic).toHaveBeenCalled();
   });
 });
