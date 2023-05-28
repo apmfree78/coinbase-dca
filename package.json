@@ -6,6 +6,8 @@
   "scripts": {
     "lint": "eslint . --ext .ts --ignore-path .gitignore --cache --fix",
     "format": "prettier 'src/**/*.ts' --write --ignore-path .gitignore",
+    "cron:enable": "mkdir -p .github/workflows; cp cron.yml .github/workflows/cron.yml",
+    "cron:disable": "rm -rf .github",
     "purchase": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/index.js",
     "status": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/checkAccounts.js",
     "build": "rm -rf ./build && tsc",
