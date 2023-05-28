@@ -12,6 +12,7 @@ import {panic, AppState} from './utils';
 import {purchaseCrypto, marketBuy, limitOrderBuy} from './purchase';
 import {server} from './mocks/server';
 import {rest} from 'msw';
+import {coins} from './coin.config';
 import {setupEnvironment} from './env';
 import {checkAccountStatus} from './accountStatus';
 import type {AccountStatusSuccessResponse} from './coin.config';
@@ -36,7 +37,7 @@ describe('purchaseCrypto', () => {
     const result = await purchaseCrypto();
 
     expect(result.state).toEqual(AppState.SUCCESS);
-    expect(result.message).toContain('✅ Order(1) - Purchased');
+    expect(result.message).toContain('✅ Limit Order(1) Submitted');
   });
 
   it('should panic when marketBuy fails', async () => {
@@ -90,7 +91,7 @@ describe('limitOrderBuy', () => {
   };
 
   it('should return success message on successful buy', async () => {
-    const limitPrice = parseFloat(mockPriceDataResponse.price) * 0.999;
+    const limitPrice = parseFloat(mockPriceDataResponse.price) * 0.9999;
 
     const result = await limitOrderBuy(coin);
 

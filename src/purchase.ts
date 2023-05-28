@@ -13,7 +13,7 @@ import {getPriceData} from './getPriceData';
 export async function purchaseCrypto(): Promise<AppResult> {
   const orders: string[] = [];
   for (const coin of coins) {
-    orders.push(await marketBuy(coin as CoinbaseCurrency));
+    orders.push(await limitOrderBuy(coin as CoinbaseCurrency));
   }
   return {
     state: AppState.SUCCESS,
@@ -70,10 +70,10 @@ export async function limitOrderBuy(coin: CoinbaseCurrency): Promise<string> {
   }
 
   // convert coin.funds to base_size
-  const base_size = (parseFloat(coin.funds) / priceData.price).toString();
+  const base_size = (parseFloat(coin.funds) / priceData.price).toFixed(6);
 
   // set limit price 0.1% below market price
-  const limitPrice = parseFloat((0.999 * priceData.price).toFixed(2));
+  const limitPrice = parseFloat((0.9999 * priceData.price).toFixed(2));
 
   const coinData: CoinbaseOrderRequest = {
     client_order_id: uuidv4(),

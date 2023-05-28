@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684971397201" clover="3.2.0">
-  <project timestamp="1684971397201" name="All files">
-    <metrics statements="134" coveredstatements="123" conditionals="84" coveredconditionals="50" methods="19" coveredmethods="17" elements="237" coveredelements="190" complexity="0" loc="134" ncloc="134" packages="3" files="13" classes="13"/>
+<coverage generated="1685216579441" clover="3.2.0">
+  <project timestamp="1685216579441" name="All files">
+    <metrics statements="161" coveredstatements="146" conditionals="147" coveredconditionals="97" methods="20" coveredmethods="18" elements="328" coveredelements="261" complexity="0" loc="161" ncloc="161" packages="3" files="13" classes="13"/>
     <package name="src">
-      <metrics statements="77" coveredstatements="69" conditionals="39" coveredconditionals="16" methods="12" coveredmethods="11"/>
+      <metrics statements="101" coveredstatements="89" conditionals="61" coveredconditionals="30" methods="13" coveredmethods="12"/>
       <file name="accountStatus.ts" path="/Users/apmfree/Desktop/CRYPTO-DCA/express-dca/src/accountStatus.ts">
         <metrics statements="21" coveredstatements="17" conditionals="12" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -52,40 +52,64 @@
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
+        <line num="9" count="7" type="stmt"/>
+        <line num="10" count="7" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
         <line num="22" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="27" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
       </file>
       <file name="purchase.ts" path="/Users/apmfree/Desktop/CRYPTO-DCA/express-dca/src/purchase.ts">
-        <metrics statements="23" coveredstatements="23" conditionals="12" coveredconditionals="7" methods="2" coveredmethods="2"/>
+        <metrics statements="47" coveredstatements="43" conditionals="34" coveredconditionals="21" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="2" type="stmt"/>
         <line num="15" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
-        <line num="25" count="4" type="stmt"/>
-        <line num="36" count="4" type="stmt"/>
-        <line num="38" count="4" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="40" count="2" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="42" count="2" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
-        <line num="46" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="51" count="2" type="stmt"/>
-        <line num="55" count="2" type="stmt"/>
-        <line num="56" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="62" count="4" type="stmt"/>
+        <line num="63" count="4" type="cond" truecount="2" falsecount="1"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="73" count="4" type="stmt"/>
+        <line num="76" count="4" type="stmt"/>
+        <line num="78" count="4" type="stmt"/>
+        <line num="91" count="4" type="stmt"/>
+        <line num="93" count="4" type="stmt"/>
+        <line num="94" count="2" type="stmt"/>
+        <line num="95" count="2" type="stmt"/>
+        <line num="96" count="2" type="stmt"/>
+        <line num="98" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="102" count="2" type="stmt"/>
+        <line num="104" count="2" type="stmt"/>
+        <line num="110" count="0" type="stmt"/>
+        <line num="113" count="2" type="stmt"/>
+        <line num="114" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="119" count="2" type="stmt"/>
+        <line num="123" count="2" type="stmt"/>
+        <line num="124" count="2" type="stmt"/>
       </file>
       <file name="utils.ts" path="/Users/apmfree/Desktop/CRYPTO-DCA/express-dca/src/utils.ts">
         <metrics statements="9" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="3"/>
@@ -97,7 +121,7 @@
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
       </file>
     </package>
     <package name="src.axios">
@@ -108,20 +132,20 @@
         <line num="2" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="13" count="9" type="stmt"/>
-        <line num="14" count="9" type="cond" truecount="3" falsecount="1"/>
-        <line num="15" count="9" type="stmt"/>
-        <line num="16" count="9" type="cond" truecount="3" falsecount="1"/>
-        <line num="17" count="9" type="cond" truecount="2" falsecount="0"/>
-        <line num="19" count="9" type="stmt"/>
-        <line num="25" count="9" type="stmt"/>
-        <line num="26" count="9" type="stmt"/>
-        <line num="27" count="9" type="stmt"/>
-        <line num="28" count="9" type="stmt"/>
-        <line num="29" count="9" type="stmt"/>
-        <line num="30" count="9" type="stmt"/>
-        <line num="31" count="9" type="stmt"/>
-        <line num="32" count="9" type="stmt"/>
+        <line num="13" count="15" type="stmt"/>
+        <line num="14" count="15" type="cond" truecount="3" falsecount="1"/>
+        <line num="15" count="15" type="stmt"/>
+        <line num="16" count="15" type="cond" truecount="3" falsecount="1"/>
+        <line num="17" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="15" type="stmt"/>
+        <line num="25" count="15" type="stmt"/>
+        <line num="26" count="15" type="stmt"/>
+        <line num="27" count="15" type="stmt"/>
+        <line num="28" count="15" type="stmt"/>
+        <line num="29" count="15" type="stmt"/>
+        <line num="30" count="15" type="stmt"/>
+        <line num="31" count="15" type="stmt"/>
+        <line num="32" count="15" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
       </file>
@@ -130,17 +154,17 @@
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="13" count="9" type="stmt"/>
-        <line num="14" count="9" type="stmt"/>
-        <line num="15" count="9" type="stmt"/>
-        <line num="16" count="9" type="cond" truecount="1" falsecount="1"/>
-        <line num="17" count="9" type="stmt"/>
-        <line num="21" count="9" type="stmt"/>
-        <line num="22" count="9" type="stmt"/>
+        <line num="13" count="15" type="stmt"/>
+        <line num="14" count="15" type="stmt"/>
+        <line num="15" count="15" type="stmt"/>
+        <line num="16" count="15" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="15" type="stmt"/>
+        <line num="21" count="15" type="stmt"/>
+        <line num="22" count="15" type="stmt"/>
       </file>
     </package>
     <package name="src.mocks">
-      <metrics statements="27" coveredstatements="25" conditionals="27" coveredconditionals="21" methods="3" coveredmethods="3"/>
+      <metrics statements="30" coveredstatements="28" conditionals="68" coveredconditionals="54" methods="3" coveredmethods="3"/>
       <file name="constants.ts" path="/Users/apmfree/Desktop/CRYPTO-DCA/express-dca/src/mocks/constants.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -155,9 +179,9 @@
         <line num="10" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="17" count="2" type="stmt"/>
-        <line num="23" count="3" type="stmt"/>
-        <line num="24" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="25" count="2" type="stmt"/>
+        <line num="23" count="7" type="stmt"/>
+        <line num="24" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="6" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
       </file>
       <file name="mockData.ts" path="/Users/apmfree/Desktop/CRYPTO-DCA/express-dca/src/mocks/mockData.ts">
@@ -166,16 +190,19 @@
         <line num="59" count="1" type="stmt"/>
       </file>
       <file name="orderResponse.ts" path="/Users/apmfree/Desktop/CRYPTO-DCA/express-dca/src/mocks/orderResponse.ts">
-        <metrics statements="9" coveredstatements="7" conditionals="25" coveredconditionals="19" methods="1" coveredmethods="1"/>
+        <metrics statements="12" coveredstatements="10" conditionals="66" coveredconditionals="52" methods="1" coveredmethods="1"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="13" count="2" type="cond" truecount="15" falsecount="5"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="18" count="2" type="cond" truecount="4" falsecount="1"/>
+        <line num="13" count="3" type="cond" truecount="15" falsecount="4"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="cond" truecount="3" falsecount="1"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
+        <line num="21" count="3" type="cond" truecount="12" falsecount="2"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="41" count="2" type="cond" truecount="10" falsecount="3"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
       </file>
       <file name="server.ts" path="/Users/apmfree/Desktop/CRYPTO-DCA/express-dca/src/mocks/server.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
