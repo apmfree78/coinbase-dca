@@ -15,5 +15,5 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '20'
-      - run: npm install
-      - run: npm run purchase
+      - run: npm --prefix server install
+      - run: npm --prefix server run purchase
