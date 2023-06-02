@@ -7,7 +7,7 @@ export default {
     extend: {},
   },
   variants: {
-    extend: {}
+    extend: {},
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };

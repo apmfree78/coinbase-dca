@@ -1,4 +1,4 @@
-import { useUser } from "components/user/hooks/useUser";
+import { useUser } from "user/hooks/useUser";
 import Layout from "layout";
 import { Navigate } from "react-router-dom";
 import Navbar from "routes/Navbar";

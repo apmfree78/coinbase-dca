@@ -1,4 +1,4 @@
-import { customToast } from "components/hooks/useToast";
+import { customToast } from "hooks/useToast";
 import { z } from "zod";
 
 // zod schema for SignIn validation

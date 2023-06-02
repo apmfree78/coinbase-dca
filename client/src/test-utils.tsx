@@ -4,15 +4,14 @@ import { QueryClientProvider, setLogger } from "react-query";
 import { generateQueryClient } from "react-query/queryClient";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "redux/store";
 import { MemoryRouter } from "react-router-dom";
 
-import { GlobalProvider } from "./state/context";
+import { GlobalProvider } from "context";
 
 setLogger({
   log: console.log,
   warn: console.warn,
-  error: () => {},
+  error: () => { },
 });
 
 // make a function to generate a unique query client for each test
@@ -28,9 +27,7 @@ const AllTheProviders: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <MemoryRouter>
       <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <GlobalProvider>{children}</GlobalProvider>;
-        </Provider>
+        <GlobalProvider>{children}</GlobalProvider>;
       </QueryClientProvider>
     </MemoryRouter>
   );
