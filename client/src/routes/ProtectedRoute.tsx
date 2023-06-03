@@ -1,7 +1,7 @@
-import { useUser } from "user/hooks/useUser";
-import Layout from "layout";
-import { Navigate } from "react-router-dom";
-import Navbar from "routes/Navbar";
+import { useUser } from 'user/hooks/useUser';
+import Layout from 'layout';
+import { Navigate } from 'react-router-dom';
+import Navbar from 'routes/Navbar';
 
 export const ProtectedRoute: React.FC<{ children: React.ReactElement }> = ({
   children,
@@ -9,7 +9,7 @@ export const ProtectedRoute: React.FC<{ children: React.ReactElement }> = ({
   const { user } = useUser();
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to='/login' />;
   }
   return (
     <Layout>

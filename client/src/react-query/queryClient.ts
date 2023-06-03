@@ -1,17 +1,16 @@
-import { customToast } from "components/hooks/useToast";
-import { QueryClient } from "react-query";
-// import { theme } from '../theme';
+import { QueryClient } from 'react-query';
+import { useGlobalContext } from 'context';
 
 // const toast = createStandaloneToast({ theme });
 
 function queryErrorHandler(error: unknown): void {
+  const { showToast } = useGlobalContext();
   // error is type unknown because in js, anything can be an error (e.g. throw(5))
   const title =
-    error instanceof Error ? error.message : "error connecting to server";
+    error instanceof Error ? error.message : 'error connecting to server';
   console.warn(title);
-  // prevent duplicate toasts
-  // toast.closeAll();
-  customToast(title, "is-warning");
+
+  showToast(title, 'error');
 }
 
 // to satisfy typescript until this file has uncommented contents

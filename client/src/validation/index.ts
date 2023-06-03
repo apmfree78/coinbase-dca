@@ -1,12 +1,12 @@
-import { customToast } from "hooks/useToast";
-import { z } from "zod";
+import { z } from 'zod';
+import { useGlobalContext } from 'context';
 
 // zod schema for SignIn validation
 export const SignInCredentials = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
+  email: z.string().email({ message: 'Invalid email address' }),
   password: z
     .string()
-    .min(8, { message: "password must be 8 or more characters" }),
+    .min(8, { message: 'password must be 8 or more characters' }),
 });
 
 export const SignUpCredentials = SignInCredentials.and(
@@ -16,8 +16,8 @@ export const SignUpCredentials = SignInCredentials.and(
 ).superRefine(({ password, passwordConfirm }, ctx) => {
   if (passwordConfirm !== password) {
     ctx.addIssue({
-      code: "custom",
-      message: "passwords do not match",
+      code: 'custom',
+      message: 'passwords do not match',
     });
   }
 });
@@ -29,12 +29,13 @@ export type SignUpCredentialsType = z.infer<typeof SignUpCredentials>;
 export function displayZodErrorToast<T extends object>(
   error: z.ZodError<T>
 ): void {
+  const { showToast } = useGlobalContext();
   // parsing error messages
   const errorData = JSON.parse(error.message);
   const errorMessages = errorData.map((error: any) => error.message);
 
   // toast for each error
   errorMessages.forEach((errorMessage: string) =>
-    customToast(errorMessage, "is-warning")
+    showToast(errorMessage, 'error')
   );
 }

@@ -1,16 +1,15 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { queryClient } from 'react-query/queryClient';
+import { BrowserRouter } from 'react-router-dom';
+import { GlobalProvider } from 'context';
 
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { queryClient } from "react-query/queryClient";
-import { BrowserRouter } from "react-router-dom";
-import { GlobalProvider } from "context";
-
-import App from "./App";
+import App from './App';
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>

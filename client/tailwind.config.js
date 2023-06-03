@@ -9,5 +9,5 @@ export default {
   variants: {
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [require('daisyui')],
 };

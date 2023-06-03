@@ -63,7 +63,7 @@ export const handlers = [
       console.log(req.body);
       console.log('identity validated');
       // return res(ctx.status(200), ctx.json(mockUserResponse));
-      const { identity, password } = JSON.parse(req.body);
+      //const { identity, password } = JSON.parse(req.body);
       // console.log("invalide request");
       return res(
         ctx.status(401),

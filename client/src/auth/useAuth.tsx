@@ -1,8 +1,8 @@
-import { AxiosResponse } from "axios";
-import { axiosInstance } from "axiosInstance";
-import { customToast } from "components/hooks/useToast";
-import { useUser } from "components/user/hooks/useUser";
-import { User } from "shared/types";
+import { AxiosResponse } from 'axios';
+import { axiosInstance } from 'axiosInstance';
+import { useUser } from 'user/hooks/useUser';
+import { User } from 'shared/types';
+import { useGlobalContext } from 'context';
 
 interface UseAuth {
   signin: (email: string, password: string) => Promise<void>;
@@ -24,6 +24,7 @@ type CustomAxiosResponse = AxiosResponse<UserSignInResponse> &
 export function useAuth(): UseAuth {
   // const SERVER_ERROR = 'There was an error contacting the server.';
   const { clearUser, updateUser } = useUser();
+  const { showToast } = useGlobalContext();
 
   async function authServerCall(
     urlEndpoint: string,
@@ -40,19 +41,19 @@ export function useAuth(): UseAuth {
     try {
       const { data, status }: CustomAxiosResponse = await axiosInstance({
         url: urlEndpoint,
-        method: "POST",
+        method: 'POST',
         data: requestData,
-        headers: { "Content-Type": "application/json" },
+        headers: { 'Content-Type': 'application/json' },
       });
 
       if (status === 400) {
-        const message = "message" in data ? data.message : "Unauthorized";
-        customToast(message, "is-warning");
+        const message = 'message' in data ? data.message : 'Unauthorized';
+        showToast(message, 'error');
         return;
       }
 
-      if ("email" in data.record && "token" in data) {
-        customToast(`Logged in as ${data.record.email}`, "is-success");
+      if ('email' in data.record && 'token' in data) {
+        showToast(`Logged in as ${data.record.email}`, 'success');
 
         // update stored user data
         updateUser(data.record);
@@ -62,12 +63,12 @@ export function useAuth(): UseAuth {
 
       // if (axios.isAxiosError(errorResponse)) message = errorResponse?.message;
 
-      customToast("Invalid email / password combo", "is-warning");
+      setToast('Invalid email / password combo', 'warning');
     }
   }
 
   async function signin(email: string, password: string): Promise<void> {
-    authServerCall("/collections/users/auth-with-password", email, password);
+    authServerCall('/collections/users/auth-with-password', email, password);
   }
   async function signup(
     email: string,
@@ -75,7 +76,7 @@ export function useAuth(): UseAuth {
     passwordConfirm: string
   ): Promise<void> {
     authServerCall(
-      "/collections/users/records",
+      '/collections/users/records',
       email,
       password,
       passwordConfirm
@@ -85,7 +86,7 @@ export function useAuth(): UseAuth {
   function signout(): void {
     // clear user from stored user data
     clearUser();
-    customToast("Logged out!", "is-info");
+    customToast('Logged out!', 'is-info');
   }
 
   // Return the user object and auth methods
