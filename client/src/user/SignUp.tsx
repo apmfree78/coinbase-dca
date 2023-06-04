@@ -10,6 +10,7 @@ import {
   SignUpCredentials,
   SignUpCredentialsType,
 } from 'validation';
+import Input from 'components/Input';
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -43,77 +44,59 @@ const SignUp: React.FC = () => {
 
   return (
     <Layout>
-      <div role='form' className='login'>
-        <h2 className='title is-3'>Sign Up for Free</h2>
-        <div className='field'>
-          <p className='control has-icons-left has-icons-right'>
-            <input
-              className='input'
-              type='email'
-              value={email}
-              required
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder='Email'
-            />
-            <span className='icon is-small is-left'>
-              <i className='fas fa-envelope'></i>
-            </span>
-            <span className='icon is-small is-right'>
-              <i className='fas fa-check'></i>
-            </span>
-          </p>
-        </div>
+      <div
+        role='form'
+        className='shadow-lg p-8 rounded-3xl border border-slate-100'
+      >
+        <h2 className='text-3xl font-bold pb-4 text-center'>
+          Sign Up for Free
+        </h2>
 
-        <div className='field'>
-          <p className='control has-icons-left'>
-            <input
-              className='input'
-              type='password'
-              value={password}
-              required
-              minLength={8}
-              placeholder='Password'
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <span className='icon is-small is-left'>
-              <i className='fas fa-lock'></i>
-            </span>
-          </p>
-        </div>
+        <Input
+          leftIcon='fas fa-envelope'
+          rightIcon='fas fa-check'
+          type='email'
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder='Email'
+        />
 
-        <div className='field'>
-          <p className='control has-icons-left'>
-            <input
-              className='input'
-              type='password'
-              required
-              minLength={8}
-              placeholder='Confirm Password'
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-            />
-            <span className='icon is-small is-left'>
-              <i className='fas fa-lock'></i>
-            </span>
-          </p>
-        </div>
+        <Input
+          leftIcon='fas fa-lock'
+          type='password'
+          value={password}
+          required
+          minLength={8}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder='Password'
+        />
 
-        <div className='field'>
-          <p className='control'>
-            <button
-              type='submit'
-              disabled={!email || !password || !passwordConfirm}
-              onClick={handleSignUpCredentials}
-              className='button is-success'
-            >
-              Login
-            </button>
-          </p>
-        </div>
-        <div className='field'>
-          <p className='control'>
-            <Link to='/login'>Have Account? Click Here to Login</Link>
-          </p>
-        </div>
+        <Input
+          leftIcon='fas fa-lock'
+          type='password'
+          value={passwordConfirm}
+          required
+          minLength={8}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+          placeholder='Confirm Password'
+        />
+
+        <button
+          type='submit'
+          disabled={!email || !password || !passwordConfirm}
+          onClick={handleSignUpCredentials}
+          className='py-3 px-5 rounded text-md text-slate-50 font-bold uppercase bg-green-400 hover:bg-green-600 disabled:bg-slate-300 disabled:cursor-not-allowed'
+        >
+          Login
+        </button>
+
+        <Link
+          className='mt-4 block text-blue-400 hover:text-blue-700'
+          to='/login'
+        >
+          Have Account? Click Here to Login
+        </Link>
       </div>
     </Layout>
   );

@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { queryClient } from 'react-query/queryClient';
 import { BrowserRouter } from 'react-router-dom';
 import { GlobalProvider } from 'context';
+import 'tailwind.css';
 
 import App from './App';
 

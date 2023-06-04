@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  purge: ['./index.html', './src/**/*.{ts,tsx}'],
   darkMode: false,
-  content: [],
+  content: ['./src/**/*.{ts,tsx}', './public/**/*.{html}'],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: ['focus'],
+    },
   },
   variants: {
     extend: {},
   },
-  plugins: [require('daisyui')],
 };
