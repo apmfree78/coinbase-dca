@@ -1,43 +1,35 @@
-import "styles/Navbar.css";
+import 'styles/Navbar.css';
 
-import { useAuth } from "auth/useAuth";
-import { NavLink } from "react-router-dom";
+import { useAuth } from 'auth/useAuth';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { signout } = useAuth();
 
-  const linkStyle = {
-    color: "white",
-    fontWieght: "bold",
-  };
-
   return (
-    <nav role="navigation" className="navbar is-info is-fixed-top">
-      <div className="navbar-item">
-        <NavLink to="/" style={linkStyle}>
-          Home
-        </NavLink>
-      </div>
-
-      <div className="navbar-item">
-        <NavLink to="/posts" style={linkStyle}>
-          Posts
-        </NavLink>
-      </div>
-
-      <div className="navbar-item">
-        <div
-          onClick={signout}
-          onMouseOver={(e) => {
-            e.currentTarget.style.cursor = "pointer";
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.cursor = "pointer";
-          }}
-          style={linkStyle}
+    <nav
+      role='navigation'
+      className='bg-blue-400 fixed top-0 flex justify-between'
+    >
+      <div>
+        <Link
+          to='/'
+          className='text-lg text-white font-bold pr-4 hover:underline'
         >
-          Sign Out
-        </div>
+          Home
+        </Link>
+        <Link
+          to='/posts'
+          className='text-lg text-white font-bold pr-4 hover:underline'
+        >
+          Orders
+        </Link>
+      </div>
+      <div
+        className='text-lg text-white font-bold pr-4 hover:underline hover:cursor-pointer'
+        onClick={signout}
+      >
+        Sign Out
       </div>
     </nav>
   );
