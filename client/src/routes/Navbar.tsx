@@ -10,21 +10,15 @@ const Navbar = () => {
       className='bg-blue-400 fixed top-0 flex justify-between w-screen py-4 px-9'
     >
       <div>
-        <Link
-          to='/'
-          className='text-lg text-white font-bold pr-4 hover:underline'
-        >
+        <Link to='/' className='navlink'>
           Home
         </Link>
-        <Link
-          to='/orders'
-          className='text-lg text-white font-bold pr-4 hover:underline'
-        >
+        <Link to='/orders' className='navlink'>
           Orders
         </Link>
       </div>
       <div
-        className='text-lg text-white font-bold pr-4 hover:underline hover:cursor-pointer'
+        className='navlink hover:cursor-pointer'
         onClick={signout}
       >
         Sign Out
