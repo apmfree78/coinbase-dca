@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { axiosInstance } from 'axiosInstance';
 import { useUser } from 'user/hooks/useUser';
 import { User } from 'shared/types';
-import { useGlobalContext } from 'context';
+import { customToast } from 'components/Toast';
 
 interface UseAuth {
   signin: (email: string, password: string) => Promise<void>;
@@ -24,7 +24,6 @@ type CustomAxiosResponse = AxiosResponse<UserSignInResponse> &
 export function useAuth(): UseAuth {
   // const SERVER_ERROR = 'There was an error contacting the server.';
   const { clearUser, updateUser } = useUser();
-  const { showToast } = useGlobalContext();
 
   async function authServerCall(
     urlEndpoint: string,
@@ -48,22 +47,18 @@ export function useAuth(): UseAuth {
 
       if (status === 400) {
         const message = 'message' in data ? data.message : 'Unauthorized';
-        showToast(message, 'error');
+        customToast(message, 'is-warning');
         return;
       }
 
       if ('email' in data.record && 'token' in data) {
-        showToast(`Logged in as ${data.record.email}`, 'success');
+        customToast(`Logged in as ${data.record.email}`, 'is-success');
 
         // update stored user data
         updateUser(data.record);
       }
     } catch (errorResponse) {
-      // let message = SERVER_ERROR; //default error message
-
-      // if (axios.isAxiosError(errorResponse)) message = errorResponse?.message;
-
-      setToast('Invalid email / password combo', 'warning');
+      customToast('Invalid email / password combo', 'is-warning');
     }
   }
 

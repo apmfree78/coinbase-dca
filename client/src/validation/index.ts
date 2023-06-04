@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { useGlobalContext } from 'context';
+import { customToast } from 'components/Toast';
 
 // zod schema for SignIn validation
 export const SignInCredentials = z.object({
@@ -29,13 +29,12 @@ export type SignUpCredentialsType = z.infer<typeof SignUpCredentials>;
 export function displayZodErrorToast<T extends object>(
   error: z.ZodError<T>
 ): void {
-  const { showToast } = useGlobalContext();
   // parsing error messages
   const errorData = JSON.parse(error.message);
   const errorMessages = errorData.map((error: any) => error.message);
 
   // toast for each error
   errorMessages.forEach((errorMessage: string) =>
-    showToast(errorMessage, 'error')
+    customToast(errorMessage, 'is-warning')
   );
 }
