@@ -20,49 +20,38 @@ export interface NewUser {
 // user type
 export type User = Id & NewUser;
 
-export interface PostId {
+export interface CollectionId {
   id: string;
   "@collectionId": string;
   "@collectionName": string;
   created: string;
   updated: string;
-  author: string;
 }
 
-export interface publishStatusType {
-  published: boolean;
-  publisher: string;
-  publishDate: Date | "";
+export type exchangeType = 'coinbase' | 'binance' | 'kraken' | 'bitstamp' | 'gemini';
+export type assetType = 'BTC' | 'ETH' | 'ADA' | 'SOL' | 'MATIC';
+
+export interface NewPurchaseOrder {
+  exchange: exchangeType;
+  asset: assetType;
+  amount: number;
+  amount_purchased: number;
 }
 
-export interface NewPost {
-  content: string;
-  publishStatus: publishStatusType;
+export interface PurchaseOrderPayload {
+  exchange: exchangeType;
+  asset: assetType;
+  amount: number;
 }
 
-// user post
-export type Post = PostId & NewPost;
+// user purchase order
+export type PurchaseOrder = CollectionId & NewPurchaseOrder;
 
 // the is structure pocketbase will return
-export type PostData = {
+export type PaginationData<T> = {
   page: number;
   perPage: number;
   totalPages: number;
   totalItems: number;
-  items: Post[];
+  items: T[];
 };
-
-//holds publication status of a given publisher: hashnode, medium, devto, etc
-export interface IsPublishedType {
-  isPublished: boolean;
-  datePublished?: Date;
-}
-
-export type publicationStatus = Record<string, IsPublishedType>;
-
-// Blog post type
-export interface PostType {
-  content: string;
-  publishStatus: publicationStatus;
-  userId: string;
-}
