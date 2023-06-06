@@ -3,11 +3,9 @@ import { axiosInstance, getJWTHeader } from 'axiosInstance';
 import { customToast } from 'components/Toast';
 import { useUser } from 'user/hooks/useUser';
 import { useMutation } from 'react-query';
-import { queryKeys, createPurchaseOrderPath } from 'react-query/constants';
+import { queryKeys } from 'react-query/constants';
 import { queryClient } from 'react-query/queryClient';
 import type {
-  PurchaseOrder,
-  PurchaseOrderPayload,
   User,
   CollectionId,
 } from 'shared/types';
@@ -44,11 +42,3 @@ export function usePostData<T extends CollectionId, K>(urlPath: string) {
   const id = data?.id;
   return { mutate, id, isSuccess, isLoading, isError, error };
 }
-
-// **********************************************************
-// **********************************************************
-// export custom hook to obtain specific data types
-// **********************************************************
-// **********************************************************
-export const usePostPurchaseOrder = () =>
-  usePostData<PurchaseOrder, PurchaseOrderPayload>(createPurchaseOrderPath);

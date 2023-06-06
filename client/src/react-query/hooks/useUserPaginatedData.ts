@@ -3,8 +3,8 @@ import { axiosInstance, getJWTHeader } from 'axiosInstance';
 import { useUser } from 'user/hooks/useUser';
 import { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
-import { queryKeys, getPurchaseOrdersPath } from 'react-query/constants';
-import type { PurchaseOrder, PaginationData, User } from 'shared/types';
+import { queryKeys } from 'react-query/constants';
+import type { PaginationData, User } from 'shared/types';
 
 const maxOrderPage = 5;
 const ordersPerPage = 10;
@@ -24,7 +24,7 @@ async function fetchPaginatedData<T>(
 }
 
 interface UsePaginatedData<T> {
-  orders: T[] | null;
+  paginatedData: T[] | null;
   page: number;
   totalPages: number;
   totalItems: number;
@@ -32,7 +32,7 @@ interface UsePaginatedData<T> {
 }
 
 // hooks that returns user data by page
-function useUserPosts<T>(urlPath: string): UsePaginatedData<T> {
+export function useUserPosts<T>(urlPath: string): UsePaginatedData<T> {
   // userUserPosts will handle page state
   const [page, setPage] = useState(1);
   const { user } = useUser();
@@ -55,22 +55,15 @@ function useUserPosts<T>(urlPath: string): UsePaginatedData<T> {
     }
   }, [page, user, queryClient]);
 
-  const orders = orderData?.items || null;
+  const paginatedData = orderData?.items || null;
   const totalPages = orderData?.totalPages || 0;
   const totalItems = orderData?.totalItems || 0;
 
   return {
-    orders,
+    paginatedData,
     totalPages,
     totalItems,
     page,
     setPage,
   };
 }
-
-// **********************************************************
-// **********************************************************
-// export custom hook to obtain specific data types
-// **********************************************************
-// **********************************************************
-export const useUserPurchaseOrders = () => useUserPosts<PurchaseOrder>(getPurchaseOrdersPath);
