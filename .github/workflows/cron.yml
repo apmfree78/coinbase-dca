@@ -1,8 +1,8 @@
 name: 'coinbase dca job'
 
-on: push
-  # schedule:
-  #   - cron: '0 3 * * *' # At 3:00 UTC every day
+on: 
+  schedule:
+    - cron: '0 3 * * *' # At 3:00 UTC every day
 
 jobs:
   buy-crypto:
