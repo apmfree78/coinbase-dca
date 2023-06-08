@@ -5,6 +5,7 @@ import SignIn from 'user/SignIn';
 import SignUp from 'user/SignUp';
 import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from 'routes/ProtectedRoute';
+import Orders from 'orders/Orders';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
         path='orders'
         element={
           <ProtectedRoute>
-            <div>see all automated purchase orders here</div>
+            <Orders />
           </ProtectedRoute>
         }
       />

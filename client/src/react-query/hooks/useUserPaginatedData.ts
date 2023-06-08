@@ -15,6 +15,7 @@ async function fetchPaginatedData<T>(
   pageNumber: number,
   urlPath: string
 ): Promise<PaginationData<T> | null> {
+  console.log('user', user);
   if (!user) return null;
   const { data }: AxiosResponse<PaginationData<T>> = await axiosInstance.get(
     `${urlPath}?perPage=${ordersPerPage}&page=${pageNumber}`,

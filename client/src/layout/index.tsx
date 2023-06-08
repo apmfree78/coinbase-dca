@@ -1,5 +1,4 @@
 import 'styles/App.css';
-
 import React, { ReactElement } from 'react';
 
 const Layout: React.FC<{ children: ReactElement }> = ({ children }) => {

@@ -8,13 +8,16 @@ interface ListOrderProps {
 
 const PostTable = ({ orders }: ListOrderProps) => {
   return (
+    // TODO change below to tailwind css
     <table className='is-striped is-hoverable table'>
       <thead>
         <tr className='bg-gray-200'>
-          <th>Post</th>
-          <th>Published?</th>
-          <th> </th>
-          <th> </th>
+          <th>Order</th>
+          <th>Asset</th>
+          <th>Amount</th>
+          <th>Exchange</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

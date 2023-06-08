@@ -17,10 +17,7 @@ const Navbar = () => {
           Orders
         </Link>
       </div>
-      <div
-        className='navlink hover:cursor-pointer'
-        onClick={signout}
-      >
+      <div className='navlink hover:cursor-pointer' onClick={signout}>
         Sign Out
       </div>
     </nav>

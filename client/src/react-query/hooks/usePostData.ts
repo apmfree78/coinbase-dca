@@ -5,10 +5,7 @@ import { useUser } from 'user/hooks/useUser';
 import { useMutation } from 'react-query';
 import { queryKeys } from 'react-query/constants';
 import { queryClient } from 'react-query/queryClient';
-import type {
-  User,
-  CollectionId,
-} from 'shared/types';
+import type { User, CollectionId } from 'shared/types';
 
 async function postNewData<T extends CollectionId, K>(
   user: User | null,

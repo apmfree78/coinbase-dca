@@ -1,0 +1,23 @@
+import Pagination from 'orders/Pagination';
+import PostTable from 'orders/table/OrderTable';
+
+import { useUserPurchaseOrders } from 'orders/hooks';
+
+const Orders = () => {
+  const {
+    paginatedData: orders,
+    page,
+    setPage,
+    totalPages,
+  } = useUserPurchaseOrders();
+  if (!orders) return <div>You have no orders!</div>;
+
+  return (
+    <>
+      <PostTable orders={orders} />
+      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+    </>
+  );
+};
+
+export default Orders;

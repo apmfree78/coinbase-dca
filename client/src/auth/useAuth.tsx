@@ -54,6 +54,11 @@ export function useAuth(): UseAuth {
       if ('email' in data.record && 'token' in data) {
         customToast(`Logged in as ${data.record.email}`, 'is-success');
 
+        const user: User = data.record;
+
+        // add user token to user object
+        user.token = data.token;
+
         // update stored user data
         updateUser(data.record);
       }

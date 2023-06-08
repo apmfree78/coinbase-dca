@@ -1,8 +1,8 @@
 // pocketbase record id
 export interface Id {
   id: string;
-  "@collectionId": string;
-  "@collectionName": string;
+  '@collectionId': string;
+  '@collectionName': string;
   created: string;
   updated: string;
   username?: string;
@@ -22,13 +22,18 @@ export type User = Id & NewUser;
 
 export interface CollectionId {
   id: string;
-  "@collectionId": string;
-  "@collectionName": string;
+  '@collectionId': string;
+  '@collectionName': string;
   created: string;
   updated: string;
 }
 
-export type exchangeType = 'coinbase' | 'binance' | 'kraken' | 'bitstamp' | 'gemini';
+export type exchangeType =
+  | 'coinbase'
+  | 'binance'
+  | 'kraken'
+  | 'bitstamp'
+  | 'gemini';
 export type assetType = 'BTC' | 'ETH' | 'ADA' | 'SOL' | 'MATIC';
 
 export interface NewPurchaseOrder {
