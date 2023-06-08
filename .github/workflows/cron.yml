@@ -1,8 +1,8 @@
 name: 'coinbase dca job'
 
-on:
-  schedule:
-    - cron: '0 3 * * *' # At 3:00 UTC every day
+on: push
+  # schedule:
+  #   - cron: '0 3 * * *' # At 3:00 UTC every day
 
 jobs:
   buy-crypto:
@@ -15,5 +15,5 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
-      - run: npm install
-      - run: npm run purchase
+      - run: npm --prefix server install
+      - run: npm --prefix server run purchase

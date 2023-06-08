@@ -12,6 +12,8 @@
     "src"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "mocks",
+    "src/**/*.test.ts"
   ]
 }
