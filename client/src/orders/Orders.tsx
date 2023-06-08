@@ -9,7 +9,10 @@ const Orders = () => {
     page,
     setPage,
     totalPages,
+    isLoading,
   } = useUserPurchaseOrders();
+
+  if (isLoading) return <p>Loading...</p>;
   if (!orders) return <div>You have no orders!</div>;
 
   return (

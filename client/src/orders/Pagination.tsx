@@ -8,15 +8,15 @@ const Pagination = ({ page, setPage, totalPages }: PaginationProps) => {
   return (
     <div>
       <button
-        className='button is-small is-rounded fa fa-angle-left'
+        className='pagination fa fa-angle-left'
         disabled={page === 1}
         onClick={() => {
           setPage(page - 1);
         }}
       ></button>
-      <span style={{ padding: '0vh 1.5vw' }}>Page {page}</span>
+      <span className='px-6 text-gray-700 font-bold'>Page {page}</span>
       <button
-        className='button is-small is-rounded fa fa-angle-right'
+        className='pagination fa fa-angle-right'
         disabled={page === totalPages}
         onClick={() => {
           setPage(page + 1);

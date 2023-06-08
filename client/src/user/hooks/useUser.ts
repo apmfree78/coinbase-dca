@@ -1,9 +1,9 @@
-import { AxiosResponse } from "axios";
-import { axiosInstance } from "axiosInstance";
-import { useQuery, useQueryClient } from "react-query";
-import { queryKeys } from "react-query/constants";
-import type { User } from "shared/types";
-import { clearStoredUser, getStoredUser, setStoredUser } from "user-storage";
+import { AxiosResponse } from 'axios';
+import { axiosInstance } from 'axiosInstance';
+import { useQuery, useQueryClient } from 'react-query';
+import { queryKeys } from 'react-query/constants';
+import type { User } from 'shared/types';
+import { clearStoredUser, getStoredUser, setStoredUser } from 'user-storage';
 
 async function getUser(user: User | null): Promise<User | null> {
   if (!user) return null;

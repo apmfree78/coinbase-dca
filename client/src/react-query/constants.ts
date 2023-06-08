@@ -1,6 +1,6 @@
 export const queryKeys = {
-  orders: "orders",
-  user: "user",
+  orders: 'orders',
+  user: 'user',
 };
 
 // path for pocketbase API endpoints

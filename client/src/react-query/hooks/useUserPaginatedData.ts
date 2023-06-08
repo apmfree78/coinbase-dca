@@ -26,6 +26,7 @@ async function fetchPaginatedData<T>(
 
 interface UsePaginatedData<T> {
   paginatedData: T[] | null;
+  isLoading: boolean;
   page: number;
   totalPages: number;
   totalItems: number;
@@ -40,7 +41,7 @@ export function useUserPosts<T>(urlPath: string): UsePaginatedData<T> {
   const queryClient = useQueryClient();
 
   // get user orders from pocketbase
-  const { data: orderData } = useQuery(
+  const { data: orderData, isLoading } = useQuery(
     [queryKeys.orders, queryKeys.user, page],
     () => fetchPaginatedData<T>(user, page, urlPath),
     { enabled: !!user }
@@ -62,6 +63,7 @@ export function useUserPosts<T>(urlPath: string): UsePaginatedData<T> {
 
   return {
     paginatedData,
+    isLoading,
     totalPages,
     totalItems,
     page,
