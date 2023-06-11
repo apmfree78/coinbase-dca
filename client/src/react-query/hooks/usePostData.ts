@@ -15,7 +15,7 @@ async function postNewData<T extends CollectionId, K>(
   if (!user) return null;
   const { data }: AxiosResponse<T> = await axiosInstance.post(
     urlPath,
-    payload,
+    { ...payload, user: user.id },
     { headers: getJWTHeader(user) }
   );
   return data;

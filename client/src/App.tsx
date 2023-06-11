@@ -6,6 +6,7 @@ import SignUp from 'user/SignUp';
 import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from 'routes/ProtectedRoute';
 import Orders from 'orders/Orders';
+import OrderHome from 'orders/OrderHome';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         path='/'
         element={
           <ProtectedRoute>
-            <div>Home Page</div>
+            <OrderHome />
           </ProtectedRoute>
         }
       />
@@ -24,7 +25,7 @@ function App() {
         path='/order/:id'
         element={
           <ProtectedRoute>
-            <div>see purchase order details here</div>
+            <OrderHome />
           </ProtectedRoute>
         }
       />

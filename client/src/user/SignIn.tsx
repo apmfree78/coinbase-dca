@@ -69,7 +69,7 @@ const SignIn: React.FC = () => {
           type='submit'
           disabled={!email || !password}
           onClick={handleLoginCredentials}
-          className='py-3 px-5 rounded text-md text-slate-50 font-bold uppercase bg-green-400 hover:bg-green-600 disabled:bg-slate-300 disabled:cursor-not-allowed'
+          className='dca-button'
         >
           Login
         </button>

@@ -12,3 +12,7 @@
 .pagination {
 @apply border-slate-300 border-2 px-5 py-2 shadow-xl rounded-full hover:bg-blue-100 disabled:cursor-not-allowed disabled:text-gray-300
 }
+
+.dca-button {
+  @apply py-3 px-5 rounded text-lg text-slate-50 font-bold uppercase bg-green-400 hover:bg-green-600 disabled:bg-slate-300 disabled:cursor-not-allowed
+}

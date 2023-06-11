@@ -28,28 +28,26 @@ export interface CollectionId {
   updated: string;
 }
 
-export type exchangeType =
-  | 'coinbase'
-  | 'binance'
-  | 'kraken'
-  | 'bitstamp'
-  | 'gemini';
-
-export const assets = [
-  'BTC',
-  'ETH',
-  'ADA',
-  'SOL',
-  'MATIC',
+export const exchanges = [
+  'coinbase',
+  'binance',
+  'kraken',
+  'bitstamp',
+  'gemini',
 ] as const;
 
-type assetType = typeof assets[number];
+export type exchangeType = typeof exchanges[number];
+
+export const assets = ['BTC', 'ETH', 'ADA', 'SOL', 'MATIC'] as const;
+
+export type assetType = typeof assets[number];
 
 export interface NewPurchaseOrder {
   exchange: exchangeType;
   asset: assetType;
   amount: number;
-  amount_purchased: number;
+  amount_purchased?: number;
+  user: string;
 }
 
 export interface PurchaseOrderPayload {
