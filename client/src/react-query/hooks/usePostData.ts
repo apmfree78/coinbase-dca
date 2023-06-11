@@ -15,7 +15,7 @@ async function postNewData<T extends CollectionId, K>(
   if (!user) return null;
   const { data }: AxiosResponse<T> = await axiosInstance.post(
     urlPath,
-    { ...payload, user: user.id },
+    { ...payload, owner: user.id },
     { headers: getJWTHeader(user) }
   );
   return data;
@@ -31,7 +31,7 @@ export function usePostData<T extends CollectionId, K>(urlPath: string) {
       onSuccess: () => {
         //clear cache
         queryClient.invalidateQueries([queryKeys.orders]);
-        customToast('post created', 'is-success');
+        customToast('order created', 'is-success');
       },
     }
   );

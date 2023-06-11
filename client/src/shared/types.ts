@@ -47,7 +47,7 @@ export interface NewPurchaseOrder {
   asset: assetType;
   amount: number;
   amount_purchased?: number;
-  user: string;
+  owner: string;
 }
 
 export interface PurchaseOrderPayload {
