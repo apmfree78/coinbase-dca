@@ -34,7 +34,16 @@ export type exchangeType =
   | 'kraken'
   | 'bitstamp'
   | 'gemini';
-export type assetType = 'BTC' | 'ETH' | 'ADA' | 'SOL' | 'MATIC';
+
+export const assets = [
+  'BTC',
+  'ETH',
+  'ADA',
+  'SOL',
+  'MATIC',
+] as const;
+
+type assetType = typeof assets[number];
 
 export interface NewPurchaseOrder {
   exchange: exchangeType;
