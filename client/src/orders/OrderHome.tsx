@@ -18,7 +18,7 @@ const OrderHome: React.FC = () => {
 
   return (
     <>
-      <span className='ml-14 w-1/2 flex items-center text-xl'>
+      <span className='flex items-center text-xl'>
         <strong>Buy</strong>{' '}
         <NumberInput
           value={amount}
@@ -43,7 +43,7 @@ const OrderHome: React.FC = () => {
         type='submit'
         onClick={SubmitOrder}
         disabled={amount < 10 || isLoading}
-        className='dca-button mt-2 ml-14 shadow-xl'
+        className='dca-button mt-2 shadow-xl'
       >
         <span>
           <i className='fa-solid fa-bolt'></i>
