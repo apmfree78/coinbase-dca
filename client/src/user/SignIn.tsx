@@ -3,7 +3,7 @@ import 'styles/SignUpSignIn.css';
 import { useAuth } from 'auth/useAuth';
 import { useUser } from 'user/hooks/useUser';
 import Layout from 'layout';
-import React, { useState } from 'react';
+import React, { useState, KeyboardEvent } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   displayZodErrorToast,
@@ -37,6 +37,12 @@ const SignIn: React.FC = () => {
     }
   };
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleLoginCredentials();
+    }
+  };
+
   return (
     <Layout>
       <div
@@ -62,6 +68,7 @@ const SignIn: React.FC = () => {
           required
           minLength={8}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={(e) => handleKeyDown(e)}
           placeholder='Password'
         />
 

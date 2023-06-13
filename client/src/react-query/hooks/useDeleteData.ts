@@ -20,16 +20,26 @@ async function deleteUserData<T>(
   return data;
 }
 
-type useDelete<T> = UseMutateFunction<T | null, unknown, string, unknown>;
+type useDelete = UseMutateFunction<string, unknown, string, unknown>;
 
-export function useDeleteData<T>(urlPath: string): useDelete<T> {
+export function useDeleteData<T>(urlPath: string): useDelete {
   const queryClient = useQueryClient();
-  const { user } = useUser();
+  const { user, updateUser } = useUser();
 
   const { mutate } = useMutation(
-    (id: string) => deleteUserData<T>(user, id, urlPath),
+    (id: string) => deleteUserData<T>(user, id, urlPath).then(() => id),
     {
-      onSuccess: () => {
+      onSuccess: (id) => {
+        /* how do i pass id !! */
+        // grab user
+        if (user) {
+          const newUser = {
+            ...user,
+            dca_orders: user.dca_orders.filter((order) => order !== id),
+          };
+          queryClient.setQueryData(queryKeys.user, newUser);
+          updateUser(newUser);
+        }
         queryClient.invalidateQueries([queryKeys.orders]);
         customToast('Purchase Order has been deleted!', 'is-warning');
       },

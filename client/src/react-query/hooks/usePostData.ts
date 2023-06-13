@@ -23,12 +23,20 @@ async function postNewData<T extends CollectionId, K>(
 
 // hook to create new post
 export function usePostData<T extends CollectionId, K>(urlPath: string) {
-  const { user } = useUser();
+  const { user, updateUser } = useUser();
 
   const { data, isSuccess, isLoading, isError, error, mutate } = useMutation(
     (payload: K) => postNewData<T, K>(user, urlPath, payload),
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        // grab user
+        if (user && data) {
+          const newUser = {
+            ...user,
+            dca_orders: [...user.dca_orders, data.id],
+          };
+          updateUser(newUser);
+        }
         //clear cache
         queryClient.invalidateQueries([queryKeys.orders]);
         customToast('order created', 'is-success');

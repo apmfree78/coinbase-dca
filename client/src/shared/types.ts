@@ -15,6 +15,7 @@ export interface Id {
 export interface NewUser {
   email: string;
   token?: string;
+  dca_orders: string[];
 }
 
 // user type
