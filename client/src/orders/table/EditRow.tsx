@@ -34,6 +34,9 @@ const EditRow = ({
       id: order.id,
       payload: { asset, exchange, amount, owner: order.owner },
     });
+
+    // exit after update  
+    hideRow();
   };
 
   return (
