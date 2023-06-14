@@ -2,8 +2,13 @@ import { purchaseOrdersPath } from 'react-query/constants';
 import { useDeleteData } from 'react-query/hooks/useDeleteData';
 import { useGetDataById } from 'react-query/hooks/useGetDataById';
 import { usePostData } from 'react-query/hooks/usePostData';
+import { usePatchData } from 'react-query/hooks/usePatchData';
 import { useUserPosts } from 'react-query/hooks/useUserPaginatedData';
-import type { PurchaseOrder, PurchaseOrderPayload } from 'shared/types';
+import type {
+  PurchaseOrder,
+  PostOrderPayload,
+  PatchOrderPayload,
+} from 'shared/types';
 
 // **********************************************************
 // **********************************************************
@@ -14,7 +19,10 @@ export const useDeletePurchaseOrder = () =>
   useDeleteData<PurchaseOrder>(purchaseOrdersPath);
 
 export const usePostPurchaseOrder = () =>
-  usePostData<PurchaseOrder, PurchaseOrderPayload>(purchaseOrdersPath);
+  usePostData<PurchaseOrder, PostOrderPayload>(purchaseOrdersPath);
+
+export const usePatchPurchaseOrder = () =>
+  usePatchData<PurchaseOrder, PatchOrderPayload>(purchaseOrdersPath);
 
 export const useGetPurchaseOrderById = (id: string) =>
   useGetDataById<PurchaseOrder>(id, purchaseOrdersPath);

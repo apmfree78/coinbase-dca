@@ -39,7 +39,7 @@ export function usePostData<T extends CollectionId, K>(urlPath: string) {
         }
         //clear cache
         queryClient.invalidateQueries([queryKeys.orders]);
-        customToast('order created', 'is-success');
+        customToast(`${queryKeys.orders} created`, 'is-success');
       },
     }
   );

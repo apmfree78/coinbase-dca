@@ -3,6 +3,7 @@
 @import 'tailwindcss/utilities';
 
 
+
 /* reusable nav link style */
 .navlink {
   @apply text-lg text-white font-bold pr-4 no-underline hover:underline

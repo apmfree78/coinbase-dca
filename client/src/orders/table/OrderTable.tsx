@@ -6,7 +6,7 @@ interface ListOrderProps {
   orders: PurchaseOrder[];
 }
 
-const PostTable = ({ orders }: ListOrderProps) => {
+const OrderTable = ({ orders }: ListOrderProps) => {
   return (
     // TODO change below to tailwind css
     <table className='border-slate-200 border-2 shadow-xl mb-4'>
@@ -28,4 +28,4 @@ const PostTable = ({ orders }: ListOrderProps) => {
   );
 };
 
-export default PostTable;
+export default OrderTable;

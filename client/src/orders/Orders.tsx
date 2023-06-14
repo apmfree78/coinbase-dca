@@ -1,5 +1,5 @@
 import Pagination from 'orders/Pagination';
-import PostTable from 'orders/table/OrderTable';
+import OrderTable from 'orders/table/OrderTable';
 
 import { useUserPurchaseOrders } from 'orders/hooks';
 
@@ -17,7 +17,7 @@ const Orders = () => {
 
   return (
     <>
-      <PostTable orders={orders} />
+      <OrderTable orders={orders} />
       <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </>
   );

@@ -51,11 +51,15 @@ export interface NewPurchaseOrder {
   owner: string;
 }
 
-export interface PurchaseOrderPayload {
+export interface PostOrderPayload {
   exchange: exchangeType;
   asset: assetType;
   amount: number;
 }
+
+export type PatchOrderPayload = PostOrderPayload & {
+  owner: string;
+};
 
 // user purchase order
 export type PurchaseOrder = CollectionId & NewPurchaseOrder;

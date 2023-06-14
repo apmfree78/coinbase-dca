@@ -1,5 +1,5 @@
 export const queryKeys = {
-  orders: 'orders',
+  orders: 'order',
   user: 'user',
 };
 
