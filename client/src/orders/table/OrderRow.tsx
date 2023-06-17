@@ -1,6 +1,5 @@
 import { useDeletePurchaseOrder } from 'orders/hooks';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { PurchaseOrder } from 'shared/types';
 import EditRow from './EditRow';
 
@@ -18,7 +17,7 @@ const OrderRow = ({ order }: { order: PurchaseOrder }) => {
 
   return (
     <>
-      {!editRow ?
+      {!editRow ? (
         <tr className='hover:bg-gray-200 transition duration-700 ease-linear'>
           <th className='p-3'>{order.asset}</th>
           <th className='p-3'>{order.amount}</th>
@@ -33,16 +32,15 @@ const OrderRow = ({ order }: { order: PurchaseOrder }) => {
           </th>
           {/* icon to edit post */}
           <th className='py-3 pr-4 pl-3 hover:scale-110 hover:text-blue-600'>
-            <Link to={`/order/${order.id}`}>
-              <i
-                onClick={() => setEditRow(true)}
-                className='fa-solid fa-pencil'
-              />
-            </Link>
+            <i
+              onClick={() => setEditRow(true)}
+              className='fa-solid fa-pencil'
+            />
           </th>
         </tr>
-        : <EditRow order={order} hideRow={() => setEditRow(false)} />
-      }
+      ) : (
+        <EditRow order={order} hideRow={() => setEditRow(false)} />
+      )}
     </>
   );
 };

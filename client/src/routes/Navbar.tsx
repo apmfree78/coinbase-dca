@@ -13,9 +13,6 @@ const Navbar = () => {
         <Link to='/' className='navlink'>
           Home
         </Link>
-        <Link to='/orders' className='navlink'>
-          Orders
-        </Link>
       </div>
       <div className='navlink hover:cursor-pointer' onClick={signout}>
         Sign Out

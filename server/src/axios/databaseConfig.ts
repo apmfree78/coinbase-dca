@@ -1,0 +1,41 @@
+import axios, { InternalAxiosRequestConfig } from 'axios';
+import { databaseAPI } from './constants';
+import { User } from '../shared/types';
+
+export function getJWTHeader(user: User): Record<string, string> {
+  return { Authorization: `Bearer ${user.token}` };
+}
+
+const axiosDatabaseInstance = axios.create({
+  baseURL: databaseAPI,
+  responseType: 'json',
+});
+
+// axiosInstance.interceptors.request.use(
+//   (config: InternalAxiosRequestConfig<CoinbaseOrderRequest>) => {
+//     // geting signature for axios call using api secret
+//     console.log('body', config.data);
+//     console.log('method', config.method?.toUpperCase());
+//     console.log('url', config.url);
+//     const method = config.method?.toUpperCase();
+//     let body = method === 'POST' ? JSON.stringify(config.data) : '';
+//     const {signature, timestamp} = generateSignature(
+//       config.method?.toUpperCase() || 'GET',
+//       config.url as string,
+//       body,
+//     );
+//     config.headers.accept = 'application/json';
+//     config.headers['CB-ACCESS-KEY'] = process.env.API_KEY;
+//     config.headers['CB-ACCESS-SIGN'] = signature;
+//     config.headers['CB-ACCESS-TIMESTAMP'] = parseInt(timestamp);
+//     console.log('API KEY', config.headers['CB-ACCESS-KEY']);
+//     console.log('signature', config.headers['CB-ACCESS-SIGN']);
+//     console.log('timestamp', config.headers['CB-ACCESS-TIMESTAMP']);
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   },
+// );
+
+export { axiosDatabaseInstance };

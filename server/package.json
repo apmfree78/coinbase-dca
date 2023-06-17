@@ -10,6 +10,7 @@
     "cron:disable": "rm -rf .github",
     "purchase": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/index.js",
     "status": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/checkAccounts.js",
+    "view:orders": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/connect/viewOrders.js",
     "build": "rm -rf ./build && tsc",
     "serve": "node build/app.js",
     "test": "NODE_ENV=development jest --coverage"
