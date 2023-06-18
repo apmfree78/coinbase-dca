@@ -14,7 +14,8 @@ async function fetchData<T>(
     const response: AxiosResponse<T> = await axiosDatabaseInstance.get(
       `${urlPath}?page=${pageNumber}`,
     );
-    console.log(response);
+    console.log('data', response.data);
+
     return response.data;
   } catch (err) {
     console.warn(err);

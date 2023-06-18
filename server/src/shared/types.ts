@@ -21,7 +21,7 @@ export interface NewUser {
 // user type
 export type User = Id & NewUser;
 
-export interface Admin {
+export interface AdminResponse {
   token: string;
   admin: {
     id: string;
