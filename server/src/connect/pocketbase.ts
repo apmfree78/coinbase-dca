@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { axiosDatabaseInstance, getJWTHeader } from '../axios/databaseConfig';
-import type { PaginationData, PurchaseOrder, User } from '../shared/types';
+import { axiosDatabaseInstance } from '../axios/databaseConfig';
+import type { PaginationData, PurchaseOrder } from '../shared/types';
 import { purchaseOrdersPath } from '../axios/constants';
 
 const ordersPerPage = 1000;
@@ -10,13 +10,12 @@ async function fetchData<T>(
   // user: User | null,
   pageNumber: number,
   urlPath: string,
-): Promise<PaginationData<T> | undefined> {
+): Promise<T | undefined> {
   // if (!user) return null;
   try {
-    const { data }: AxiosResponse<PaginationData<T>> =
-      await axiosDatabaseInstance.get(
-        `${urlPath}?perPage=${ordersPerPage}&page=${pageNumber}`,
-      );
+    const { data }: AxiosResponse<T> = await axiosDatabaseInstance.get(
+      `${urlPath}?perPage=${ordersPerPage}&page=${pageNumber}`,
+    );
     console.log(data);
     return data;
   } catch (err) {

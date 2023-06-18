@@ -21,6 +21,9 @@ export class Auth {
     this.Admin = null;
   }
 
+  getToken(): string | null {
+    return this.Admin?.token || null;
+  }
 
   private async authServerCall(
     urlEndpoint: string,
@@ -73,3 +76,14 @@ export class Auth {
     console.log('Logged out!');
   }
 }
+
+const adminUser = new Auth();
+(async () => {
+  // TODO setup login credentials for admin
+  await adminUser.signin(
+    process.env.ADMIN_USERNAME || '',
+    process.env.ADMIN_PASSWORD || '',
+  );
+})();
+
+export { adminUser };
