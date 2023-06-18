@@ -1,21 +1,23 @@
 import { AxiosResponse } from 'axios';
-import { axiosDatabaseInstance } from '../axios/databaseConfig';
-import { User } from '../shared/types';
-
-interface UserSignInResponse {
-  token: string;
-  record: User;
-}
+import axios from 'axios';
+import { databaseAPI } from '../axios/constants';
+import { AdminResponse } from '../shared/types';
 
 interface ErrorResponse {
   message: string;
 }
 
-type CustomAxiosResponse = AxiosResponse<UserSignInResponse> &
+export type AdminType = {
+  id: string;
+  token: string;
+  email: string;
+};
+
+type CustomAxiosResponse = AxiosResponse<AdminResponse> &
   AxiosResponse<ErrorResponse>;
 
 export class Auth {
-  private Admin: User | null;
+  private Admin: AdminType | null;
 
   constructor() {
     this.Admin = null;
@@ -33,12 +35,10 @@ export class Auth {
     let requestData = { identity: email, password };
 
     try {
-      const { data, status }: CustomAxiosResponse = await axiosDatabaseInstance({
-        url: urlEndpoint,
-        method: 'POST',
-        data: requestData,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const { data, status }: CustomAxiosResponse = await axios.post(
+        `${databaseAPI}${urlEndpoint}`,
+        requestData,
+      );
 
       if (status === 400) {
         const message = 'message' in data ? data.message : 'Unauthorized';
@@ -46,16 +46,17 @@ export class Auth {
         return;
       }
 
-      if ('email' in data.record && 'token' in data) {
-        console.log(`Logged in as ${data.record.email}`);
+      if ('email' in data.admin && 'token' in data) {
+        console.log(`Logged in as ${data.admin.email} as admin`);
 
-        const user: User = data.record;
-
-        // add user token to user object
-        user.token = data.token;
+        const admin: AdminType = {
+          id: data.admin.id,
+          token: data.token,
+          email: data.admin.email,
+        };
 
         // update Admin data
-        this.Admin = data.record;
+        this.Admin = { ...admin };
       }
     } catch (errorResponse) {
       console.log('Invalid email / password combo');
@@ -63,11 +64,7 @@ export class Auth {
   }
 
   public async signin(email: string, password: string): Promise<void> {
-    await this.authServerCall(
-      '/collections/users/auth-with-password',
-      email,
-      password,
-    );
+    await this.authServerCall('admins/auth-with-password', email, password);
   }
 
   public signout(): void {
@@ -77,13 +74,4 @@ export class Auth {
   }
 }
 
-const adminUser = new Auth();
-(async () => {
-  // TODO setup login credentials for admin
-  await adminUser.signin(
-    process.env.ADMIN_USERNAME || '',
-    process.env.ADMIN_PASSWORD || '',
-  );
-})();
-
-export { adminUser };
+export const adminUser = new Auth();

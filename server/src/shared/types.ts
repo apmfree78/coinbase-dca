@@ -1,4 +1,3 @@
-
 // pocketbase record id
 export interface Id {
   id: string;
@@ -21,6 +20,16 @@ export interface NewUser {
 
 // user type
 export type User = Id & NewUser;
+
+export interface Admin {
+  token: string;
+  admin: {
+    id: string;
+    created: string;
+    updated: string;
+    email: string;
+  };
+}
 
 export interface CollectionId {
   id: string;

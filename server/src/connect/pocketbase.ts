@@ -3,21 +3,19 @@ import { axiosDatabaseInstance } from '../axios/databaseConfig';
 import type { PaginationData, PurchaseOrder } from '../shared/types';
 import { purchaseOrdersPath } from '../axios/constants';
 
-const ordersPerPage = 1000;
+const ordersPerPage = 10;
 
 //fetch user posts with authorization token
 async function fetchData<T>(
-  // user: User | null,
   pageNumber: number,
   urlPath: string,
 ): Promise<T | undefined> {
-  // if (!user) return null;
   try {
-    const { data }: AxiosResponse<T> = await axiosDatabaseInstance.get(
-      `${urlPath}?perPage=${ordersPerPage}&page=${pageNumber}`,
+    const response: AxiosResponse<T> = await axiosDatabaseInstance.get(
+      `${urlPath}?page=${pageNumber}`,
     );
-    console.log(data);
-    return data;
+    console.log(response);
+    return response.data;
   } catch (err) {
     console.warn(err);
   }

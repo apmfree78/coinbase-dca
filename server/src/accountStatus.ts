@@ -1,8 +1,8 @@
-import axios, {AxiosResponse} from 'axios';
-import {axiosInstance} from './axios/config';
-import {AppResult, AppState, panic, sleep} from './utils';
-import {AccountStatus} from './coin.config';
-import type {AccountStatusSuccessResponse} from './coin.config';
+import axios, { AxiosResponse } from 'axios';
+import { axiosInstance } from './axios/config';
+import { AppResult, AppState, panic, sleep } from './utils';
+import { AccountStatus } from './coin.config';
+import type { AccountStatusSuccessResponse } from './coin.config';
 
 export async function checkAccountStatus(): Promise<
   AccountStatusSuccessResponse[] | void
@@ -37,8 +37,8 @@ export async function checkAccountStatus(): Promise<
     const message = axios.isAxiosError(err)
       ? err?.response?.data.message
       : err instanceof Error
-      ? err.message
-      : 'unknown error occurred';
+        ? err.message
+        : 'unknown error occurred';
     const data: AppResult = {
       state: AppState.BUY_FAILURE,
       message,
