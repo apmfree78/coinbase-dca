@@ -1,4 +1,73 @@
-import {AccountStatus, PriceData} from '../coin.config';
+import { AccountStatus, PriceData } from '../coin.config';
+import { AdminResponse, PaginationData, PurchaseOrder } from '../shared/types';
+
+export const mockAdminResponse: AdminResponse = {
+  token: 'dcb98ebf10d15805b04ac2235b11e9f1',
+  admin: {
+    id: 'd772a88c-b40c-593a-8e58-aaaf9dab3241',
+    created: '2019-06-20T16:44:53.357Z',
+    updated: '2019-06-20T16:44:53.357Z',
+    email: 'amitpmehta78@gmail.com',
+  },
+};
+
+export const mockDatabaseOrderResonse: PaginationData<PurchaseOrder> =
+{
+  page: 1,
+  perPage: 30,
+  totalItems: 4,
+  totalPages: 1,
+  items: [
+    {
+      amount: 1000,
+      amount_purchased: 0,
+      asset: 'BTC',
+      collectionId: 'uua9ux4bce1etl0',
+      collectionName: 'purchase_order',
+      created: '2023-06-04 20:03:34.140Z',
+      exchange: 'coinbase',
+      id: 'wg58b0dsvn76bpo',
+      owner: '7u6cvnhb9v3qvu8',
+      updated: '2023-06-11 16:38:31.133Z'
+    },
+    {
+      amount: 5000,
+      amount_purchased: 0,
+      asset: 'BTC',
+      collectionId: 'uua9ux4bce1etl0',
+      collectionName: 'purchase_order',
+      created: '2023-06-11 15:53:51.011Z',
+      exchange: 'bitstamp',
+      id: '5rmz6vvs8ev2im8',
+      owner: 'cl98cqq1grfab8r',
+      updated: '2023-06-11 16:38:15.799Z'
+    },
+    {
+      amount: 300,
+      amount_purchased: 0,
+      asset: 'ETH',
+      collectionId: 'uua9ux4bce1etl0',
+      collectionName: 'purchase_order',
+      created: '2023-06-13 22:35:46.931Z',
+      exchange: 'kraken',
+      id: 'pk7n1w6nqeljpnj',
+      owner: '7u6cvnhb9v3qvu8',
+      updated: '2023-06-14 23:11:06.496Z'
+    },
+    {
+      amount: 200,
+      amount_purchased: 0,
+      asset: 'BTC',
+      collectionId: 'uua9ux4bce1etl0',
+      collectionName: 'purchase_order',
+      created: '2023-06-14 23:41:51.585Z',
+      exchange: 'coinbase',
+      id: 'foggbpujl2mucj2',
+      owner: 'cl98cqq1grfab8r',
+      updated: '2023-06-14 23:41:51.585Z'
+    }
+  ]
+}
 
 export const mockAccountDataResponse: AccountStatus = {
   accounts: [

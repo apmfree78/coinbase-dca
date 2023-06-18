@@ -33,8 +33,8 @@ export interface AdminResponse {
 
 export interface CollectionId {
   id: string;
-  '@collectionId': string;
-  '@collectionName': string;
+  collectionId: string;
+  collectionName: string;
   created: string;
   updated: string;
 }

@@ -3,8 +3,6 @@ import { axiosDatabaseInstance } from '../axios/databaseConfig';
 import type { PaginationData, PurchaseOrder } from '../shared/types';
 import { purchaseOrdersPath } from '../axios/constants';
 
-const ordersPerPage = 10;
-
 //fetch user posts with authorization token
 async function fetchData<T>(
   pageNumber: number,
