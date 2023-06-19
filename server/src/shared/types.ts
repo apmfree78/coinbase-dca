@@ -1,21 +1,21 @@
 // pocketbase record id
 export interface Id {
   id: string;
-  '@collectionId': string;
-  '@collectionName': string;
+  collectionId: string;
+  collectionName: string;
   created: string;
   updated: string;
   username?: string;
   name?: string;
   verified: boolean;
   emailVisibility: boolean;
-  posts?: string[];
 }
 
 export interface NewUser {
   email: string;
-  token?: string;
-  dca_orders: string[];
+  token: string;
+  dca_orders?: string[];
+  expand?: { dca_orders: PurchaseOrder };
 }
 
 // user type
