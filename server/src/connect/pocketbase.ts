@@ -4,7 +4,7 @@ import type { PaginationData, PurchaseOrder } from '../shared/types';
 import { purchaseOrdersPath } from '../axios/constants';
 
 //fetch user posts with authorization token
-async function fetchData<T>(
+async function fetchPaginatedData<T>(
   pageNumber: number,
   urlPath: string,
 ): Promise<T | undefined> {
@@ -21,4 +21,4 @@ async function fetchData<T>(
 }
 
 export const getOrders = (page: number) =>
-  fetchData<PaginationData<PurchaseOrder>>(page, purchaseOrdersPath);
+  fetchPaginatedData<PaginationData<PurchaseOrder>>(page, purchaseOrdersPath);

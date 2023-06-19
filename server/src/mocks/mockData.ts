@@ -2,7 +2,7 @@ import { AccountStatus, PriceData } from '../coin.config';
 import { AdminResponse, PaginationData, PurchaseOrder } from '../shared/types';
 
 export const mockAdminResponse: AdminResponse = {
-  token: 'dcb98ebf10d15805b04ac2235b11e9f1',
+  token: 'token',
   admin: {
     id: 'd772a88c-b40c-593a-8e58-aaaf9dab3241',
     created: '2019-06-20T16:44:53.357Z',
@@ -11,8 +11,7 @@ export const mockAdminResponse: AdminResponse = {
   },
 };
 
-export const mockDatabaseOrderResonse: PaginationData<PurchaseOrder> =
-{
+export const mockDatabaseOrderResonse: PaginationData<PurchaseOrder> = {
   page: 1,
   perPage: 30,
   totalItems: 4,
@@ -28,7 +27,7 @@ export const mockDatabaseOrderResonse: PaginationData<PurchaseOrder> =
       exchange: 'coinbase',
       id: 'wg58b0dsvn76bpo',
       owner: '7u6cvnhb9v3qvu8',
-      updated: '2023-06-11 16:38:31.133Z'
+      updated: '2023-06-11 16:38:31.133Z',
     },
     {
       amount: 5000,
@@ -40,7 +39,7 @@ export const mockDatabaseOrderResonse: PaginationData<PurchaseOrder> =
       exchange: 'bitstamp',
       id: '5rmz6vvs8ev2im8',
       owner: 'cl98cqq1grfab8r',
-      updated: '2023-06-11 16:38:15.799Z'
+      updated: '2023-06-11 16:38:15.799Z',
     },
     {
       amount: 300,
@@ -52,7 +51,7 @@ export const mockDatabaseOrderResonse: PaginationData<PurchaseOrder> =
       exchange: 'kraken',
       id: 'pk7n1w6nqeljpnj',
       owner: '7u6cvnhb9v3qvu8',
-      updated: '2023-06-14 23:11:06.496Z'
+      updated: '2023-06-14 23:11:06.496Z',
     },
     {
       amount: 200,
@@ -64,10 +63,10 @@ export const mockDatabaseOrderResonse: PaginationData<PurchaseOrder> =
       exchange: 'coinbase',
       id: 'foggbpujl2mucj2',
       owner: 'cl98cqq1grfab8r',
-      updated: '2023-06-14 23:41:51.585Z'
-    }
-  ]
-}
+      updated: '2023-06-14 23:41:51.585Z',
+    },
+  ],
+};
 
 export const mockAccountDataResponse: AccountStatus = {
   accounts: [
