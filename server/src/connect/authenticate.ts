@@ -27,6 +27,10 @@ export class Auth {
     return this.Admin?.token || null;
   }
 
+  getEmail(): string | null {
+    return this.Admin?.email || null;
+  }
+
   private async authServerCall(
     urlEndpoint: string,
     email: string,
