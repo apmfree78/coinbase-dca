@@ -23,11 +23,12 @@ export const getUsers = (page: number) =>
   );
 
 // obtain purchase orders for all users by page number
-export const getUserWithOrders = (page: number) =>
+export const getActiveUserWithOrders = (page: number) =>
   fetchPaginatedExpandedData<PaginationData<User>>(
     page,
     userPath,
     'dca_orders',
-    'id,email,expand',
+    'id,email,expand,membership',
+    "(status = 'active')",
     axiosDatabaseInstance,
   );

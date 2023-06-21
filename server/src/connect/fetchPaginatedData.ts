@@ -23,11 +23,12 @@ export async function fetchPaginatedExpandedData<T>(
   urlPath: string,
   expandFields: string, // "field1,field2,field3.."
   fields: string,
+  filter: string, // (id = 'abc' && ..)
   axiosConnectionInstance: AxiosInstance,
 ): Promise<T | undefined> {
   try {
     const response: AxiosResponse<T> = await axiosConnectionInstance.get(
-      `${urlPath}?page=${pageNumber}&expand=${expandFields}&fields=${fields}`,
+      `${urlPath}?page=${pageNumber}&expand=${expandFields}&fields=${fields}&filter=${filter}`,
     );
     // console.log('data', response.data);
     return response.data;
