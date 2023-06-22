@@ -7,14 +7,16 @@ import {
 } from './mocks/constants';
 import { getOrders } from './connect/pocketbase';
 import { panic, AppState } from './utils';
-import { purchaseCrypto, marketBuy, limitOrderBuy } from './purchase';
+import { limitOrderBuy } from './orders/limitOrderBuy';
+import { marketBuy } from './orders/marketBuy';
+import { purchaseCrypto } from './purchase';
 import { server } from './mocks/server';
 import { rest } from 'msw';
 import { adminUser } from './connect/authenticate';
 import { setupEnvironment } from './env';
 import { checkAccountStatus } from './accountStatus';
 import type { AccountStatusSuccessResponse } from './coin.config';
-import { getPriceData } from './getPriceData';
+import { getPriceData } from './orders/getPriceData';
 import {
   mockPriceDataResponse,
   mockAdminResponse,
@@ -137,7 +139,7 @@ describe('marketBuy', () => {
 });
 
 describe('limitOrderBuy', () => {
-  jest.mock('./getPriceData', () => {
+  jest.mock('./orders/getPriceData', () => {
     getPriceData: (productId: string) => mockPriceDataResponse;
   });
   const coin: CoinbaseCurrency = {
@@ -150,7 +152,7 @@ describe('limitOrderBuy', () => {
 
     const result = await limitOrderBuy(coin);
 
-    expect(result).toEqual(
+    expect(result?.success_message).toEqual(
       `✅ Limit Order(1) Submitted - For ${coin.funds} of ${coin.productId
       } at ${limitPrice.toFixed(2)}`,
     );

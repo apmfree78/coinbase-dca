@@ -15,7 +15,7 @@ export interface NewUser {
   email: string;
   token: string;
   dca_orders?: string[];
-  expand?: { dca_orders: PurchaseOrder };
+  expand?: { dca_orders: PurchaseOrder[] };
 }
 
 // user type

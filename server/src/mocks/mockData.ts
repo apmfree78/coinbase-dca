@@ -1,5 +1,5 @@
-import { AccountStatus, PriceData } from '../coin.config';
-import { AdminResponse, PaginationData, PurchaseOrder } from '../shared/types';
+import { AccountStatus, PriceData } from 'coin.config';
+import { AdminResponse, PaginationData, PurchaseOrder } from 'shared/types';
 
 export const mockAdminResponse: AdminResponse = {
   token: 'token',

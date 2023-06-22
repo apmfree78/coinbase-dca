@@ -1,5 +1,5 @@
 import { axiosDatabaseInstance } from '../../axios/databaseConfig';
-import type { PaginationData, PurchaseOrder, User } from '../../shared/types';
+import type { PaginationData, PurchaseOrder, User } from 'shared/types';
 import { purchaseOrdersPath, userPath } from '../../axios/constants';
 import {
   fetchPaginatedData,

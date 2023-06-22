@@ -1,6 +1,5 @@
 import CryptoJS from 'crypto-js';
 import url from 'url';
-import {CoinbaseOrderRequest} from '../coin.config';
 
 export function generateSignature(
   method: string,
@@ -14,7 +13,7 @@ export function generateSignature(
   const path = '/' + url.parse(apiUrl).pathname;
   const str = timestamp + method + path + requestBody;
   const sig = sign(str, process.env.API_SECRET || '');
-  return {signature: sig, timestamp};
+  return { signature: sig, timestamp };
 }
 
 function sign(str: string, secret: string) {
