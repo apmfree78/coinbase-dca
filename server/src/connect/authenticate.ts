@@ -62,7 +62,6 @@ export class Auth {
         this.Admin = { ...admin };
       } else throw new Error('response missing token or email');
     } catch (errorResponse) {
-      console.warn(errorResponse);
       console.log('Invalid email / password combo');
     }
   }

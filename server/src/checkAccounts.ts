@@ -1,5 +1,5 @@
 import { setupEnvironment } from 'env';
-import { checkAccountStatus } from 'accountStatus';
+import { checkAccountStatus } from 'orders/accountStatus';
 
 (async function() {
   await setupEnvironment();

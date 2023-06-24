@@ -5,6 +5,7 @@ module.exports = {
   transform: {
     '^.+\\.ts?$': 'ts-jest',
   },
+  setupFilesAfterEnv: ['<rootDir>/src/testUtils/setupEnv.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   coverageThreshold: {
     global: {

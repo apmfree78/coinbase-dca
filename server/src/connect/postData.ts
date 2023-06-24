@@ -13,7 +13,7 @@ export async function postData<T extends CollectionId, K>(
     );
     return data;
   } catch (err) {
-    console.warn(err);
+    console.warn('error posting data');
     return null;
   }
 }

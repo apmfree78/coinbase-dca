@@ -10,10 +10,9 @@ export async function fetchPaginatedData<T>(
     const response: AxiosResponse<T> = await axiosConnectionInstance.get(
       `${urlPath}?page=${pageNumber}`,
     );
-    console.log('data', response.data);
     return response.data;
   } catch (err) {
-    console.warn(err);
+    console.warn('error fetching paginated data');
   }
 }
 
@@ -33,6 +32,6 @@ export async function fetchPaginatedExpandedData<T>(
     // console.log('data', response.data);
     return response.data;
   } catch (err) {
-    console.warn(err);
+    console.warn('error fetching paginated expanded data');
   }
 }

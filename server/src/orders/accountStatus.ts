@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { axiosInstance } from './axios/config';
+import { axiosInstance } from '../axios/config';
 import { AppResult, AppState, panic, sleep } from 'utils';
 import { AccountStatus } from 'coin.config';
 import type { AccountStatusSuccessResponse } from 'coin.config';
@@ -33,7 +33,7 @@ export async function checkAccountStatus(): Promise<
     return userAccounts;
     // Error handling below
   } catch (err: unknown) {
-    console.warn(err);
+    console.warn('error getting user account status');
     const message = axios.isAxiosError(err)
       ? err?.response?.data.message
       : err instanceof Error

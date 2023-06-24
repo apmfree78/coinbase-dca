@@ -33,7 +33,6 @@ export async function limitOrderBuy(
       await axiosInstance.post('api/v3/brokerage/orders', coinData);
     await sleep(300);
     const order = response.data as OrderResponseSuccess;
-    console.log('response', order);
 
     if (order.order_id) {
       const {
@@ -49,6 +48,7 @@ export async function limitOrderBuy(
       return {
         order_id: order.order_id,
         product_id,
+        amount: parseInt(coin.funds),
         limit_price: parseFloat(limit_limit_gtc?.limit_price || ''),
         success_message: successMessage,
       };
@@ -56,7 +56,7 @@ export async function limitOrderBuy(
     return null;
     // Error handling below
   } catch (err: unknown) {
-    console.warn(err);
+    console.warn('error submitting limit buy to coinbase');
     const message = axios.isAxiosError(err)
       ? err?.response?.data.message
       : err instanceof Error

@@ -72,6 +72,7 @@ export interface CoinbaseOrderRequest {
 export type LimitOrderSubmitted = {
   order_id: string;
   product_id: string;
+  amount: number;
   limit_price: number;
   success_message: string;
 };

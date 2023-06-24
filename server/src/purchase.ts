@@ -5,12 +5,16 @@ import type {
   PaginationData,
   PostSubmittedOrderPayload,
   PurchaseOrder,
-  User,
 } from 'shared/types';
 import { getActiveUserWithOrders, postSubmittedOrder } from 'connect/pocketbase';
 import { limitOrderBuy } from 'orders/limitOrderBuy';
 
-export async function submitPurchaseOrdersForAllUsers() {
+export async function submitPurchaseOrdersForAllUsers(): Promise<
+  LimitOrderSubmitted[] | null
+> {
+  // submit orders to coinbase
+  let userSubmittedLimitOrders: LimitOrderSubmitted[] = [];
+
   // grab first page of users
   const userData: PaginationData<AbbreviatedUserWithOrders> | undefined =
     await getActiveUserWithOrders(1);
@@ -25,8 +29,7 @@ export async function submitPurchaseOrdersForAllUsers() {
 
     if (!orders) return null;
     // submit orders to coinbase
-    const userSubmittedLimitOrders: LimitOrderSubmitted[] =
-      await submitUserLimitBuyOrders(orders);
+    userSubmittedLimitOrders = await submitUserLimitBuyOrders(orders);
 
     // map through each submitted limited order and
     // record in pocketbase
@@ -43,6 +46,7 @@ export async function submitPurchaseOrdersForAllUsers() {
       await postSubmittedOrder(orderPayload);
     }
   }
+  return userSubmittedLimitOrders;
 }
 
 export async function submitUserLimitBuyOrders(
@@ -61,7 +65,7 @@ export async function submitUserLimitBuyOrders(
         submittedOrders.push(limitOrderData);
       }
     } catch (err) {
-      console.warn(err);
+      console.warn('error submitting limit buy order');
     }
   }
   return submittedOrders;

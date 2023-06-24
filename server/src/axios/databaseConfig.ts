@@ -9,7 +9,7 @@ export const axiosDatabaseInstance = axios.create({
 
 axiosDatabaseInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    console.log('token', adminUser.getToken());
+    // console.log('token', adminUser.getToken());
     const token = adminUser.getToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

@@ -18,7 +18,7 @@ export async function getPriceData(
     };
     // Error handling below
   } catch (err: unknown) {
-    console.warn(err);
+    console.warn('error getting price data');
     const message = axios.isAxiosError(err)
       ? err?.response?.data.message
       : err instanceof Error
