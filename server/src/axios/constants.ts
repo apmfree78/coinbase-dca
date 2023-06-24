@@ -8,4 +8,4 @@ export const queryKeys = {
 // path for pocketbase API endpoints
 export const purchaseOrdersPath = 'collections/purchase_order/records';
 export const userPath = 'collections/users/records';
-export const submittedOrderPath = 'collections/submitted_order/records';
+export const submittedOrderPath = 'collections/submitted_orders/records';

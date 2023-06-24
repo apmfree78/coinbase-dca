@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { databaseAPI } from '../axios/constants';
-import { AdminResponse } from 'shared/types';
+import { AdminResponse } from '../shared/types';
 
 interface ErrorResponse {
   message: string;

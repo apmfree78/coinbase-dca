@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { axiosInstance } from '../axios/config';
-import { AppResult, AppState, panic, sleep } from 'utils';
-import type { PriceDataSuccessResponse, PriceData } from 'coin.config';
+import { AppResult, AppState, panic, sleep } from '../utils';
+import type { PriceDataSuccessResponse, PriceData } from '../coin.config';
 
 export async function getPriceData(
   productId: string,

@@ -22,7 +22,7 @@ import {
   mockDatabaseOrderResonse,
   mockActiveUserOrders,
 } from './mockData';
-import { PostSubmittedOrderPayload } from 'shared/types';
+import { PostSubmittedOrderPayload } from '../shared/types';
 
 export const handlers: RequestHandler[] = [
   rest.post(buyOrderURL, buyOrderResponse),
@@ -30,7 +30,7 @@ export const handlers: RequestHandler[] = [
     databaseSubmittedOrdersURL,
     (req: MockedRequest, res: ResponseComposition, ctx: RestContext) => {
       const body = req.body as PostSubmittedOrderPayload;
-      const { order_id, product_id, limit_price, owner, isFilled } = body;
+      const { order_id, product_id, limit_price, owner, isFilled, amount } = body;
       return res(
         ctx.status(200),
         ctx.json({
@@ -44,6 +44,7 @@ export const handlers: RequestHandler[] = [
           limit_price,
           owner,
           isFilled,
+          amount
         }),
       );
     },

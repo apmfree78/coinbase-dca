@@ -3,7 +3,7 @@ import {
   CoinbaseOrderRequest,
   OrderResponseSuccess,
   OrderResponseError,
-} from 'coin.config';
+} from '../coin.config';
 
 export const buyOrderResponse = (
   req: MockedRequest<CoinbaseOrderRequest>,

@@ -1,13 +1,16 @@
-import { AppResult, AppState, panic, sleep } from 'utils';
+import { AppResult, AppState, panic, sleep } from './utils';
 import { coins, CoinbaseCurrency, LimitOrderSubmitted } from './coin.config';
 import type {
   AbbreviatedUserWithOrders,
   PaginationData,
   PostSubmittedOrderPayload,
   PurchaseOrder,
-} from 'shared/types';
-import { getActiveUserWithOrders, postSubmittedOrder } from 'connect/pocketbase';
-import { limitOrderBuy } from 'orders/limitOrderBuy';
+} from './shared/types';
+import {
+  getActiveUserWithOrders,
+  postSubmittedOrder,
+} from './connect/pocketbase';
+import { limitOrderBuy } from './orders/limitOrderBuy';
 
 export async function submitPurchaseOrdersForAllUsers(): Promise<
   LimitOrderSubmitted[] | null
@@ -40,6 +43,7 @@ export async function submitPurchaseOrdersForAllUsers(): Promise<
         limit_price: order.limit_price,
         owner: user.id,
         isFilled: false,
+        amount: order.amount,
       };
 
       // post to pocketbase

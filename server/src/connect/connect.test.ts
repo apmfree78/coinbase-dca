@@ -94,6 +94,7 @@ describe('postSubmittedOrder', () => {
       limit_price: 27000,
       owner: '1bc',
       isFilled: false,
+      amount: 1000,
     };
 
     const response: PostSubmittedResponse | null = await postSubmittedOrder(
@@ -106,6 +107,7 @@ describe('postSubmittedOrder', () => {
       expect(response.limit_price).toEqual(payload.limit_price);
       expect(response.owner).toEqual(payload.owner);
       expect(response.isFilled).toEqual(payload.isFilled);
+      expect(response.amount).toEqual(payload.amount);
     }
   });
 });

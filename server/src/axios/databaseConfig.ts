@@ -1,6 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 import { databaseAPI } from './constants';
-import { adminUser } from 'connect/authenticate';
+import { adminUser } from '../connect/authenticate';
 
 export const axiosDatabaseInstance = axios.create({
   baseURL: databaseAPI,

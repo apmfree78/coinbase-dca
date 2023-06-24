@@ -10,4 +10,4 @@ export const databaseOrdersURL =
 export const databaseUserURL =
   'http://127.0.0.1:8090/api/collections/users/records';
 export const databaseSubmittedOrdersURL =
-  'http://127.0.0.1:8090/api/collections/submitted_order/records';
+  'http://127.0.0.1:8090/api/collections/submitted_orders/records';

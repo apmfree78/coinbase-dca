@@ -1,4 +1,3 @@
-
 import { axiosDatabaseInstance } from '../../axios/databaseConfig';
 import type {
   PaginationData,
@@ -7,7 +6,7 @@ import type {
   PostSubmittedResponse,
   User,
   AbbreviatedUserWithOrders,
-} from 'shared/types';
+} from '../../shared/types';
 import {
   purchaseOrdersPath,
   userPath,
@@ -17,7 +16,7 @@ import {
   fetchPaginatedData,
   fetchPaginatedExpandedData,
 } from '../fetchPaginatedData';
-import { postData } from 'connect/postData';
+import { postData } from '../../connect/postData';
 
 // obtain purchase orders for all users by page number
 export const getOrders = (page: number) =>

@@ -75,6 +75,7 @@ export type PostSubmittedOrderPayload = {
   limit_price: number;
   owner: string;
   isFilled: boolean;
+  amount: number;
 };
 
 export type PostSubmittedResponse = CollectionId & PostSubmittedOrderPayload;

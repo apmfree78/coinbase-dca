@@ -1,10 +1,10 @@
-import { AccountStatus, PriceData } from 'coin.config';
+import { AccountStatus, PriceData } from '../coin.config';
 import {
   AbbreviatedUserWithOrders,
   AdminResponse,
   PaginationData,
   PurchaseOrder,
-} from 'shared/types';
+} from '../shared/types';
 
 export const mockAdminResponse: AdminResponse = {
   token: 'token',
