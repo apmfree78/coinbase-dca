@@ -1,5 +1,10 @@
 import { AccountStatus, PriceData } from 'coin.config';
-import { AdminResponse, PaginationData, PurchaseOrder } from 'shared/types';
+import {
+  AbbreviatedUserWithOrders,
+  AdminResponse,
+  PaginationData,
+  PurchaseOrder,
+} from 'shared/types';
 
 export const mockAdminResponse: AdminResponse = {
   token: 'token',
@@ -9,6 +14,48 @@ export const mockAdminResponse: AdminResponse = {
     updated: '2019-06-20T16:44:53.357Z',
     email: 'amitpmehta78@gmail.com',
   },
+};
+
+export const mockActiveUserOrders: PaginationData<AbbreviatedUserWithOrders> = {
+  items: [
+    {
+      email: 'amit@profitswami.com',
+      expand: {
+        dca_orders: [
+          {
+            amount: 1000,
+            amount_purchased: 0,
+            asset: 'BTC',
+            collectionId: 'uua9ux4bce1etl0',
+            collectionName: 'purchase_order',
+            created: '2023-06-04 20:03:34.140Z',
+            exchange: 'coinbase',
+            id: 'wg58b0dsvn76bpo',
+            owner: '7u6cvnhb9v3qvu8',
+            updated: '2023-06-11 16:38:31.133Z',
+          },
+          {
+            amount: 300,
+            amount_purchased: 0,
+            asset: 'ETH',
+            collectionId: 'uua9ux4bce1etl0',
+            collectionName: 'purchase_order',
+            created: '2023-06-13 22:35:46.931Z',
+            exchange: 'kraken',
+            id: 'pk7n1w6nqeljpnj',
+            owner: '7u6cvnhb9v3qvu8',
+            updated: '2023-06-14 23:11:06.496Z',
+          },
+        ],
+      },
+      id: '7u6cvnhb9v3qvu8',
+      membership: 'gold',
+    },
+  ],
+  page: 1,
+  perPage: 30,
+  totalItems: 1,
+  totalPages: 1,
 };
 
 export const mockDatabaseOrderResonse: PaginationData<PurchaseOrder> = {

@@ -11,6 +11,8 @@ import {
   productPriceURL,
   databaseAdminAccessURL,
   databaseOrdersURL,
+  databaseUserURL,
+  databaseSubmittedOrdersURL,
 } from './constants';
 import { buyOrderResponse } from './orderResponse';
 import {
@@ -18,10 +20,39 @@ import {
   mockPriceDataResponse,
   mockAdminResponse,
   mockDatabaseOrderResonse,
+  mockActiveUserOrders,
 } from './mockData';
+import { PostSubmittedOrderPayload } from 'shared/types';
 
 export const handlers: RequestHandler[] = [
   rest.post(buyOrderURL, buyOrderResponse),
+  rest.post(
+    databaseSubmittedOrdersURL,
+    (req: MockedRequest, res: ResponseComposition, ctx: RestContext) => {
+      const body = req.body as PostSubmittedOrderPayload;
+      const { order_id, product_id, limit_price, owner, isFilled } = body;
+      return res(
+        ctx.status(200),
+        ctx.json({
+          id: '1abc',
+          collectionId: '2a43akece',
+          collectionName: 'submitted_orders',
+          created: Date(),
+          updated: Date(),
+          order_id,
+          product_id,
+          limit_price,
+          owner,
+          isFilled,
+        }),
+      );
+    },
+  ),
+  rest.get(
+    databaseUserURL,
+    (req: MockedRequest, res: ResponseComposition, ctx: RestContext) =>
+      res(ctx.status(200), ctx.json(mockActiveUserOrders)),
+  ),
   rest.post(
     databaseAdminAccessURL,
     (req: MockedRequest, res: ResponseComposition, ctx: RestContext) => {

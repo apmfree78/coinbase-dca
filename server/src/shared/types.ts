@@ -1,4 +1,6 @@
-// pocketbase record id
+export type Membership = 'free' | 'silver' | 'gold' | 'platinum';
+export type Status = 'active' | 'suspended';
+//pocketbase record id
 export interface Id {
   id: string;
   collectionId: string;
@@ -16,10 +18,17 @@ export interface NewUser {
   token: string;
   dca_orders?: string[];
   expand?: { dca_orders: PurchaseOrder[] };
+  membership: Membership;
+  status: Status;
 }
 
 // user type
 export type User = Id & NewUser;
+
+export type AbbreviatedUserWithOrders = { id: string } & Omit<
+  NewUser,
+  'token' | 'status'
+>;
 
 export interface AdminResponse {
   token: string;
@@ -30,14 +39,13 @@ export interface AdminResponse {
     email: string;
   };
 }
-
-export interface CollectionId {
+export type CollectionId = {
   id: string;
   collectionId: string;
   collectionName: string;
   created: string;
   updated: string;
-}
+};
 
 export const exchanges = [
   'coinbase',
@@ -60,6 +68,16 @@ export interface NewPurchaseOrder {
   amount_purchased?: number;
   owner: string;
 }
+
+export type PostSubmittedOrderPayload = {
+  order_id: string;
+  product_id: string;
+  limit_price: number;
+  owner: string;
+  isFilled: boolean;
+};
+
+export type PostSubmittedResponse = CollectionId & PostSubmittedOrderPayload;
 
 export interface PostOrderPayload {
   exchange: exchangeType;

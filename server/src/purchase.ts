@@ -1,12 +1,18 @@
 import { AppResult, AppState, panic, sleep } from 'utils';
 import { coins, CoinbaseCurrency, LimitOrderSubmitted } from './coin.config';
-import type { PaginationData, PurchaseOrder, User } from 'shared/types';
-import { getActiveUserWithOrders } from 'connect/pocketbase';
+import type {
+  AbbreviatedUserWithOrders,
+  PaginationData,
+  PostSubmittedOrderPayload,
+  PurchaseOrder,
+  User,
+} from 'shared/types';
+import { getActiveUserWithOrders, postSubmittedOrder } from 'connect/pocketbase';
 import { limitOrderBuy } from 'orders/limitOrderBuy';
 
 export async function submitPurchaseOrdersForAllUsers() {
   // grab first page of users
-  const userData: PaginationData<User> | undefined =
+  const userData: PaginationData<AbbreviatedUserWithOrders> | undefined =
     await getActiveUserWithOrders(1);
 
   if (!userData) throw new Error('no user data found');
@@ -21,9 +27,22 @@ export async function submitPurchaseOrdersForAllUsers() {
     // submit orders to coinbase
     const userSubmittedLimitOrders: LimitOrderSubmitted[] =
       await submitUserLimitBuyOrders(orders);
-  }
 
-  // post userSubmittedLimitOrders to pocketbase below  
+    // map through each submitted limited order and
+    // record in pocketbase
+    for (const order of userSubmittedLimitOrders) {
+      const orderPayload: PostSubmittedOrderPayload = {
+        order_id: order.order_id,
+        product_id: order.product_id,
+        limit_price: order.limit_price,
+        owner: user.id,
+        isFilled: false,
+      };
+
+      // post to pocketbase
+      await postSubmittedOrder(orderPayload);
+    }
+  }
 }
 
 export async function submitUserLimitBuyOrders(

@@ -8,7 +8,7 @@
     "format": "prettier 'src/**/*.ts' --write --ignore-path .gitignore",
     "purchase": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/index.js",
     "status": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/checkAccounts.js",
-    "view:orders": "NODE_ENV=production nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/connect/viewOrders.ts",
+    "view:orders": "NODE_ENV=production nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node -r tsconfig-paths/register ./src/connect/viewOrders.ts",
     "build": "rm -rf ./build && tsc",
     "serve": "node build/app.js",
     "test": "NODE_ENV=development jest --coverage"
@@ -46,6 +46,7 @@
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"
   },
   "prettier": {

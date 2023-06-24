@@ -5,7 +5,17 @@ import {
   productPriceURL,
   databaseOrdersURL,
 } from './mocks/constants';
-import { getOrders } from './connect/pocketbase';
+import {
+  AbbreviatedUserWithOrders,
+  PaginationData,
+  PostSubmittedOrderPayload,
+  PostSubmittedResponse,
+} from './shared/types';
+import {
+  getOrders,
+  getActiveUserWithOrders,
+  postSubmittedOrder,
+} from './connect/pocketbase';
 import { panic, AppState } from './utils';
 import { limitOrderBuy } from './orders/limitOrderBuy';
 import { marketBuy } from './orders/marketBuy';
@@ -21,6 +31,7 @@ import {
   mockPriceDataResponse,
   mockAdminResponse,
   mockDatabaseOrderResonse,
+  mockActiveUserOrders,
 } from './mocks/mockData';
 
 beforeAll(async () => {
@@ -74,9 +85,7 @@ describe('getOrders', () => {
       });
     }
   });
-});
 
-describe('getOrders', () => {
   it('should fail to fetch purchase orders from database', async () => {
     server.use(
       rest.get(databaseOrdersURL, (req, res, ctx) => {
@@ -167,6 +176,47 @@ describe('limitOrderBuy', () => {
 
     await limitOrderBuy(coin);
     expect(panic).toHaveBeenCalled();
+  });
+});
+
+describe('getActiveUsersWithOrders', () => {
+  it('should successfully return account data', async () => {
+    const orders: PaginationData<AbbreviatedUserWithOrders> | undefined =
+      await getActiveUserWithOrders(1);
+
+    expect(orders?.page).toEqual(mockActiveUserOrders.page);
+    expect(orders?.totalItems).toEqual(mockActiveUserOrders.totalItems);
+    expect(orders?.perPage).toEqual(mockActiveUserOrders.perPage);
+    expect(orders?.items.length).toEqual(mockActiveUserOrders.items.length);
+    orders?.items[0].expand?.dca_orders.forEach((order, i) => {
+      expect(order.amount).toEqual(
+        mockActiveUserOrders.items[0].expand?.dca_orders[i].amount,
+      );
+    });
+  });
+});
+
+describe('postSubmittedOrder', () => {
+  it('success response to posting limit orders to database', async () => {
+    const payload: PostSubmittedOrderPayload = {
+      order_id: '1',
+      product_id: 'BTC-USD',
+      limit_price: 27000,
+      owner: '1bc',
+      isFilled: false,
+    };
+
+    const response: PostSubmittedResponse | null = await postSubmittedOrder(
+      payload,
+    );
+
+    if (response !== null) {
+      expect(response.order_id).toEqual(payload.order_id);
+      expect(response.product_id).toEqual(payload.product_id);
+      expect(response.limit_price).toEqual(payload.limit_price);
+      expect(response.owner).toEqual(payload.owner);
+      expect(response.isFilled).toEqual(payload.isFilled);
+    }
   });
 });
 
