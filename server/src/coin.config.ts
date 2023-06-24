@@ -5,7 +5,7 @@ export interface CoinbaseCurrency {
 
 export const coins: CoinbaseCurrency[] = [
   {
-    funds: '10.00',
+    funds: '30.00',
     productId: 'BTC-USD',
   },
 ];
