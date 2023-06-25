@@ -9,7 +9,7 @@ beforeAll(async () => {
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-jest.mock('../utils', () => ({
-  ...jest.requireActual('../utils'),
+jest.mock('../shared/utils', () => ({
+  ...jest.requireActual('../shared/utils'),
   panic: jest.fn(),
 }));
