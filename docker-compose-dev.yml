@@ -1,0 +1,46 @@
+version: '1'
+services:
+  web:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile.dev
+    container_name: frontend
+    ports:
+      - "8080:5173"
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+  server:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: backend
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - ADMIN_USERNAME=apmfree_admin 
+      - ADMIN_PASSWORD
+      - API_KEY
+      - API_SECRET
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:latest
+    container_name: pocketbase
+    restart: unless-stopped
+    ports:
+      - '8090:8090'
+    volumes:
+      - ./pocketbase/pb_data:/pb_data
+    healthcheck: #optional (recommended) since v0.10.0
+      test: wget --no-verbose --tries=1 --spider http://localhost:8090/api/health || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 5  
+  tests:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    command: ["npm","run","test"]

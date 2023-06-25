@@ -44,7 +44,7 @@ export const handlers: RequestHandler[] = [
           limit_price,
           owner,
           isFilled,
-          amount
+          amount,
         }),
       );
     },
