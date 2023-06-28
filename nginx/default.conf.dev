@@ -1,0 +1,30 @@
+upstream web {
+  server web:5173;
+}
+
+upstream pocketbase {
+  server pocketbase:8090;
+}
+
+server {
+  listen 80;
+
+  location / {
+    proxy_pass http://web;
+  }
+
+  location /ws {
+    proxy_pass http://web;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+  }
+
+  location /api {
+    # rewrite /api/(.*) $1 break;
+    proxy_pass http://pocketbase;
+  }
+
+}
+
+

@@ -1,0 +1,30 @@
+version: '1'
+services:
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - '3050:80'
+  web:
+    build: 
+      context: ./client
+    container_name: frontend
+    environment:
+      - WDS_SOCKET_PORT=0
+  backend:
+    build: 
+      context: ./server
+    container_name: backend
+    environment:
+      - POCKETBASE_URL=http://pocketbase:8090
+    env_file:
+      - ./server/.env.production
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:latest
+    container_name: pocketbase
+    restart: unless-stopped
+    ports:
+      - '8090:8090'
+    volumes:
+      - ./pocketbase/pb_data:/pb_data

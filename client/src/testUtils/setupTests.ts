@@ -74,6 +74,7 @@ export const handlers = [
   rest.get<string, SuccessResponse | ErrorResponse, any>(
     `${baseUrl}/collections/users/records/:id`,
     (req, res, ctx) => {
+      console.log(req);
       return res(ctx.json({ user: null }));
     }
   ),

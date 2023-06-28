@@ -1,4 +1,4 @@
-import { AccountStatus, PriceData } from '../coin.config';
+import { AccountStatus, PriceData } from '../shared/coin.config';
 import {
   AbbreviatedUserWithOrders,
   AdminResponse,

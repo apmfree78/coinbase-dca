@@ -12,6 +12,7 @@ jobs:
       API_SECRET: ${{ secrets.API_SECRET }}
       ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
       ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      POCKETBASE_URL: ${{ secrets.POCKETBASE_URL }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3

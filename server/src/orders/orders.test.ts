@@ -1,6 +1,9 @@
-import { CoinbaseCurrency, PriceDataSuccessResponse } from '../coin.config';
+import {
+  CoinbaseCurrency,
+  PriceDataSuccessResponse,
+} from '../shared/coin.config';
 import { buyOrderURL, productPriceURL } from '../mocks/constants';
-import { panic } from '../utils';
+import { panic } from '../shared/utils';
 import { limitOrderBuy } from '../orders/limitOrderBuy';
 import { marketBuy } from '../orders/marketBuy';
 import { server } from '../mocks/server';

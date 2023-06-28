@@ -1,12 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { axiosInstance } from '../axios/config';
-import { AppResult, AppState, panic, sleep } from '../utils';
+import { AppResult, AppState, panic, sleep } from '../shared/utils';
 import {
   CoinbaseCurrency,
   CoinbaseOrderRequest,
   OrderResponseSuccess,
-} from '../coin.config';
+} from '../shared/coin.config';
 
 export async function marketBuy(coin: CoinbaseCurrency): Promise<string> {
   const coinData: CoinbaseOrderRequest = {

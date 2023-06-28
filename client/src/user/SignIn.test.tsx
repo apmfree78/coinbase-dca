@@ -1,7 +1,7 @@
 // import { render, screen } from '@testing-library/react';
-import SignIn from 'user/SignIn';
+import SignIn from '../user/SignIn';
 import React from 'react';
-import { fireEvent, render, screen } from 'test-utils';
+import { fireEvent, render, screen } from '../testUtils/test-utils';
 
 jest.mock('../../user-storage/', () => ({
   getStoredUser: () => {

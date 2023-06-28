@@ -1,6 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 import { generateSignature } from './generateSignature';
-import { CoinbaseOrderRequest } from '../coin.config';
+import { CoinbaseOrderRequest } from '../shared/coin.config';
 
 const axiosInstance = axios.create({
   baseURL: 'https://api.coinbase.com',

@@ -1,13 +1,13 @@
 import axios, { AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { axiosInstance } from '../axios/config';
-import { AppResult, AppState, panic, sleep } from '../utils';
+import { AppResult, AppState, panic, sleep } from '../shared/utils';
 import {
   CoinbaseCurrency,
   CoinbaseOrderRequest,
   OrderResponseSuccess,
-} from '../coin.config';
-import type { LimitOrderSubmitted } from '../coin.config';
+} from '../shared/coin.config';
+import type { LimitOrderSubmitted } from '../shared/coin.config';
 import { getPriceData } from './getPriceData';
 
 // limit order returns object of type LimitOrderSubmitted if limit

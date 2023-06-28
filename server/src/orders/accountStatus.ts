@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import { axiosInstance } from '../axios/config';
-import { AppResult, AppState, panic, sleep } from '../utils';
-import { AccountStatus } from '../coin.config';
-import type { AccountStatusSuccessResponse } from '../coin.config';
+import { AppResult, AppState, panic, sleep } from '../shared/utils';
+import { AccountStatus } from '../shared/coin.config';
+import type { AccountStatusSuccessResponse } from '../shared/coin.config';
 
 export async function checkAccountStatus(): Promise<
   AccountStatusSuccessResponse[] | void

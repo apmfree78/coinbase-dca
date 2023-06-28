@@ -1,5 +1,9 @@
-import { AppResult, AppState, panic, sleep } from './utils';
-import { coins, CoinbaseCurrency, LimitOrderSubmitted } from './coin.config';
+import { AppResult, AppState, panic, sleep } from './shared/utils';
+import {
+  coins,
+  CoinbaseCurrency,
+  LimitOrderSubmitted,
+} from './shared/coin.config';
 import type {
   AbbreviatedUserWithOrders,
   PaginationData,

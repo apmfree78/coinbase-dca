@@ -1,10 +1,10 @@
 import { accountstatusURL, buyOrderURL } from './mocks/constants';
-import { panic, AppState } from './utils';
+import { panic, AppState } from './shared/utils';
 import { purchaseCrypto, submitPurchaseOrdersForAllUsers } from './purchase';
 import { server } from './mocks/server';
 import { rest } from 'msw';
 import { checkAccountStatus } from './orders/accountStatus';
-import type { AccountStatusSuccessResponse } from './coin.config';
+import type { AccountStatusSuccessResponse } from './shared/coin.config';
 import { mockActiveUserOrders, mockPriceDataResponse } from './mocks/mockData';
 import { PurchaseOrder } from './shared/types';
 

@@ -1,4 +1,4 @@
-export const databaseAPI = 'http://127.0.0.1:8090/api/';
+export const databaseAPI = `${process.env.POCKETBASE_URL}/api/`;
 
 export const queryKeys = {
   orders: 'order',

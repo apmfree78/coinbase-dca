@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { AppResult, AppState, panic } from './utils';
+import { AppResult, AppState, panic } from './shared/utils';
 import { adminUser } from './connect/authenticate';
 import path from 'path';
 
@@ -10,6 +10,7 @@ function validateEnvironment(): void {
     'NODE_ENV',
     'ADMIN_USERNAME',
     'ADMIN_PASSWORD',
+    'POCKETBASE_URL',
   ].filter((arg) => process.env[arg] == null);
   if (invalidArgs.length > 0) {
     const result: AppResult = {
