@@ -20,7 +20,7 @@ jobs:
         username: ${{ secrets.LINODE_USERNAME }}
         key: ${{ secrets.LINODE_SSH_KEY }}
         script: |
-          cd /path/to/your/application/directory
+          cd app
           git pull
           docker-compose down
           docker-compose build
