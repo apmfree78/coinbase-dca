@@ -1,4 +1,5 @@
-version: '1'
+# for running on linode server to build production app
+version: '2'
 services:
   nginx:
     restart: always
@@ -17,9 +18,11 @@ services:
       context: ./server
     container_name: backend
     environment:
-      - POCKETBASE_URL=http://pocketbase:8090
-    env_file:
-      - ./server/.env.production
+      - POCKETBASE_URL=${POCKETBASE_URL}
+      - API_KEY=${API_KEY}
+      - API_SECRET=${API_SECRET}
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
     container_name: pocketbase

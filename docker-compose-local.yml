@@ -1,0 +1,52 @@
+# to run for local development
+version: '2'
+services:
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3050:80'
+  web:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile.dev
+    container_name: frontend
+    ports:
+      - "8080:5173"
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    environment:
+      - WDS_SOCKET_PORT=0
+  backend:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: backend
+    volumes:
+      - /app/node_modules
+    env_file:
+      - ./server/.env.production
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:latest
+    container_name: pocketbase
+    restart: unless-stopped
+    ports:
+      - '8090:8090'
+    volumes:
+      - ./pocketbase/pb_data:/pb_data
+    healthcheck: #optional (recommended) since v0.10.0
+      test: wget --no-verbose --tries=1 --spider http://localhost:8090/api/health || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 5  
+  tests:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    command: ["npm","run","test"]

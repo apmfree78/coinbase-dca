@@ -20,8 +20,8 @@ jobs:
         username: ${{ secrets.LINODE_USERNAME }}
         key: ${{ secrets.LINODE_SSH_KEY }}
         script: |
-          cd app
+          cd /home/apmfree78/coinbase-dca
           git pull
-          docker-compose down
-          docker-compose build
-          docker-compose up -d
+          # docker-compose down
+          # docker-compose build
+          # docker-compose up -d
