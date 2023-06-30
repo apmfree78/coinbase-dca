@@ -6,6 +6,7 @@ module.exports = {
     '^.+\\.ts?$': 'ts-jest',
   },
   setupFilesAfterEnv: ['<rootDir>/src/testUtils/setupEnv.ts'],
+  setupFiles: ['<rootDir>/src/testUtils/envVariable.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   coverageThreshold: {
     global: {
