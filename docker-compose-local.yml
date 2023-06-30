@@ -13,13 +13,15 @@ services:
       context: ./client
       dockerfile: Dockerfile.dev
     container_name: frontend
-    ports:
-      - "8080:5173"
     volumes:
       - /app/node_modules
       - ./client:/app
     environment:
       - WDS_SOCKET_PORT=0
+      - POCKETBASE_URL=http://pocketbase:8090
+    depends_on:
+      pocketbase:
+        condition: service_healthy
   backend:
     build: 
       context: ./server
@@ -29,12 +31,15 @@ services:
       - /app/node_modules
     env_file:
       - ./server/.env.production
+    environment:
+      - POCKETBASE_URL=http://pocketbase:8090
+    depends_on:
+      pocketbase:
+        condition: service_healthy
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
     container_name: pocketbase
     restart: unless-stopped
-    ports:
-      - '8090:8090'
     volumes:
       - ./pocketbase/pb_data:/pb_data
     healthcheck: #optional (recommended) since v0.10.0
