@@ -13,7 +13,7 @@ services:
     container_name: frontend
     environment:
       - WDS_SOCKET_PORT=0
-      - POCKETBASE_URL=http://pocketbase:8090
+      - VITE_POCKETBASE_URL=http://pocketbase:8090
   backend:
     build: 
       context: ./server
