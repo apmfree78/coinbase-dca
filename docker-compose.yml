@@ -13,6 +13,7 @@ services:
     container_name: frontend
     environment:
       - WDS_SOCKET_PORT=0
+      - POCKETBASE_URL=http://pocketbase:8090
   backend:
     build: 
       context: ./server
@@ -27,7 +28,5 @@ services:
     image: ghcr.io/muchobien/pocketbase:latest
     container_name: pocketbase
     restart: unless-stopped
-    ports:
-      - '8090:8090'
     volumes:
       - ./pocketbase/pb_data:/pb_data
