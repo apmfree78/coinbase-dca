@@ -1,9 +1,6 @@
 
 #!/bin/bash
 
-# Go to your repository directory if not already in it
-cd /home/apmfree78/coinbase-dca
-
 # Add all changes in the pocketbase directory
 git add pocketbase/*
 
@@ -15,9 +12,6 @@ git pull origin master
 
 # Resolve any merge conflicts that occurred during git pull by accepting "their" changes
 git checkout --theirs .
-
-# Go to your docker-compose directory if it's not the same as your repo directory
-# cd /path/to/your/docker-compose
 
 # Shut down running containers
 docker-compose down

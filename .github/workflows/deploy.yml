@@ -19,4 +19,6 @@ jobs:
         host: ${{ secrets.LINODE_IP }}
         username: ${{ secrets.LINODE_USERNAME }}
         key: ${{ secrets.LINODE_SSH_KEY }}
-        script: ./deploy.sh
+        script: |
+          cd /home/apmfree78/coinbase-dca
+          ./deploy.sh
