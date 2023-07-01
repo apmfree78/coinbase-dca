@@ -11,6 +11,8 @@ git pull origin master
 
 # Resolve any merge conflicts that occurred during git pull by accepting "their" changes
 git checkout --theirs .
+git add pocketbase/*
+git commit -m "merge changes"
 
 # Shut down running containers
 docker-compose down
