@@ -5,7 +5,7 @@ import { setupEnvironment } from './env';
 (async function() {
   await setupEnvironment();
   cron.schedule(
-    '0 23 * * *',
+    '* * * * *',
     () => {
       const limitOrders = submitPurchaseOrdersForAllUsers();
       console.log(limitOrders);
