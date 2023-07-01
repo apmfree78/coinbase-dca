@@ -32,7 +32,6 @@ export async function fetchPaginatedExpandedData<T>(
     // console.log('data', response.data);
     return response.data;
   } catch (err) {
-    console.log(err)
     console.warn('error fetching paginated expanded data');
   }
 }

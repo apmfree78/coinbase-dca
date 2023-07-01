@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "purchase": "NODE_ENV=production node --es-module-specifier-resolution=node server/build/index.js"
+    "purchase": "NODE_ENV=production node --es-module-specifier-resolution=node server/build/index.js""docker": "docker-compose -f docker-compose-local.yml up --build""docker": "docker-compose -f docker-compose-local.yml up --build""docker": "docker-compose -f docker-compose-local.yml up --build""docker": "docker-compose -f docker-compose-local.yml up --build",
+    "docker": "docker-compose -f docker-compose-local.yml up --build"
   },
   "keywords": [],
   "author": "",

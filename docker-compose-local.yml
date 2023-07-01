@@ -1,13 +1,6 @@
 # to run for local development
 version: '2'
 services:
-  nginx:
-    restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
-    ports:
-      - '3050:80'
   web:
     build: 
       context: ./client
@@ -19,20 +12,8 @@ services:
     environment:
       - WDS_SOCKET_PORT=0
       - POCKETBASE_URL=http://pocketbase:8090
-    depends_on:
-      pocketbase:
-        condition: service_healthy
-  backend:
-    build: 
-      context: ./server
-      dockerfile: Dockerfile.dev
-    container_name: backend
-    volumes:
-      - /app/node_modules
-    env_file:
-      - ./server/.env.production
-    environment:
-      - POCKETBASE_URL=http://pocketbase:8090
+    ports:
+      - '8080:5173'
     depends_on:
       pocketbase:
         condition: service_healthy
@@ -47,11 +28,3 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5  
-  tests:
-    build: 
-      context: ./server
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /app/node_modules
-      - ./server:/app
-    command: ["npm","run","test"]

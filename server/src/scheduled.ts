@@ -15,4 +15,5 @@ import { setupEnvironment } from './env';
       timezone: 'America/New_York',
     },
   );
+  setInterval(() => console.log('cron job running'), 1000 * 60); // log every min
 })();

@@ -23,6 +23,3 @@ docker-compose build
 
 # Run services in the background
 docker-compose up -d
-
-# view logs
-docker-compose logs -f
