@@ -6,6 +6,7 @@ import type {
   PostSubmittedResponse,
   User,
   AbbreviatedUserWithOrders,
+  PatchUserPayload,
 } from '../../shared/types';
 import {
   purchaseOrdersPath,
@@ -16,6 +17,7 @@ import {
   fetchPaginatedData,
   fetchPaginatedExpandedData,
 } from '../fetchPaginatedData';
+import { patchData } from '../patchData';
 import { postData } from '../../connect/postData';
 
 // obtain purchase orders for all users by page number
@@ -35,16 +37,26 @@ export const getUsers = (page: number) =>
   );
 
 // obtain purchase orders for all users by page number
+export const patchUser = (userId: string, payload: PatchUserPayload) =>
+  patchData<User, PatchUserPayload>(
+    userId,
+    userPath,
+    payload,
+    axiosDatabaseInstance,
+  );
+
+// obtain purchase orders for all users by page number
 export const getActiveUserWithOrders = (page: number) =>
   fetchPaginatedExpandedData<PaginationData<AbbreviatedUserWithOrders>>(
     page,
     userPath,
     'dca_orders',
-    'id,email,expand,membership',
+    'id,email,expand,membership,submitted_orders,status',
     "(status = 'active')",
     axiosDatabaseInstance,
   );
 
+// post submitted order to database
 export const postSubmittedOrder = (payload: PostSubmittedOrderPayload) =>
   postData<PostSubmittedResponse, PostSubmittedOrderPayload>(
     submittedOrderPath,

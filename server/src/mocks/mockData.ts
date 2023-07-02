@@ -4,6 +4,7 @@ import {
   AdminResponse,
   PaginationData,
   PurchaseOrder,
+  User,
 } from '../shared/types';
 
 export const mockAdminResponse: AdminResponse = {
@@ -14,6 +15,21 @@ export const mockAdminResponse: AdminResponse = {
     updated: '2019-06-20T16:44:53.357Z',
     email: 'amitpmehta78@gmail.com',
   },
+};
+
+export const mockActiveUser: Omit<User, 'token'> = {
+  id: '7u6cvnhb9v3qvu8',
+  collectionId: 'pub_user_auth',
+  collectionName: 'users',
+  created: '2022-01-01 01:00:00.123Z',
+  updated: '2022-01-01 01:00:00.123Z',
+  email: 'amit@profitswami.com',
+  membership: 'gold',
+  status: 'active',
+  dca_orders: ['13abc', '32adc12'],
+  verified: true,
+  emailVisibility: false,
+  submitted_orders: ['first_order'],
 };
 
 export const mockActiveUserOrders: PaginationData<AbbreviatedUserWithOrders> = {
@@ -50,6 +66,7 @@ export const mockActiveUserOrders: PaginationData<AbbreviatedUserWithOrders> = {
       },
       id: '7u6cvnhb9v3qvu8',
       membership: 'gold',
+      status: 'active',
     },
   ],
   page: 1,

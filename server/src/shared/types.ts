@@ -19,16 +19,26 @@ export interface NewUser {
   dca_orders?: string[];
   expand?: { dca_orders: PurchaseOrder[] };
   membership: Membership;
+  submitted_orders?: string[];
   status: Status;
 }
 
 // user type
 export type User = Id & NewUser;
 
-export type AbbreviatedUserWithOrders = { id: string } & Omit<
-  NewUser,
-  'token' | 'status'
->;
+export type AbbreviatedUserWithOrders = { id: string } & Omit<NewUser, 'token'>;
+
+export type PatchUserPayload = {
+  username?: string;
+  email?: string;
+  name?: string;
+  verified?: boolean;
+  emailVisibility?: boolean;
+  dca_orders?: string[];
+  membership: Membership;
+  submitted_orders?: string[];
+  status: Status;
+};
 
 export interface AdminResponse {
   token: string;

@@ -1,3 +1,5 @@
+export type Membership = 'free' | 'silver' | 'gold' | 'platinum';
+export type Status = 'active' | 'suspended';
 // pocketbase record id
 export interface Id {
   id: string;
@@ -16,6 +18,9 @@ export interface NewUser {
   email: string;
   token?: string;
   dca_orders: string[];
+  membership: Membership;
+  submitted_orders?: string[];
+  status: Status;
 }
 
 // user type

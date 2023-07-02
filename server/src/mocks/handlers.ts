@@ -13,16 +13,18 @@ import {
   databaseOrdersURL,
   databaseUserURL,
   databaseSubmittedOrdersURL,
+  databaseUserURLbyId,
 } from './constants';
 import { buyOrderResponse } from './orderResponse';
 import {
+  mockActiveUser,
   mockAccountDataResponse,
   mockPriceDataResponse,
   mockAdminResponse,
   mockDatabaseOrderResonse,
   mockActiveUserOrders,
 } from './mockData';
-import { PostSubmittedOrderPayload } from '../shared/types';
+import { PostSubmittedOrderPayload, Membership, Status } from '../shared/types';
 
 export const handlers: RequestHandler[] = [
   rest.post(buyOrderURL, buyOrderResponse),
@@ -53,6 +55,20 @@ export const handlers: RequestHandler[] = [
     databaseUserURL,
     (req: MockedRequest, res: ResponseComposition, ctx: RestContext) =>
       res(ctx.status(200), ctx.json(mockActiveUserOrders)),
+  ),
+  rest.patch(
+    databaseUserURLbyId,
+    (req: MockedRequest, res: ResponseComposition, ctx: RestContext) => {
+      const body = req.body as {
+        submitted_orders: string[];
+      };
+      const updatedUser = {
+        ...mockActiveUser,
+        ...body,
+      };
+
+      return res(ctx.status(200), ctx.json(updatedUser));
+    },
   ),
   rest.post(
     databaseAdminAccessURL,

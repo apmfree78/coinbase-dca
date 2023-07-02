@@ -20,6 +20,3 @@ docker-compose down
 
 # Build services
 docker-compose build
-
-# Run services in the background
-docker-compose up -d

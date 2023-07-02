@@ -4,11 +4,13 @@ import {
   PaginationData,
   PostSubmittedOrderPayload,
   PostSubmittedResponse,
+  PatchUserPayload,
 } from '../shared/types';
 import {
   getOrders,
   getActiveUserWithOrders,
   postSubmittedOrder,
+  patchUser,
 } from '../connect/pocketbase';
 import { server } from '../mocks/server';
 import { rest } from 'msw';
@@ -17,12 +19,33 @@ import {
   mockAdminResponse,
   mockDatabaseOrderResonse,
   mockActiveUserOrders,
+  mockActiveUser,
 } from '../mocks/mockData';
 
 describe('admin autehentication', () => {
   it('admin is successfully authenticated and logged into database', () => {
     expect(adminUser.getToken()).toEqual(mockAdminResponse.token);
     expect(adminUser.getEmail()).toEqual(mockAdminResponse.admin.email);
+  });
+});
+
+describe('patchUser', () => {
+  it('returns update User', async () => {
+    const payload: PatchUserPayload = {
+      membership: 'gold',
+      status: 'active',
+      submitted_orders: [
+        ...(mockActiveUser.submitted_orders || []),
+        'new_order',
+      ],
+    };
+    const id = mockActiveUser.id;
+    console.log(payload);
+
+    const patchUserResponse = await patchUser(id, payload);
+
+    expect(patchUserResponse?.submitted_orders).toContain('new_order');
+    expect(patchUserResponse?.submitted_orders?.length).toEqual(2);
   });
 });
 

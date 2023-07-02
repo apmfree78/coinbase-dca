@@ -7,11 +7,13 @@ import {
 import type {
   AbbreviatedUserWithOrders,
   PaginationData,
+  PatchUserPayload,
   PostSubmittedOrderPayload,
   PurchaseOrder,
 } from './shared/types';
 import {
   getActiveUserWithOrders,
+  patchUser,
   postSubmittedOrder,
 } from './connect/pocketbase';
 import { limitOrderBuy } from './orders/limitOrderBuy';
@@ -19,7 +21,6 @@ import { limitOrderBuy } from './orders/limitOrderBuy';
 export async function submitPurchaseOrdersForAllUsers(): Promise<
   LimitOrderSubmitted[] | null
 > {
-  // submit orders to coinbase
   let userSubmittedLimitOrders: LimitOrderSubmitted[] = [];
 
   // grab first page of users
@@ -51,7 +52,22 @@ export async function submitPurchaseOrdersForAllUsers(): Promise<
       };
 
       // post to pocketbase
-      await postSubmittedOrder(orderPayload);
+      const submittedOrderResponse = await postSubmittedOrder(orderPayload);
+
+      if (submittedOrderResponse !== null) {
+        // create payload to update user with submitted order
+        const userUpdate: PatchUserPayload = {
+          membership: user.membership,
+          status: user.status,
+          submitted_orders: [
+            ...(user.submitted_orders || []),
+            submittedOrderResponse.id,
+          ],
+        };
+
+        const response = await patchUser(user.id, userUpdate);
+        console.log(response);
+      }
     }
   }
   return userSubmittedLimitOrders;
