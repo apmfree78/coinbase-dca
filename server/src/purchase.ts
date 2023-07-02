@@ -1,21 +1,16 @@
-import { AppResult, AppState, panic, sleep } from './shared/utils';
+import { AppResult, AppState } from './shared/utils';
 import {
   coins,
   CoinbaseCurrency,
   LimitOrderSubmitted,
 } from './shared/coin.config';
+import { recordLimitOrdersToDatabase } from './connect/recordLimitOrders';
 import type {
   AbbreviatedUserWithOrders,
   PaginationData,
-  PatchUserPayload,
-  PostSubmittedOrderPayload,
   PurchaseOrder,
 } from './shared/types';
-import {
-  getActiveUserWithOrders,
-  patchUser,
-  postSubmittedOrder,
-} from './connect/pocketbase';
+import { getActiveUserWithOrders } from './connect/pocketbase';
 import { limitOrderBuy } from './orders/limitOrderBuy';
 
 export async function submitPurchaseOrdersForAllUsers(): Promise<
@@ -41,34 +36,7 @@ export async function submitPurchaseOrdersForAllUsers(): Promise<
 
     // map through each submitted limited order and
     // record in pocketbase
-    for (const order of userSubmittedLimitOrders) {
-      const orderPayload: PostSubmittedOrderPayload = {
-        order_id: order.order_id,
-        product_id: order.product_id,
-        limit_price: order.limit_price,
-        owner: user.id,
-        isFilled: false,
-        amount: order.amount,
-      };
-
-      // post to pocketbase
-      const submittedOrderResponse = await postSubmittedOrder(orderPayload);
-
-      if (submittedOrderResponse !== null) {
-        // create payload to update user with submitted order
-        const userUpdate: PatchUserPayload = {
-          membership: user.membership,
-          status: user.status,
-          submitted_orders: [
-            ...(user.submitted_orders || []),
-            submittedOrderResponse.id,
-          ],
-        };
-
-        const response = await patchUser(user.id, userUpdate);
-        console.log(response);
-      }
-    }
+    await recordLimitOrdersToDatabase(user, userSubmittedLimitOrders);
   }
   return userSubmittedLimitOrders;
 }
