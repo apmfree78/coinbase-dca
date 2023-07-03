@@ -69,6 +69,17 @@ export type PatchOrderPayload = PostOrderPayload & {
 // user purchase order
 export type PurchaseOrder = CollectionId & NewPurchaseOrder;
 
+export type SubmittedOrder = CollectionId & PostSubmittedOrderPayload;
+
+export type PostSubmittedOrderPayload = {
+  order_id: string;
+  product_id: string;
+  limit_price: number;
+  owner: string;
+  isFilled: boolean;
+  amount: number;
+};
+
 // the is structure pocketbase will return
 export type PaginationData<T> = {
   page: number;

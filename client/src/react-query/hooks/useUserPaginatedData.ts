@@ -33,7 +33,7 @@ interface UsePaginatedData<T> {
 }
 
 // hooks that returns user data by page
-export function useUserPosts<T>(urlPath: string): UsePaginatedData<T> {
+export function useUserPaginatedData<T>(urlPath: string): UsePaginatedData<T> {
   // userUserPosts will handle page state
   const [page, setPage] = useState(1);
   const { user } = useUser();
