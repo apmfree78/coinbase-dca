@@ -20,7 +20,7 @@ const OrderRow = ({ order }: { order: PurchaseOrder }) => {
       {!editRow ? (
         <tr className='hover:bg-gray-200 transition duration-700 ease-linear'>
           <th className='p-3'>{order.asset}</th>
-          <th className='p-3'>{order.amount}</th>
+          <th className='p-3'>${order.amount}</th>
           <th className='p-3 uppercase'>{order.exchange}</th>
           {/* show check or x icon in this column */}
           {/* icon to delete post */}

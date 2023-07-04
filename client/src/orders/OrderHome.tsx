@@ -36,7 +36,7 @@ const OrderHome: React.FC = () => {
           onSelectChange={setExchange}
           options={exchanges}
         />
-        <i>Monthly</i>
+        <i>Daily</i>
       </span>
       <p className='ml-14'>*Miminum order size is $10</p>
       <button
@@ -53,7 +53,7 @@ const OrderHome: React.FC = () => {
       <hr />
       <hr />
       <hr />
-      <div className='flex flex-col items-center ml-32'>
+      <div className='flex flex-col items-center'>
         <Orders />
       </div>
     </>
