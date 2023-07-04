@@ -5,6 +5,7 @@ import SignIn from 'user/SignIn';
 import SignUp from 'user/SignUp';
 import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from 'routes/ProtectedRoute';
+import Purchases from 'purchases/Purchases';
 import OrderHome from 'orders/OrderHome';
 
 function App() {
@@ -15,6 +16,14 @@ function App() {
         element={
           <ProtectedRoute>
             <OrderHome />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='/purchases'
+        element={
+          <ProtectedRoute>
+            <Purchases />
           </ProtectedRoute>
         }
       />

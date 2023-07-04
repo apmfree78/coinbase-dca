@@ -22,7 +22,10 @@ async function postNewData<T extends CollectionId, K>(
 }
 
 // hook to create new post
-export function usePostData<T extends CollectionId, K>(urlPath: string) {
+export function usePostData<T extends CollectionId, K>(
+  urlPath: string,
+  queryKey: string
+) {
   const { user, updateUser } = useUser();
 
   const { data, isSuccess, isLoading, isError, error, mutate } = useMutation(
@@ -38,8 +41,8 @@ export function usePostData<T extends CollectionId, K>(urlPath: string) {
           updateUser(newUser);
         }
         //clear cache
-        queryClient.invalidateQueries([queryKeys.orders]);
-        customToast(`${queryKeys.orders} created`, 'is-success');
+        queryClient.invalidateQueries([queryKey]);
+        customToast(`${queryKey} created`, 'is-success');
       },
     }
   );

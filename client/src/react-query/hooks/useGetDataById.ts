@@ -25,14 +25,15 @@ interface UseData<T> {
 // hook that returns post by ID and function to create new post and save posts
 export function useGetDataById<T>(
   id: string | null = null,
-  urlPath: string
+  urlPath: string,
+  queryKey: string
 ): UseData<T> {
   const { user } = useUser();
 
   // load initial post
   // get post by id from pocketbase
   const { data } = useQuery(
-    [queryKeys.orders, queryKeys.user, id],
+    [queryKey, queryKeys.user, id],
     () => fetchUserDataById<T>(id, user, urlPath),
     { enabled: !!user }
   );

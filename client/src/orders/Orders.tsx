@@ -1,4 +1,4 @@
-import Pagination from 'orders/Pagination';
+import Pagination from 'components/Pagination';
 import OrderTable from 'orders/table/OrderTable';
 
 import { useUserPurchaseOrders } from 'orders/hooks';

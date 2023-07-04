@@ -22,7 +22,7 @@ async function deleteUserData<T>(
 
 type useDelete = UseMutateFunction<string, unknown, string, unknown>;
 
-export function useDeleteData<T>(urlPath: string): useDelete {
+export function useDeleteData<T>(urlPath: string, queryKey: string): useDelete {
   const queryClient = useQueryClient();
   const { user, updateUser } = useUser();
 
@@ -40,7 +40,7 @@ export function useDeleteData<T>(urlPath: string): useDelete {
           queryClient.setQueryData(queryKeys.user, newUser);
           updateUser(newUser);
         }
-        queryClient.invalidateQueries([queryKeys.orders]);
+        queryClient.invalidateQueries([queryKey]);
         customToast('Purchase Order has been deleted!', 'is-warning');
       },
     }

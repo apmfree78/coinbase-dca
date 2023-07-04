@@ -23,7 +23,10 @@ async function patchData<T extends CollectionId, K>(
 }
 
 // hook to create new post
-export function usePatchData<T extends CollectionId, K>(urlPath: string) {
+export function usePatchData<T extends CollectionId, K>(
+  urlPath: string,
+  queryKey: string
+) {
   const { user } = useUser();
 
   const { isSuccess, isLoading, isError, error, mutate } = useMutation(
@@ -32,8 +35,8 @@ export function usePatchData<T extends CollectionId, K>(urlPath: string) {
     {
       onSuccess: () => {
         //clear cache
-        queryClient.invalidateQueries([queryKeys.orders]);
-        customToast(`${queryKeys.orders} updated`, 'is-success');
+        queryClient.invalidateQueries([queryKey]);
+        customToast(`${queryKey} updated`, 'is-success');
       },
     }
   );
