@@ -79,9 +79,11 @@ export interface NewPurchaseOrder {
   owner: string;
 }
 
+// ADD exchange to schema and typescript type
 export type PostSubmittedOrderPayload = {
   order_id: string;
   product_id: string;
+  exchange: exchangeType;
   limit_price: number;
   owner: string;
   isFilled: boolean;

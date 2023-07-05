@@ -3,7 +3,6 @@ import { axiosInstance, getJWTHeader } from 'axiosInstance';
 import { customToast } from 'components/Toast';
 import { useUser } from 'user/hooks/useUser';
 import { useMutation } from 'react-query';
-import { queryKeys } from 'react-query/constants';
 import { queryClient } from 'react-query/queryClient';
 import type { User, CollectionId } from 'shared/types';
 

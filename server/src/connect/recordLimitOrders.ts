@@ -17,6 +17,7 @@ export async function recordLimitOrdersToDatabase(
       order_id: order.order_id,
       product_id: order.product_id,
       limit_price: order.limit_price,
+      exchange: 'coinbase',
       owner: currentUser.id,
       isFilled: false,
       amount: order.amount,

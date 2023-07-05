@@ -13,7 +13,7 @@ const ordersPerPage = 10;
 async function fetchPaginatedData<T>(
   user: User | null,
   pageNumber: number,
-  urlPath: string,
+  urlPath: string
 ): Promise<PaginationData<T> | null> {
   if (!user) return null;
   const { data }: AxiosResponse<PaginationData<T>> = await axiosInstance.get(
@@ -33,7 +33,10 @@ interface UsePaginatedData<T> {
 }
 
 // hooks that returns user data by page
-export function useUserPaginatedData<T>(urlPath: string, queryKey: string): UsePaginatedData<T> {
+export function useUserPaginatedData<T>(
+  urlPath: string,
+  queryKey: string
+): UsePaginatedData<T> {
   // userUserPosts will handle page state
   const [page, setPage] = useState(1);
   const { user } = useUser();
@@ -49,9 +52,8 @@ export function useUserPaginatedData<T>(urlPath: string, queryKey: string): UseP
   // prefetch next page data, if not at last page
   useEffect(() => {
     if (page < maxOrderPage) {
-      queryClient.prefetchQuery(
-        [queryKey, queryKeys.user, page + 1],
-        () => fetchPaginatedData<T>(user, page + 1, urlPath)
+      queryClient.prefetchQuery([queryKey, queryKeys.user, page + 1], () =>
+        fetchPaginatedData<T>(user, page + 1, urlPath)
       );
     }
   }, [page, user, queryClient]);

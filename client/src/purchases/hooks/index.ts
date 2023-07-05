@@ -1,9 +1,7 @@
 import { submittedOrdersPath } from 'react-query/constants';
 import { queryKeys } from 'react-query/constants';
 import { useUserPaginatedData } from 'react-query/hooks/useUserPaginatedData';
-import type {
-  SubmittedOrder,
-} from 'shared/types';
+import type { SubmittedOrder } from 'shared/types';
 
 // **********************************************************
 // **********************************************************
@@ -12,4 +10,7 @@ import type {
 // **********************************************************
 
 export const useUserSubmittedOrders = () =>
-  useUserPaginatedData<SubmittedOrder>(submittedOrdersPath, queryKeys.purchases);
+  useUserPaginatedData<SubmittedOrder>(
+    submittedOrdersPath,
+    queryKeys.purchases
+  );
