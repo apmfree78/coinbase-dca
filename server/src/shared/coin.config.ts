@@ -52,6 +52,51 @@ export type PriceDataSuccessResponse = {
   price: number;
 };
 
+export type ListFilledOrderResponse = {
+  orders: [
+    order_id: string,
+    product_id: string,
+    user_id: string,
+    order_configuration: {
+      market_market_ioc?: {
+        quote_size?: string; // required for BUY order
+        base_size?: string; // required for SELL order
+      };
+      limit_limit_gtc?: {
+        base_size?: string; // required for BUY order
+        limit_price?: string; // required for SELL order
+        post_only?: boolean;
+      };
+    },
+    side: 'BUY' | 'SELL',
+    client_order_id: string,
+    status: 'FILLED',
+    number_of_fills: string,
+    filled_value: string,
+    pending_cancel: boolean,
+    size_in_quote: boolean,
+    total_fees: string,
+    size_inclusive_of_fees: boolean,
+    total_value_after_fees: string,
+    trigger_status: string,
+    order_type:
+    | 'LIMIT'
+    | 'MARKET'
+    | 'STOP'
+    | 'STOP_LIMIT'
+    | 'UNKNOWN_ORDER_TYPE',
+    reject_reason: 'REJECT_REASON_UNSPECIFIED',
+    settled: boolean,
+    product_type: 'SPOT' | 'FUTURE',
+    reject_message: string,
+    cancel_message: string,
+    order_placement_source: 'RETAIL_ADVANCED',
+    outstanding_hold_amount: string,
+    is_liquidation: boolean,
+    last_fill_time: string,
+  ];
+};
+
 export interface CoinbaseOrderRequest {
   client_order_id: string;
   side: 'BUY' | 'SELL';
