@@ -53,48 +53,56 @@ export type PriceDataSuccessResponse = {
 };
 
 export type ListFilledOrderResponse = {
-  orders: [
-    order_id: string,
-    product_id: string,
-    user_id: string,
-    order_configuration: {
-      market_market_ioc?: {
-        quote_size?: string; // required for BUY order
-        base_size?: string; // required for SELL order
-      };
-      limit_limit_gtc?: {
-        base_size?: string; // required for BUY order
-        limit_price?: string; // required for SELL order
-        post_only?: boolean;
-      };
-    },
-    side: 'BUY' | 'SELL',
-    client_order_id: string,
-    status: 'FILLED',
-    number_of_fills: string,
-    filled_value: string,
-    pending_cancel: boolean,
-    size_in_quote: boolean,
-    total_fees: string,
-    size_inclusive_of_fees: boolean,
-    total_value_after_fees: string,
-    trigger_status: string,
-    order_type:
-    | 'LIMIT'
-    | 'MARKET'
-    | 'STOP'
-    | 'STOP_LIMIT'
-    | 'UNKNOWN_ORDER_TYPE',
-    reject_reason: 'REJECT_REASON_UNSPECIFIED',
-    settled: boolean,
-    product_type: 'SPOT' | 'FUTURE',
-    reject_message: string,
-    cancel_message: string,
-    order_placement_source: 'RETAIL_ADVANCED',
-    outstanding_hold_amount: string,
-    is_liquidation: boolean,
-    last_fill_time: string,
-  ];
+  orders: FilledOrder[];
+};
+
+export type FilledOrder = {
+  order_id: string;
+  product_id: string;
+  user_id: string;
+  order_configuration: {
+    limit_limit_gtc: {
+      base_size: string;
+      limit_price: string;
+      post_only: true;
+    };
+  };
+  side: 'BUY' | 'SELL';
+  client_order_id: string;
+  status: 'FILLED';
+  time_in_force:
+  | 'GOOD_UNTIL_CANCELLED'
+  | 'IMMEDIATE_OR_CANCEL'
+  | 'FILL_OR_KILL'
+  | 'UNKNOWN_TIME_IN_FORCE'
+  | 'GOOD_UNTIL_DATE_TIME';
+  created_time: string;
+  completion_percentage: string;
+  filled_size: string;
+  average_filled_price: string;
+  fee: string;
+  number_of_fills: string;
+  filled_value: string;
+  pending_cancel: false;
+  size_in_quote: false;
+  total_fees: string;
+  size_inclusive_of_fees: false;
+  total_value_after_fees: string;
+  trigger_status:
+  | 'INVALID_ORDER_TYPE'
+  | 'UNKNOWN_TRIGGER_STATUS'
+  | 'STOP_PENDING'
+  | 'STOP_TRIGGERED';
+  order_type: 'LIMIT' | 'MARKET' | 'STOP' | 'STOP_LIMIT' | 'UNKNOWN_ORDER_TYPE';
+  reject_reason: 'REJECT_REASON_UNSPECIFIED';
+  settled: true;
+  product_type: 'SPOT' | 'FUTURE';
+  reject_message: string;
+  cancel_message: string;
+  order_placement_source: 'RETAIL_ADVANCED' | 'RETAIL_SIMPLE';
+  outstanding_hold_amount: string;
+  is_liquidation: false;
+  last_fill_time: string;
 };
 
 export interface CoinbaseOrderRequest {

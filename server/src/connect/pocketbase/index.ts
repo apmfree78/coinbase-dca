@@ -4,9 +4,11 @@ import type {
   PurchaseOrder,
   PostSubmittedOrderPayload,
   PostSubmittedResponse,
+  PatchSubmittedOrderPayload,
   User,
   AbbreviatedUserWithOrders,
   PatchUserPayload,
+  SubmittedOrder,
 } from '../../shared/types';
 import {
   purchaseOrdersPath,
@@ -45,6 +47,18 @@ export const patchUser = (userId: string, payload: PatchUserPayload) =>
     axiosDatabaseInstance,
   );
 
+// obtain submitted orders for all users by page number
+export const patchSubmittedOrders = (
+  id: string,
+  payload: PatchSubmittedOrderPayload,
+) =>
+  patchData<SubmittedOrder, PatchSubmittedOrderPayload>(
+    id,
+    submittedOrderPath,
+    payload,
+    axiosDatabaseInstance,
+  );
+
 // obtain purchase orders for all users by page number
 export const getActiveUserWithOrders = (page: number) =>
   fetchPaginatedExpandedData<PaginationData<AbbreviatedUserWithOrders>>(
@@ -53,6 +67,17 @@ export const getActiveUserWithOrders = (page: number) =>
     'dca_orders',
     'id,email,expand,membership,submitted_orders,status',
     "(status = 'active')",
+    axiosDatabaseInstance,
+  );
+
+// obtain purchase orders for all users by page number
+export const getSubmittedOrders = (page: number) =>
+  fetchPaginatedExpandedData<PaginationData<SubmittedOrder>>(
+    page,
+    submittedOrderPath,
+    '',
+    '',
+    '(isFilled = false)',
     axiosDatabaseInstance,
   );
 

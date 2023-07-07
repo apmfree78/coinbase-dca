@@ -4,8 +4,15 @@ import { purchaseCrypto, submitPurchaseOrdersForAllUsers } from './purchase';
 import { server } from './mocks/server';
 import { rest } from 'msw';
 import { checkAccountStatus } from './orders/accountStatus';
-import type { AccountStatusSuccessResponse } from './shared/coin.config';
-import { mockActiveUserOrders, mockPriceDataResponse } from './mocks/mockData';
+import type {
+  AccountStatusSuccessResponse,
+  FilledOrder,
+} from './shared/coin.config';
+import {
+  mockActiveUserOrders,
+  mockPriceDataResponse,
+  mockFilledOrderResponse,
+} from './mocks/mockData';
 import { PurchaseOrder } from './shared/types';
 
 describe('submitPurchaseOrderForAllUsers', () => {

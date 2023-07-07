@@ -79,6 +79,11 @@ export interface NewPurchaseOrder {
   owner: string;
 }
 
+type OptionalSubmittedOrderFields = {
+  owner?: string;
+  isFilled?: boolean;
+};
+
 // ADD exchange to schema and typescript type
 export type PostSubmittedOrderPayload = {
   order_id: string;
@@ -89,6 +94,10 @@ export type PostSubmittedOrderPayload = {
   isFilled: boolean;
   amount: number;
 };
+
+// ADD exchange to schema and typescript type
+export type PatchSubmittedOrderPayload = PostSubmittedOrderPayload &
+  OptionalSubmittedOrderFields;
 
 export type PostSubmittedResponse = CollectionId & PostSubmittedOrderPayload;
 

@@ -7,6 +7,7 @@ import {
 } from 'msw';
 import {
   buyOrderURL,
+  filledOrderURL,
   accountstatusURL,
   productPriceURL,
   databaseAdminAccessURL,
@@ -23,10 +24,16 @@ import {
   mockAdminResponse,
   mockDatabaseOrderResonse,
   mockActiveUserOrders,
+  mockFilledOrderResponse,
 } from './mockData';
 import { PostSubmittedOrderPayload, Membership, Status } from '../shared/types';
 
 export const handlers: RequestHandler[] = [
+  rest.get(
+    filledOrderURL,
+    (req: MockedRequest, res: ResponseComposition, ctx: RestContext) =>
+      res(ctx.status(200), ctx.json(mockFilledOrderResponse)),
+  ),
   rest.post(buyOrderURL, buyOrderResponse),
   rest.post(
     databaseSubmittedOrdersURL,

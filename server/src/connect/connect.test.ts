@@ -115,6 +115,7 @@ describe('postSubmittedOrder', () => {
       order_id: '1',
       product_id: 'BTC-USD',
       limit_price: 27000,
+      exchange: 'coinbase',
       owner: '1bc',
       isFilled: false,
       amount: 1000,
