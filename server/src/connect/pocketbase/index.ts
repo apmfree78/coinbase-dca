@@ -47,18 +47,6 @@ export const patchUser = (userId: string, payload: PatchUserPayload) =>
     axiosDatabaseInstance,
   );
 
-// obtain submitted orders for all users by page number
-export const patchSubmittedOrders = (
-  id: string,
-  payload: PatchSubmittedOrderPayload,
-) =>
-  patchData<SubmittedOrder, PatchSubmittedOrderPayload>(
-    id,
-    submittedOrderPath,
-    payload,
-    axiosDatabaseInstance,
-  );
-
 // obtain purchase orders for all users by page number
 export const getActiveUserWithOrders = (page: number) =>
   fetchPaginatedExpandedData<PaginationData<AbbreviatedUserWithOrders>>(
@@ -78,6 +66,18 @@ export const getSubmittedOrders = (page: number) =>
     '',
     '',
     '(isFilled = false)',
+    axiosDatabaseInstance,
+  );
+
+// obtain submitted orders for all users by page number
+export const patchSubmittedOrder = (
+  id: string,
+  payload: PatchSubmittedOrderPayload,
+) =>
+  patchData<SubmittedOrder, PatchSubmittedOrderPayload>(
+    id,
+    submittedOrderPath,
+    payload,
     axiosDatabaseInstance,
   );
 

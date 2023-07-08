@@ -7,6 +7,7 @@ import {
   AbbreviatedUserWithOrders,
   AdminResponse,
   PaginationData,
+  SubmittedOrder,
   PurchaseOrder,
   User,
 } from '../shared/types';
@@ -357,6 +358,101 @@ export const mockActiveUserOrders: PaginationData<AbbreviatedUserWithOrders> = {
   totalPages: 1,
 };
 
+export const mockSubmittedOrder: SubmittedOrder = {
+  amount: 10,
+  collectionId: 'cue25fs3ldv8fl2',
+  collectionName: 'submitted_orders',
+  created: '2023-06-24 19:28:14.855Z',
+  exchange: 'coinbase',
+  id: 'axdu70mz5eqqlww',
+  isFilled: false,
+  limit_price: 30673.85,
+  order_id: '3f25a5be-6097-4a58-9476-d2d49ab2d270',
+  owner: '7u6cvnhb9v3qvu8',
+  product_id: 'BTC-USD',
+  updated: '2023-07-04 23:43:59.966Z'
+}
+
+export const mockDatabaseSubmittedOrderResonse: PaginationData<SubmittedOrder> =
+{
+  page: 1,
+  perPage: 30,
+  totalItems: 5,
+  totalPages: 1,
+  items: [
+    {
+      amount: 10,
+      collectionId: 'cue25fs3ldv8fl2',
+      collectionName: 'submitted_orders',
+      created: '2023-06-24 19:28:14.855Z',
+      exchange: 'coinbase',
+      id: 'axdu70mz5eqqlww',
+      isFilled: false,
+      limit_price: 30673.85,
+      order_id: '3f25a5be-6097-4a58-9476-d2d49ab2d270',
+      owner: '7u6cvnhb9v3qvu8',
+      product_id: 'BTC-USD',
+      updated: '2023-07-04 23:43:59.966Z'
+    },
+    {
+      amount: 10,
+      collectionId: 'cue25fs3ldv8fl2',
+      collectionName: 'submitted_orders',
+      created: '2023-07-02 19:04:17.114Z',
+      exchange: 'coinbase',
+      id: 'g1yaq3qb15f63oo',
+      isFilled: false,
+      limit_price: 30537.95,
+      order_id: '3bf4c815-ecf8-4ba7-ab90-9116463b603e',
+      owner: '7u6cvnhb9v3qvu8',
+      product_id: 'BTC-USD',
+      updated: '2023-07-04 23:43:53.708Z'
+    },
+    {
+      amount: 10,
+      collectionId: 'cue25fs3ldv8fl2',
+      collectionName: 'submitted_orders',
+      created: '2023-07-02 19:08:22.430Z',
+      exchange: 'coinbase',
+      id: 'kn5nbfq7sa6t7q0',
+      isFilled: false,
+      limit_price: 30538.01,
+      order_id: '193ba976-3fe2-47c4-ba96-721393972e0c',
+      owner: '7u6cvnhb9v3qvu8',
+      product_id: 'BTC-USD',
+      updated: '2023-07-04 23:43:47.700Z'
+    },
+    {
+      amount: 10,
+      collectionId: 'cue25fs3ldv8fl2',
+      collectionName: 'submitted_orders',
+      created: '2023-07-02 19:16:59.040Z',
+      exchange: 'coinbase',
+      id: 'bpezd04ok5zag3q',
+      isFilled: false,
+      limit_price: 30533.1,
+      order_id: '62091170-4e16-41fd-a3c1-9aae3346c39c',
+      owner: '7u6cvnhb9v3qvu8',
+      product_id: 'BTC-USD',
+      updated: '2023-07-04 23:43:41.101Z'
+    },
+    {
+      amount: 10,
+      collectionId: 'cue25fs3ldv8fl2',
+      collectionName: 'submitted_orders',
+      created: '2023-07-02 19:57:59.052Z',
+      exchange: 'coinbase',
+      id: '8ba2x27oyr5vtaj',
+      isFilled: false,
+      limit_price: 30553.94,
+      order_id: '9e4b61b1-0509-4366-99d8-62496410c722',
+      owner: '7u6cvnhb9v3qvu8',
+      product_id: 'BTC-USD',
+      updated: '2023-07-04 23:43:35.588Z'
+    }
+  ]
+}
+}
 export const mockDatabaseOrderResonse: PaginationData<PurchaseOrder> = {
   page: 1,
   perPage: 30,

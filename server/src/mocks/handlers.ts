@@ -15,6 +15,7 @@ import {
   databaseUserURL,
   databaseSubmittedOrdersURL,
   databaseUserURLbyId,
+  databaseSubmittedOrdersURLbyId,
 } from './constants';
 import { buyOrderResponse } from './orderResponse';
 import {
@@ -24,7 +25,9 @@ import {
   mockAdminResponse,
   mockDatabaseOrderResonse,
   mockActiveUserOrders,
+  mockSubmittedOrder,
   mockFilledOrderResponse,
+  mockDatabaseSubmittedOrderResonse,
 } from './mockData';
 import { PostSubmittedOrderPayload, Membership, Status } from '../shared/types';
 
@@ -35,6 +38,23 @@ export const handlers: RequestHandler[] = [
       res(ctx.status(200), ctx.json(mockFilledOrderResponse)),
   ),
   rest.post(buyOrderURL, buyOrderResponse),
+  rest.patch(
+    databaseSubmittedOrdersURLbyId,
+    (req: MockedRequest, res: ResponseComposition, ctx: RestContext) => {
+      const body = req.body as object;
+      const updatedOrder = {
+        ...mockSubmittedOrder,
+        ...body,
+      };
+
+      return res(ctx.status(200), ctx.json(updatedOrder));
+    },
+  ),
+  rest.get(
+    databaseSubmittedOrdersURL,
+    (req: MockedRequest, res: ResponseComposition, ctx: RestContext) =>
+      res(ctx.status(200), ctx.json(mockDatabaseSubmittedOrderResonse)),
+  ),
   rest.post(
     databaseSubmittedOrdersURL,
     (req: MockedRequest, res: ResponseComposition, ctx: RestContext) => {

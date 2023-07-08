@@ -15,3 +15,5 @@ export const databaseUserURLbyId =
   'http://127.0.0.1:8090/api/collections/users/records/*';
 export const databaseSubmittedOrdersURL =
   'http://127.0.0.1:8090/api/collections/submitted_orders/records';
+export const databaseSubmittedOrdersURLbyId =
+  'http://127.0.0.1:8090/api/collections/submitted_orders/records/*';
