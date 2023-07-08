@@ -84,7 +84,6 @@ type OptionalSubmittedOrderFields = {
   isFilled?: boolean;
 };
 
-// ADD exchange to schema and typescript type
 export type PostSubmittedOrderPayload = {
   order_id: string;
   product_id: string;
@@ -95,11 +94,12 @@ export type PostSubmittedOrderPayload = {
   amount: number;
 };
 
-// ADD exchange to schema and typescript type
+
 export type PatchSubmittedOrderPayload = PostSubmittedOrderPayload &
   OptionalSubmittedOrderFields;
 
-export type PostSubmittedResponse = CollectionId & PostSubmittedOrderPayload;
+export type SubmittedOrder = CollectionId & PostSubmittedOrderPayload;
+export type PostSubmittedResponse = SubmittedOrder;
 
 export interface PostOrderPayload {
   exchange: exchangeType;
