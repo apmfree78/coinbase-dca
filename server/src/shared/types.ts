@@ -94,7 +94,6 @@ export type PostSubmittedOrderPayload = {
   amount: number;
 };
 
-
 export type PatchSubmittedOrderPayload = PostSubmittedOrderPayload &
   OptionalSubmittedOrderFields;
 
