@@ -3,7 +3,10 @@ import { getSubmittedOrders, patchSubmittedOrder } from './connect/pocketbase';
 import { getFilledOrders } from './orders/getFilledOrders';
 import { SubmittedOrder } from './shared/types';
 
-export async function UpdatedOrderFillStatusOnDatabase(): Promise<void> {
+export async function updateOrderFillStatusOnDatabase(): Promise<
+  SubmittedOrder[] | void
+> {
+  const filledOrders = [] as SubmittedOrder[];
   // obtain filled purchase orders info from exchange
   const realTimeOrderData: FilledOrder[] | void = await getFilledOrders();
 
@@ -31,10 +34,11 @@ export async function UpdatedOrderFillStatusOnDatabase(): Promise<void> {
     //check if order recorded in database is in fact filled
     if (filledOrderIds.includes(order.order_id)) {
       // update order database record to reflect that 'isFilled'
-      const updatedOrder = { ...order, isFilled: true };
+      const updatedOrder: SubmittedOrder = { ...order, isFilled: true };
       // TODO create mock data and handler
-      const patchOrder = await patchSubmittedOrder(order.id, updatedOrder);
-      console.log(patchOrder);
+      const filledOrder = await patchSubmittedOrder(order.id, updatedOrder);
+      if (filledOrder) filledOrders.push(filledOrder);
     }
   }
+  return filledOrders;
 }

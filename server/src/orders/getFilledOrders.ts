@@ -11,7 +11,6 @@ export async function getFilledOrders(): Promise<
       await axiosInstance.get(
         'api/v3/brokerage/orders/historical/batch?order_status=FILLED&order_type=LIMIT&order_side=BUY',
       );
-    console.log(data.orders);
     return data.orders;
     // Error handling below
   } catch (err: unknown) {

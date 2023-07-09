@@ -1,13 +1,14 @@
 import cron from 'node-cron';
 import { submitPurchaseOrdersForAllUsers } from './purchase';
+import { updateOrderFillStatusOnDatabase } from './updateOrderStatus';
 import { setupEnvironment } from './env';
 
 (async function() {
   await setupEnvironment();
   cron.schedule(
     '0 23 * * *',
-    () => {
-      const limitOrders = submitPurchaseOrdersForAllUsers();
+    async () => {
+      const limitOrders = await submitPurchaseOrdersForAllUsers();
       console.log(limitOrders);
     },
     {
@@ -15,5 +16,16 @@ import { setupEnvironment } from './env';
       timezone: 'America/New_York',
     },
   );
-  setInterval(() => console.log('cron job running'), 1000 * 60); // log every min
+  cron.schedule(
+    '0 0 * * *',
+    async () => {
+      const filledOrders = await updateOrderFillStatusOnDatabase();
+      console.log(filledOrders);
+    },
+    {
+      scheduled: true,
+      timezone: 'America/New_York',
+    },
+  );
+  setInterval(() => console.log('cron job running'), 1000 * 60 * 5); // log every min
 })();

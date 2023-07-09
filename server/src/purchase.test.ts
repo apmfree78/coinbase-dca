@@ -1,6 +1,7 @@
 import { accountstatusURL, buyOrderURL } from './mocks/constants';
 import { panic, AppState } from './shared/utils';
 import { purchaseCrypto, submitPurchaseOrdersForAllUsers } from './purchase';
+import { updateOrderFillStatusOnDatabase } from './updateOrderStatus';
 import { server } from './mocks/server';
 import { rest } from 'msw';
 import { checkAccountStatus } from './orders/accountStatus';
@@ -38,6 +39,19 @@ describe('submitPurchaseOrderForAllUsers', () => {
         expect(limitOrder.product_id).toEqual(`${orders[i].asset}-USD`);
         expect(limitOrder.limit_price).toEqual(limitPrice);
       });
+    }
+  });
+});
+
+describe('updateOrderFillStatusOnDataBase', () => {
+  it('open order records are updated and marked as filled', async () => {
+    const filledOrder = await updateOrderFillStatusOnDatabase();
+
+    // ADD EXPECT STATEMENTS for 1 returned object
+    if (!filledOrder) throw new Error('fail to get filled order');
+    else {
+      expect(filledOrder[0].isFilled).toEqual(true);
+      expect(filledOrder[0].product_id).toEqual('BTC-USD');
     }
   });
 });
