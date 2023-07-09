@@ -1,5 +1,5 @@
 import { AxiosResponse, AxiosInstance } from 'axios';
-import type { CollectionId } from '../shared/types';
+import type { CollectionId } from '../shared/databaseTypes';
 
 export async function postData<T extends CollectionId, K>(
   urlPath: string,
@@ -13,7 +13,7 @@ export async function postData<T extends CollectionId, K>(
     );
     return data;
   } catch (err) {
-    console.log(err)
+    console.log(err);
     console.warn('error posting data');
     return null;
   }

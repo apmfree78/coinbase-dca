@@ -5,7 +5,7 @@ import {
   PostSubmittedOrderPayload,
   PostSubmittedResponse,
   PatchUserPayload,
-} from '../shared/types';
+} from '../shared/databaseTypes';
 import {
   getOrders,
   getActiveUserWithOrders,

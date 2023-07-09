@@ -5,16 +5,9 @@ import { updateOrderFillStatusOnDatabase } from './updateOrderStatus';
 import { server } from './mocks/server';
 import { rest } from 'msw';
 import { checkAccountStatus } from './orders/accountStatus';
-import type {
-  AccountStatusSuccessResponse,
-  FilledOrder,
-} from './shared/coin.config';
-import {
-  mockActiveUserOrders,
-  mockPriceDataResponse,
-  mockFilledOrderResponse,
-} from './mocks/mockData';
-import { PurchaseOrder } from './shared/types';
+import type { AccountStatusSuccessResponse } from './shared/coin.config';
+import { mockActiveUserOrders, mockPriceDataResponse } from './mocks/mockData';
+import { PurchaseOrder } from './shared/databaseTypes';
 
 describe('submitPurchaseOrderForAllUsers', () => {
   it('correctly returns list of submitted limit orders', async () => {

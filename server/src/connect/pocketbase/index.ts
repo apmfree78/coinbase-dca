@@ -9,7 +9,7 @@ import type {
   AbbreviatedUserWithOrders,
   PatchUserPayload,
   SubmittedOrder,
-} from '../../shared/types';
+} from '../../shared/databaseTypes';
 import {
   purchaseOrdersPath,
   userPath,

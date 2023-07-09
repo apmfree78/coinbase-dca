@@ -1,5 +1,5 @@
 import { getActiveUserWithOrders } from '../connect/pocketbase';
-import { setupEnvironment } from '../env';
+import { setupEnvironment } from '../shared/env';
 
 (async function() {
   await setupEnvironment();

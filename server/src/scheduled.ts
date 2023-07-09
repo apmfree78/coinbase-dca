@@ -1,7 +1,7 @@
 import cron from 'node-cron';
 import { submitPurchaseOrdersForAllUsers } from './purchase';
 import { updateOrderFillStatusOnDatabase } from './updateOrderStatus';
-import { setupEnvironment } from './env';
+import { setupEnvironment } from './shared/env';
 
 (async function() {
   await setupEnvironment();

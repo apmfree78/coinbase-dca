@@ -1,7 +1,7 @@
 import { FilledOrder } from './shared/coin.config';
 import { getSubmittedOrders, patchSubmittedOrder } from './connect/pocketbase';
 import { getFilledOrders } from './orders/getFilledOrders';
-import { SubmittedOrder } from './shared/types';
+import { SubmittedOrder } from './shared/databaseTypes';
 
 export async function updateOrderFillStatusOnDatabase(): Promise<
   SubmittedOrder[] | void

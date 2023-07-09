@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
-import { AppResult, AppState, panic } from './shared/utils';
-import { adminUser } from './connect/authenticate';
+import { AppResult, AppState, panic } from './utils';
+import { adminUser } from '../connect/authenticate';
 import path from 'path';
 
 function validateEnvironment(): void {

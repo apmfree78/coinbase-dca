@@ -1,5 +1,5 @@
-import { setupEnvironment } from './shared/env';
-import { updateOrderFillStatusOnDatabase } from './updateOrderStatus';
+import { setupEnvironment } from '../shared/env';
+import { updateOrderFillStatusOnDatabase } from '../updateOrderStatus';
 
 (async function() {
   await setupEnvironment();

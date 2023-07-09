@@ -14,7 +14,7 @@ import {
   mockFilledOrderResponse,
   mockPriceDataResponse,
 } from '../mocks/mockData';
-import type { ListFilledOrderResponse, FilledOrder } from '../shared/coin.config';
+import type { FilledOrder } from '../shared/coin.config';
 
 describe('marketBuy', () => {
   it('should return success message on successful buy', async () => {

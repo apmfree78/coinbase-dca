@@ -10,7 +10,7 @@ import {
   SubmittedOrder,
   PurchaseOrder,
   User,
-} from '../shared/types';
+} from '../shared/databaseTypes';
 
 export const mockFilledOrderResponse: ListFilledOrderResponse = {
   orders: [

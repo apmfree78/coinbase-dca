@@ -1,5 +1,5 @@
-import { purchaseCrypto, submitPurchaseOrdersForAllUsers } from './purchase';
-import { setupEnvironment } from './env';
+import { purchaseCrypto, submitPurchaseOrdersForAllUsers } from '../purchase';
+import { setupEnvironment } from '../shared/env';
 
 (async function() {
   await setupEnvironment();

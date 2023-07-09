@@ -9,7 +9,7 @@ import type {
   AbbreviatedUserWithOrders,
   PaginationData,
   PurchaseOrder,
-} from './shared/types';
+} from './shared/databaseTypes';
 import { getActiveUserWithOrders } from './connect/pocketbase';
 import { limitOrderBuy } from './orders/limitOrderBuy';
 

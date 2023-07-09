@@ -4,7 +4,7 @@ import type {
   PatchUserPayload,
   PostSubmittedOrderPayload,
   User,
-} from '../shared/types';
+} from '../shared/databaseTypes';
 import { patchUser, postSubmittedOrder } from '../connect/pocketbase';
 
 export async function recordLimitOrdersToDatabase(

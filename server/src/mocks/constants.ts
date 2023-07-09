@@ -1,3 +1,4 @@
+// coinbase endpoints
 export const buyOrderURL = 'https://api.coinbase.com/api/v3/brokerage/orders';
 export const accountstatusURL =
   'https://api.coinbase.com/api/v3/brokerage/accounts';
@@ -5,6 +6,8 @@ export const productPriceURL =
   'https://api.coinbase.com/api/v3/brokerage/products/*';
 export const filledOrderURL =
   'https://api.coinbase.com/api/v3/brokerage/orders/historical/batch';
+
+// database endpoints
 export const databaseAdminAccessURL =
   'http://127.0.0.1:8090/api/admins/auth-with-password';
 export const databaseOrdersURL =
