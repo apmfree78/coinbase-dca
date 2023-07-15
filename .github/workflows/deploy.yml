@@ -37,7 +37,7 @@ jobs:
       run: npm --prefix server run build
 
     - name: Build client 
-      run: npm --prefex client run build
+      run: npm --prefix client run build
 
   deploy:
     runs-on: ubuntu-latest
