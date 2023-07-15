@@ -5,3 +5,4 @@ build
 .env
 .eslintcache
 coverage
+pocketbase/pb_data/

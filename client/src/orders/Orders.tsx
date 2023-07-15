@@ -13,7 +13,8 @@ const Orders = () => {
   } = useUserPurchaseOrders();
 
   if (isLoading) return <p>Loading...</p>;
-  if (!orders) return <div>You have no orders!</div>;
+  if (!orders || orders.length === 0)
+    return <div>You have no orders! Create a new order above.</div>;
 
   return (
     <>

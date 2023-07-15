@@ -9,7 +9,7 @@
     "purchase": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/liveTests/index.js",
     "status": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/liveTests/checkAccounts.js",
     "fill:orders": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/liveTests/updateOpenOrders.js",
-    "view:orders": "NODE_ENV=production nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/connect/liveTests/viewOrders.ts",
+    "view:orders": "NODE_ENV=production nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/liveTests/viewOrders.ts",
     "build:reset": "rm -rf ./build",
     "build": "tsc",
     "purchase:scheduled": "NODE_ENV=production node --es-module-specifier-resolution=node build/scheduled.js",
