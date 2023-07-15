@@ -5,7 +5,7 @@ COPY ./package.json .
 RUN npm config set ignore-scripts true
 RUN npm install
 # manually install esbuild
-RUN npm install esbuild --no-save --ignore-scripts
+RUN npm install esbuild@^0.18.11 --no-save --ignore-scripts
 # enable postinstall scripts back
 RUN npm config set ignore-scripts false
 COPY . .

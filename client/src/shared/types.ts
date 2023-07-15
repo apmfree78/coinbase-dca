@@ -44,7 +44,7 @@ export const exchanges = [
 
 export type exchangeType = typeof exchanges[number];
 
-export const assets = ['BTC', 'ETH', 'ADA', 'SOL', 'MATIC'] as const;
+export const assets = ['BTC', 'ETH', 'ADA', 'SOL'] as const;
 
 export type assetType = typeof assets[number];
 

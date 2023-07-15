@@ -6,24 +6,24 @@ import { useQuery, useQueryClient } from 'react-query';
 import { queryKeys } from 'react-query/constants';
 import type { PaginationData, User } from 'shared/types';
 
-const maxOrderPage = 5;
-const ordersPerPage = 10;
+const ordersPerPage = 8;
 
 //fetch user posts with authorization token
 async function fetchPaginatedData<T>(
   user: User | null,
   pageNumber: number,
-  urlPath: string
+  urlPath: string,
+  sort: string = ''
 ): Promise<PaginationData<T> | null> {
   if (!user) return null;
   const { data }: AxiosResponse<PaginationData<T>> = await axiosInstance.get(
-    `${urlPath}?perPage=${ordersPerPage}&page=${pageNumber}`,
+    `${urlPath}?perPage=${ordersPerPage}&page=${pageNumber}&sort=${sort}`,
     { headers: getJWTHeader(user) }
   );
   return data;
 }
 
-interface UsePaginatedData<T> {
+export interface UsePaginatedData<T> {
   paginatedData: T[] | null;
   isLoading: boolean;
   page: number;
@@ -35,7 +35,8 @@ interface UsePaginatedData<T> {
 // hooks that returns user data by page
 export function useUserPaginatedData<T>(
   urlPath: string,
-  queryKey: string
+  queryKey: string,
+  sort: string = ''
 ): UsePaginatedData<T> {
   // userUserPosts will handle page state
   const [page, setPage] = useState(1);
@@ -45,22 +46,22 @@ export function useUserPaginatedData<T>(
   // get user orders from pocketbase
   const { data: orderData, isLoading } = useQuery(
     [queryKey, queryKeys.user, page],
-    () => fetchPaginatedData<T>(user, page, urlPath),
+    () => fetchPaginatedData<T>(user, page, urlPath, sort),
     { enabled: !!user }
   );
-
-  // prefetch next page data, if not at last page
-  useEffect(() => {
-    if (page < maxOrderPage) {
-      queryClient.prefetchQuery([queryKey, queryKeys.user, page + 1], () =>
-        fetchPaginatedData<T>(user, page + 1, urlPath)
-      );
-    }
-  }, [page, user, queryClient]);
 
   const paginatedData = orderData?.items || null;
   const totalPages = orderData?.totalPages || 0;
   const totalItems = orderData?.totalItems || 0;
+
+  // prefetch next page data, if not at last page
+  useEffect(() => {
+    if (page < totalPages) {
+      queryClient.prefetchQuery([queryKey, queryKeys.user, page + 1], () =>
+        fetchPaginatedData<T>(user, page + 1, urlPath, sort)
+      );
+    }
+  }, [page, user, queryClient]);
 
   return {
     paginatedData,
