@@ -6,8 +6,36 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  test-and-build:
     runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 20 # Adjust as needed
+
+    - name: Install server dependencies
+      run: npm --prefix server i
+
+    - name: Install client dependencies
+      run: npm --prefix client i
+
+    - name: Run tests
+      run: npm --prefix server run test
+
+    - name: Build server 
+      run: npm --prefix server run build
+
+    - name: Build client 
+      run: npm --prefex client run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test-and-build
 
     steps:
     - name: Checkout
@@ -21,4 +49,4 @@ jobs:
         key: ${{ secrets.LINODE_SSH_KEY }}
         script: |
           cd /home/apmfree78/coinbase-dca
-          ./deploy.sh
+          ./deploy.sh # script to update codebase and relaunch app

@@ -49,4 +49,4 @@ jobs:
         key: ${{ secrets.LINODE_SSH_KEY }}
         script: |
           cd /home/apmfree78/coinbase-dca
-          ./deploy.sh
+          ./deploy.sh # script to update codebase and relaunch app
