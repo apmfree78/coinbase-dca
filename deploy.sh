@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Add all changes in the pocketbase directory
-git add pocketbase/
+# Add all changes
+git add .
 
 # Commit with the message "update"
-git commit -m "pocketbase database update on linode"
+git commit -m "local update"
 
 # Pull latest changes from the remote repository
 git fetch origin
@@ -12,7 +12,7 @@ git merge -X theirs origin master
 
 # Resolve any merge conflicts that occurred during git pull by accepting "their" changes
 git checkout --theirs .
-git add pocketbase/*
+git add .
 git commit -m "merge changes"
 
 # Shut down running containers

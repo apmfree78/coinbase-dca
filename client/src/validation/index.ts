@@ -31,7 +31,7 @@ export function displayZodErrorToast<T extends object>(
 ): void {
   // parsing error messages
   const errorData = JSON.parse(error.message);
-  const errorMessages = errorData.map((error: any) => error.message);
+  const errorMessages = errorData.map((error: z.ZodError<T>) => error.message);
 
   // toast for each error
   errorMessages.forEach((errorMessage: string) =>

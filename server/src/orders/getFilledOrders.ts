@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { axiosInstance } from '../axios/config';
-import { AppResult, AppState, panic, sleep } from '../shared/utils';
+import { AppResult, AppState, panic } from '../shared/utils';
 import type { ListFilledOrderResponse } from '../shared/coin.config';
 
 export async function getFilledOrders(): Promise<

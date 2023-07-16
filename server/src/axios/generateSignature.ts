@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js';
-import url from 'url';
+// import url from 'url';
 
 export function generateSignature(
   method: string,
@@ -10,7 +10,9 @@ export function generateSignature(
   timestamp: string;
 } {
   const timestamp = Math.floor(Date.now() / 1000).toString();
-  const path = '/' + url.parse(apiUrl).pathname;
+  const urlObject = new URL(apiUrl);
+  const path = urlObject.pathname;
+  // const path = '/' + url.parse(apiUrl).pathname;
   const str = timestamp + method + path + requestBody;
   const sig = sign(str, process.env.API_SECRET || '');
   return { signature: sig, timestamp };

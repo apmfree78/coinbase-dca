@@ -15,7 +15,7 @@ export async function updateOrderFillStatusOnDatabase(): Promise<
     return;
   }
 
-  //filter out order_id as that is all we need
+  // filter out order_id as that is all we need
   const filledOrderIds = realTimeOrderData.map((order) => order.order_id);
 
   // obtain order info recorded in database that are still marked as UNFILLED
@@ -31,7 +31,7 @@ export async function updateOrderFillStatusOnDatabase(): Promise<
 
   // check each unfilledOrder against real time orders to see which are filled
   for (const order of unfilledOrdersInDatabase) {
-    //check if order recorded in database is in fact filled
+    // check if order recorded in database is in fact filled
     if (filledOrderIds.includes(order.order_id)) {
       // update order database record to reflect that 'isFilled'
       const updatedOrder: SubmittedOrder = { ...order, isFilled: true };

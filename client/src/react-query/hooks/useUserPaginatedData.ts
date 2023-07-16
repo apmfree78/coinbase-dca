@@ -13,7 +13,7 @@ async function fetchPaginatedData<T>(
   user: User | null,
   pageNumber: number,
   urlPath: string,
-  sort: string = ''
+  sort = ''
 ): Promise<PaginationData<T> | null> {
   if (!user) return null;
   const { data }: AxiosResponse<PaginationData<T>> = await axiosInstance.get(
@@ -36,7 +36,7 @@ export interface UsePaginatedData<T> {
 export function useUserPaginatedData<T>(
   urlPath: string,
   queryKey: string,
-  sort: string = ''
+  sort = ''
 ): UsePaginatedData<T> {
   // userUserPosts will handle page state
   const [page, setPage] = useState(1);
@@ -61,7 +61,7 @@ export function useUserPaginatedData<T>(
         fetchPaginatedData<T>(user, page + 1, urlPath, sort)
       );
     }
-  }, [page, user, queryClient]);
+  }, [page, user, queryClient, queryKey, sort, totalPages, urlPath]);
 
   return {
     paginatedData,

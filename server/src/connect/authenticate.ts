@@ -35,7 +35,7 @@ export class Auth {
     email: string,
     password: string,
   ): Promise<void> {
-    let requestData = { identity: email, password };
+    const requestData = { identity: email, password };
 
     try {
       const { data, status }: CustomAxiosResponse = await axios.post(

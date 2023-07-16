@@ -19,5 +19,7 @@
     "@typescript-eslint",
     "prettier"
   ],
-  "rules": {}
+  "rules": {
+    "react-refresh/only-export-components": "off"
+  }
 }

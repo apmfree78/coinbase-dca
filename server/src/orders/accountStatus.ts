@@ -15,7 +15,7 @@ export async function checkAccountStatus(): Promise<
     const info = response.data as AccountStatus;
     const userAccounts: AccountStatusSuccessResponse[] = [];
     // console.log(info);
-    info.accounts.map((account) => {
+    info.accounts.forEach((account) => {
       const balance = parseFloat(account.available_balance.value).toFixed(5);
       console.log('--------------------------------');
       console.log('name:', account.name);
@@ -27,7 +27,7 @@ export async function checkAccountStatus(): Promise<
       userAccounts.push({
         name: account.name,
         active: account.active,
-        balance: balance,
+        balance,
       });
     });
     return userAccounts;

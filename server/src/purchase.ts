@@ -27,7 +27,8 @@ export async function submitPurchaseOrdersForAllUsers(): Promise<
   for (const user of userData.items) {
     // filter out orders that are not coinbase and not me
     const orders: PurchaseOrder[] | undefined = user.expand?.dca_orders.filter(
-      (order) => order.exchange === 'coinbase' && user.email === 'amit@profitswami.com',
+      (order) =>
+        order.exchange === 'coinbase' && user.email === 'amit@profitswami.com',
     );
 
     if (!orders) return null;

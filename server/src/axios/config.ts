@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use(
     // console.log('method', config.method?.toUpperCase());
     // console.log('url', config.url);
     const method = config.method?.toUpperCase();
-    let body = method === 'POST' ? JSON.stringify(config.data) : '';
+    const body = method === 'POST' ? JSON.stringify(config.data) : '';
 
     const { signature, timestamp } = generateSignature(
       config.method?.toUpperCase() || 'GET',

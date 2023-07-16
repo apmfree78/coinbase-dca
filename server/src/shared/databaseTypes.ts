@@ -1,6 +1,21 @@
 export type Membership = 'free' | 'silver' | 'gold' | 'platinum';
 export type Status = 'active' | 'suspended';
-//pocketbase record id
+
+export const exchanges = [
+  'coinbase',
+  'binance',
+  'kraken',
+  'bitstamp',
+  'gemini',
+] as const;
+
+export type exchangeType = typeof exchanges[number];
+
+export const assets = ['BTC', 'ETH', 'ADA', 'SOL', 'MATIC'] as const;
+
+export type assetType = typeof assets[number];
+
+// pocketbase record id
 export interface Id {
   id: string;
   collectionId: string;
@@ -13,11 +28,30 @@ export interface Id {
   emailVisibility: boolean;
 }
 
+export interface NewPurchaseOrder {
+  exchange: exchangeType;
+  asset: assetType;
+  amount: number;
+  amount_purchased?: number;
+  owner: string;
+}
+
+export type CollectionId = {
+  id: string;
+  collectionId: string;
+  collectionName: string;
+  created: string;
+  updated: string;
+};
+
+// user purchase order
+export type PurchaseOrder = CollectionId & NewPurchaseOrder;
+
 export interface NewUser {
   email: string;
   token: string;
   dca_orders?: string[];
-  expand?: {dca_orders: PurchaseOrder[]};
+  expand?: { dca_orders: PurchaseOrder[] };
   membership: Membership;
   submitted_orders?: string[];
   status: Status;
@@ -26,7 +60,7 @@ export interface NewUser {
 // user type
 export type User = Id & NewUser;
 
-export type AbbreviatedUserWithOrders = {id: string} & Omit<NewUser, 'token'>;
+export type AbbreviatedUserWithOrders = { id: string } & Omit<NewUser, 'token'>;
 
 export type PatchUserPayload = {
   username?: string;
@@ -48,35 +82,6 @@ export interface AdminResponse {
     updated: string;
     email: string;
   };
-}
-export type CollectionId = {
-  id: string;
-  collectionId: string;
-  collectionName: string;
-  created: string;
-  updated: string;
-};
-
-export const exchanges = [
-  'coinbase',
-  'binance',
-  'kraken',
-  'bitstamp',
-  'gemini',
-] as const;
-
-export type exchangeType = typeof exchanges[number];
-
-export const assets = ['BTC', 'ETH', 'ADA', 'SOL', 'MATIC'] as const;
-
-export type assetType = typeof assets[number];
-
-export interface NewPurchaseOrder {
-  exchange: exchangeType;
-  asset: assetType;
-  amount: number;
-  amount_purchased?: number;
-  owner: string;
 }
 
 type OptionalSubmittedOrderFields = {
@@ -109,9 +114,6 @@ export interface PostOrderPayload {
 export type PatchOrderPayload = PostOrderPayload & {
   owner: string;
 };
-
-// user purchase order
-export type PurchaseOrder = CollectionId & NewPurchaseOrder;
 
 // the is structure pocketbase will return
 export type PaginationData<T> = {

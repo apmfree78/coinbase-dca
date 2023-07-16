@@ -1,4 +1,5 @@
 module.exports = {
+  root: true,
   env: { browser: true, es2020: true },
   extends: [
     'eslint:recommended',
@@ -9,8 +10,8 @@ module.exports = {
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   plugins: ['react-refresh'],
   rules: {
-    'react-refresh/only-export-components': 'warn',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    'react-refresh/only-export-components': 'off',
     'no-unused-vars': 'warn',
-    '@typescript-eslint/no-unused-vars': 'warn'
   },
 }

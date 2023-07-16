@@ -11,7 +11,7 @@ export async function recordLimitOrdersToDatabase(
   currentUser: AbbreviatedUserWithOrders,
   limitOrders: LimitOrderSubmitted[],
 ): Promise<User[] | []> {
-  let updatedUsers = [];
+  const updatedUsers = [];
   for (const order of limitOrders) {
     const orderPayload: PostSubmittedOrderPayload = {
       order_id: order.order_id,

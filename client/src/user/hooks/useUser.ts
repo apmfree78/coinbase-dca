@@ -15,7 +15,7 @@ async function getUser(user: User | null): Promise<User | null> {
 
 async function patchUser(user: User | null): Promise<User | null> {
   if (!user) return null;
-  const payload: any = { ...user };
+  const payload: Partial<User> = { ...user };
   delete payload.id;
   delete payload.token;
   const { data }: AxiosResponse<User> = await axiosInstance.patch(
@@ -34,7 +34,7 @@ interface UseUser {
 
 export function useUser(): UseUser {
   const queryClient = useQueryClient();
-  const { data: user } = useQuery<any, unknown, User | null, string>(
+  const { data: user } = useQuery<User | null, unknown, User | null, string>(
     queryKeys.user,
     () => getUser(user || null),
     {

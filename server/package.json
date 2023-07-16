@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint . --ext .ts --ignore-path .gitignore --cache --fix",
+    "lint": "eslint . --ext .ts --cache --fix",
     "format": "prettier 'src/**/*.ts' --write --ignore-path .gitignore",
     "purchase": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/liveTests/index.js",
     "status": "npm run build && NODE_ENV=production node --es-module-specifier-resolution=node build/liveTests/checkAccounts.js",
@@ -38,7 +38,7 @@
     "@typescript-eslint/parser": "^5.59.2",
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",

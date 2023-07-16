@@ -52,10 +52,6 @@ export type PriceDataSuccessResponse = {
   price: number;
 };
 
-export type ListFilledOrderResponse = {
-  orders: FilledOrder[];
-};
-
 export type FilledOrder = {
   order_id: string;
   product_id: string;
@@ -103,6 +99,10 @@ export type FilledOrder = {
   outstanding_hold_amount: string;
   is_liquidation: false;
   last_fill_time: string;
+};
+
+export type ListFilledOrderResponse = {
+  orders: FilledOrder[];
 };
 
 export interface CoinbaseOrderRequest {
