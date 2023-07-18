@@ -1,7 +1,7 @@
 import 'styles/SignUpSignIn.css';
 
 import { useAuth } from 'auth/useAuth';
-import { useUser } from 'user/hooks/useUser';
+import { useAuthContext } from 'auth/authContext';
 import Layout from 'layout';
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ const SignUp: React.FC = () => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const authenticate = useAuth();
-  const { user } = useUser();
+  const { user } = useAuthContext();
 
   // if already login, then redirect to main page
   if (user) {

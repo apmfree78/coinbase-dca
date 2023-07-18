@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios';
 import { axiosInstance, getJWTHeader } from 'axiosInstance';
-import { useUser } from 'user/hooks/useUser';
 import { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { queryKeys } from 'react-query/constants';
 import type { PaginationData, User } from 'shared/types';
+import { useAuthContext } from 'auth/authContext';
 
 const ordersPerPage = 8;
 
@@ -18,7 +18,7 @@ async function fetchPaginatedData<T>(
   if (!user) return null;
   const { data }: AxiosResponse<PaginationData<T>> = await axiosInstance.get(
     `${urlPath}?perPage=${ordersPerPage}&page=${pageNumber}&sort=${sort}`,
-    { headers: getJWTHeader(user) }
+    { headers: getJWTHeader() }
   );
   return data;
 }
@@ -40,7 +40,7 @@ export function useUserPaginatedData<T>(
 ): UsePaginatedData<T> {
   // userUserPosts will handle page state
   const [page, setPage] = useState(1);
-  const { user } = useUser();
+  const { user } = useAuthContext();
   const queryClient = useQueryClient();
 
   // get user orders from pocketbase

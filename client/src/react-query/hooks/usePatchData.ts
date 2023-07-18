@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios';
 import { axiosInstance, getJWTHeader } from 'axiosInstance';
 import { customToast } from 'components/Toast';
-import { useUser } from 'user/hooks/useUser';
 import { useMutation } from 'react-query';
 import { queryClient } from 'react-query/queryClient';
 import type { User, CollectionId } from 'shared/types';
+import { useAuthContext } from 'auth/authContext';
 
 async function patchData<T extends CollectionId, K>(
   id: string,
@@ -16,7 +16,7 @@ async function patchData<T extends CollectionId, K>(
   const { data }: AxiosResponse<T> = await axiosInstance.patch(
     `${urlPath}/${id}`,
     payload,
-    { headers: getJWTHeader(user) }
+    { headers: getJWTHeader() }
   );
   return data;
 }
@@ -26,7 +26,7 @@ export function usePatchData<T extends CollectionId, K>(
   urlPath: string,
   queryKey: string
 ) {
-  const { user } = useUser();
+  const { user } = useAuthContext();
 
   const { isSuccess, isLoading, isError, error, mutate } = useMutation(
     ({ id, payload }: { id: string; payload: K }) =>

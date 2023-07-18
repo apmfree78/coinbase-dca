@@ -1,9 +1,9 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { baseUrl } from "axiosInstance/constants";
-import { User } from "shared/types";
+import axios, { AxiosRequestConfig } from 'axios';
+import { baseUrl } from 'axiosInstance/constants';
+import { getStoredToken } from 'user-storage';
 
-export function getJWTHeader(user: User): Record<string, string> {
-  return { Authorization: `Bearer ${user.token}` };
+export function getJWTHeader(): Record<string, string> {
+  return { Authorization: `Bearer ${getStoredToken()}` };
 }
 
 const config: AxiosRequestConfig = { baseURL: baseUrl };

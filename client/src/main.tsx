@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { queryClient } from './react-query/queryClient';
 import { BrowserRouter } from 'react-router-dom';
 import { GlobalProvider } from 'context';
+import { AuthProvider } from 'auth/authContext';
 import 'tailwind.css';
 
 import App from './App';
@@ -15,12 +16,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <GlobalProvider>
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          <App />
-          <ReactQueryDevtools />
-        </QueryClientProvider>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <QueryClientProvider client={queryClient}>
+            <App />
+            <ReactQueryDevtools />
+          </QueryClientProvider>
+        </BrowserRouter>
+      </AuthProvider>
     </GlobalProvider>
   </React.StrictMode>
 );

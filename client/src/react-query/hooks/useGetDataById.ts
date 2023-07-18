@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { axiosInstance, getJWTHeader } from 'axiosInstance';
-import { useUser } from 'user/hooks/useUser';
 import { useQuery } from 'react-query';
 import { queryKeys } from 'react-query/constants';
 import type { User } from 'shared/types';
+import { useAuthContext } from 'auth/authContext';
 
 async function fetchUserDataById<T>(
   id: string | null,
@@ -13,7 +13,7 @@ async function fetchUserDataById<T>(
   if (!user || !id) return null;
   const { data }: AxiosResponse<T> = await axiosInstance.get(
     `${urlPath}/${id}`,
-    { headers: getJWTHeader(user) }
+    { headers: getJWTHeader() }
   );
   return data;
 }
@@ -28,7 +28,7 @@ export function useGetDataById<T>(
   urlPath: string,
   queryKey: string
 ): UseData<T> {
-  const { user } = useUser();
+  const { user } = useAuthContext();
 
   // load initial post
   // get post by id from pocketbase

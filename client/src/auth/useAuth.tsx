@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios';
 import { axiosInstance } from 'axiosInstance';
-import { useUser } from 'user/hooks/useUser';
+import { setStoredToken, clearStoredToken } from 'user-storage';
 import { User } from 'shared/types';
+import { useAuthContext } from 'auth/authContext';
 import { customToast } from 'components/Toast';
 
 interface UseAuth {
@@ -23,7 +24,7 @@ type CustomAxiosResponse = AxiosResponse<UserSignInResponse> &
 
 export function useAuth(): UseAuth {
   // const SERVER_ERROR = 'There was an error contacting the server.';
-  const { clearUser, updateUser } = useUser();
+  const { saveUser } = useAuthContext();
 
   async function authServerCall(
     urlEndpoint: string,
@@ -56,11 +57,11 @@ export function useAuth(): UseAuth {
 
         const user: User = data.record;
 
-        // add user token to user object
-        user.token = data.token;
+        //update global auth context
+        saveUser(user);
 
-        // update stored user data
-        updateUser(data.record);
+        // add user token to user object
+        setStoredToken(data.token);
       }
     } catch (errorResponse) {
       customToast('Invalid email / password combo', 'is-warning');
@@ -85,7 +86,8 @@ export function useAuth(): UseAuth {
 
   function signout(): void {
     // clear user from stored user data
-    clearUser();
+    clearStoredToken();
+    saveUser(null);
     customToast('Logged out!', 'is-info');
   }
 

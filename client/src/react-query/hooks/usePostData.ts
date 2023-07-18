@@ -5,6 +5,7 @@ import { useUser } from 'user/hooks/useUser';
 import { useMutation } from 'react-query';
 import { queryClient } from 'react-query/queryClient';
 import type { User, CollectionId } from 'shared/types';
+import { useAuthContext } from 'auth/authContext';
 
 async function postNewData<T extends CollectionId, K>(
   user: User | null,
@@ -15,7 +16,7 @@ async function postNewData<T extends CollectionId, K>(
   const { data }: AxiosResponse<T> = await axiosInstance.post(
     urlPath,
     { ...payload, owner: user.id },
-    { headers: getJWTHeader(user) }
+    { headers: getJWTHeader() }
   );
   return data;
 }
@@ -25,7 +26,8 @@ export function usePostData<T extends CollectionId, K>(
   urlPath: string,
   queryKey: string
 ) {
-  const { user, updateUser } = useUser();
+  const { updateUser } = useUser();
+  const { user } = useAuthContext();
 
   const { data, isSuccess, isLoading, isError, error, mutate } = useMutation(
     (payload: K) => postNewData<T, K>(user, urlPath, payload),

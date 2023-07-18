@@ -5,6 +5,7 @@ import { useUser } from 'user/hooks/useUser';
 import { UseMutateFunction, useMutation, useQueryClient } from 'react-query';
 import { queryKeys } from 'react-query/constants';
 import type { User } from 'shared/types';
+import { useAuthContext } from 'auth/authContext';
 
 //fetch user posts with authorization token
 async function deleteUserData<T>(
@@ -15,7 +16,7 @@ async function deleteUserData<T>(
   if (!user) return null;
   const { data }: AxiosResponse<T> = await axiosInstance.delete(
     `${urlPath}/${id}`,
-    { headers: getJWTHeader(user) }
+    { headers: getJWTHeader() }
   );
   return data;
 }
@@ -24,7 +25,8 @@ type useDelete = UseMutateFunction<string, unknown, string, unknown>;
 
 export function useDeleteData<T>(urlPath: string, queryKey: string): useDelete {
   const queryClient = useQueryClient();
-  const { user, updateUser } = useUser();
+  const { updateUser } = useUser();
+  const { user } = useAuthContext();
 
   const { mutate } = useMutation(
     (id: string) => deleteUserData<T>(user, id, urlPath).then(() => id),
