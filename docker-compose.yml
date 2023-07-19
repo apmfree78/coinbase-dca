@@ -10,6 +10,8 @@ services:
       - '443:443'
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
+    networks:
+      - app-network
   web:
     build: 
       context: ./client
@@ -17,6 +19,8 @@ services:
     environment:
       - WDS_SOCKET_PORT=0
       - VITE_POCKETBASE_URL=http://pocketbase:8090
+    networks:
+      - app-network
   backend:
     build: 
       context: ./server
@@ -27,9 +31,13 @@ services:
       - API_SECRET=${API_SECRET}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    networks:
+      - app-network
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
     container_name: pocketbase
     restart: unless-stopped
     volumes:
       - ./pocketbase/pb_data:/pb_data
+    networks:
+      - app-network

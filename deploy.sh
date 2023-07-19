@@ -20,3 +20,6 @@ docker-compose down
 
 # Build services
 docker-compose build
+
+# launch updated app
+docker-compose up -d
