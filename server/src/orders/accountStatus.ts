@@ -34,6 +34,7 @@ export async function checkAccountStatus(): Promise<
     // Error handling below
   } catch (err: unknown) {
     console.warn('error getting user account status');
+    console.log(err);
     const message = axios.isAxiosError(err)
       ? err?.response?.data.message
       : err instanceof Error
