@@ -1,4 +1,4 @@
-import { RestContext, MockedRequest, ResponseComposition } from 'msw';
+import {RestContext, MockedRequest, ResponseComposition} from 'msw';
 import {
   CoinbaseOrderRequest,
   OrderResponseSuccess,
@@ -16,7 +16,7 @@ export const buyOrderResponse = (
     const cbAccessSign = req.headers.get('CB-ACCESS-SIGN');
     const cbAccessTimeStamp = req.headers.get('CB-ACCESS-TIMESTAMP');
     if (!cbAccessTimeStamp || !cbAccessSign || !cbAccessKey)
-      return res(ctx.status(400), ctx.json({ message: 'buy failure' }));
+      return res(ctx.status(400), ctx.json({message: 'buy failure'}));
 
     if (req.body?.order_configuration?.market_market_ioc?.quote_size) {
       return res(
@@ -61,5 +61,5 @@ export const buyOrderResponse = (
       );
     }
   }
-  return res(ctx.status(400), ctx.json({ message: 'buy failure' }));
+  return res(ctx.status(400), ctx.json({message: 'buy failure'}));
 };

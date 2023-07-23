@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
-import { v4 as uuidv4 } from 'uuid';
-import { axiosInstance } from '../axios/config';
-import { AppResult, AppState, panic, sleep } from '../shared/utils';
+import axios, {AxiosResponse} from 'axios';
+import {v4 as uuidv4} from 'uuid';
+import {axiosInstance} from '../axios/config';
+import {AppResult, AppState, panic, sleep} from '../shared/utils';
 import {
   CoinbaseCurrency,
   CoinbaseOrderRequest,
@@ -32,8 +32,8 @@ export async function marketBuy(coin: CoinbaseCurrency): Promise<string> {
     const message = axios.isAxiosError(err)
       ? err?.response?.data.message
       : err instanceof Error
-        ? err.message
-        : 'unknown error occurred';
+      ? err.message
+      : 'unknown error occurred';
     const data: AppResult = {
       state: AppState.BUY_FAILURE,
       message,

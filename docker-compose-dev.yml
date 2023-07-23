@@ -14,10 +14,10 @@ services:
     environment:
       - WDS_SOCKET_PORT=0
       - VITE_POCKETBASE_URL=http://pocketbase:8090
-  backend:
+  trade:
     build: 
-      context: ./server
-    container_name: backend
+      context: ./trading-service
+    container_name: trade
     env_file:
       - ./server/.env.production
     environment:
@@ -32,6 +32,6 @@ services:
       - ./pocketbase/pb_data:/pb_data
   tests:
     build: 
-      context: ./server
+      context: ./trading-service
       dockerfile: Dockerfile.dev
     command: ["npm","run","test"]

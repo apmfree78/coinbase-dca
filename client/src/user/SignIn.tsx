@@ -81,12 +81,17 @@ const SignIn: React.FC = () => {
           Login
         </button>
 
-        <Link
-          className='mt-4 block text-blue-400 hover:text-blue-700'
-          to='/signup'
-        >
-          No Account? Sign Up for Free!
-        </Link>
+        <div className='flex flex-col mt-3'>
+          <Link className='text-blue-400 hover:text-blue-700' to='/signup'>
+            No Account? Sign Up for Free!
+          </Link>
+          <Link
+            className='text-blue-400 text-sm hover:text-blue-700'
+            to='/password-reset'
+          >
+            Click Here to Reset Password
+          </Link>
+        </div>
       </div>
     </Layout>
   );

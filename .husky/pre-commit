@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm --prefix server run lint
+npm --prefix trading-service run lint
 npm --prefix client run lint

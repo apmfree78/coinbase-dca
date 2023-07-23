@@ -11,7 +11,7 @@ import {
   accountstatusURL,
   productPriceURL,
 } from './constants';
-import { buyOrderResponse } from './orderResponse';
+import {buyOrderResponse} from './orderResponse';
 import {
   mockAccountDataResponse,
   mockPriceDataResponse,
@@ -38,7 +38,7 @@ export const coinbaseHandlers: RequestHandler[] = [
       if (urlContents.includes('BTC-USD')) {
         return res(ctx.json(mockPriceDataResponse));
       } else
-        return res(ctx.status(400), ctx.json({ message: 'invalid product id' }));
+        return res(ctx.status(400), ctx.json({message: 'invalid product id'}));
     },
   ),
 ];

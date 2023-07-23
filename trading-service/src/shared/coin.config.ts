@@ -67,11 +67,11 @@ export type FilledOrder = {
   client_order_id: string;
   status: 'FILLED';
   time_in_force:
-  | 'GOOD_UNTIL_CANCELLED'
-  | 'IMMEDIATE_OR_CANCEL'
-  | 'FILL_OR_KILL'
-  | 'UNKNOWN_TIME_IN_FORCE'
-  | 'GOOD_UNTIL_DATE_TIME';
+    | 'GOOD_UNTIL_CANCELLED'
+    | 'IMMEDIATE_OR_CANCEL'
+    | 'FILL_OR_KILL'
+    | 'UNKNOWN_TIME_IN_FORCE'
+    | 'GOOD_UNTIL_DATE_TIME';
   created_time: string;
   completion_percentage: string;
   filled_size: string;
@@ -85,10 +85,10 @@ export type FilledOrder = {
   size_inclusive_of_fees: false;
   total_value_after_fees: string;
   trigger_status:
-  | 'INVALID_ORDER_TYPE'
-  | 'UNKNOWN_TRIGGER_STATUS'
-  | 'STOP_PENDING'
-  | 'STOP_TRIGGERED';
+    | 'INVALID_ORDER_TYPE'
+    | 'UNKNOWN_TRIGGER_STATUS'
+    | 'STOP_PENDING'
+    | 'STOP_TRIGGERED';
   order_type: 'LIMIT' | 'MARKET' | 'STOP' | 'STOP_LIMIT' | 'UNKNOWN_ORDER_TYPE';
   reject_reason: 'REJECT_REASON_UNSPECIFIED';
   settled: true;

@@ -1,5 +1,5 @@
-# for running on linode server to build production app
 version: '2'
+  # for running on linode server to build production app
 services:
   nginx:
     restart: always
@@ -21,10 +21,10 @@ services:
       - VITE_POCKETBASE_URL=http://pocketbase:8090
     networks:
       - app-network
-  backend:
+  trade:
     build: 
-      context: ./server
-    container_name: backend
+      context: ./trading-service
+    container_name: trade
     environment:
       - POCKETBASE_URL=${POCKETBASE_URL}
       - API_KEY=${API_KEY}

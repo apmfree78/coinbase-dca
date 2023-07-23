@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from 'routes/ProtectedRoute';
 import Purchases from 'purchases/Purchases';
 import OrderHome from 'orders/OrderHome';
+import PasswordReset from 'user/PasswordReset';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         }
       />
       <Route path='/login' element={<SignIn />} />
+      <Route path='/password-reset' element={<PasswordReset />} />
       <Route path='/signup' element={<SignUp />} />
     </Routes>
   );

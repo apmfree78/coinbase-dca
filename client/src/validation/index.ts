@@ -9,6 +9,10 @@ export const SignInCredentials = z.object({
     .min(8, { message: 'password must be 8 or more characters' }),
 });
 
+export const PasswordResetEmail = z
+  .string()
+  .email({ message: 'Invalid email address' });
+
 export const SignUpCredentials = SignInCredentials.and(
   z.object({
     passwordConfirm: z.string(),
@@ -24,11 +28,10 @@ export const SignUpCredentials = SignInCredentials.and(
 
 export type SignInCredentialsType = z.infer<typeof SignInCredentials>;
 export type SignUpCredentialsType = z.infer<typeof SignUpCredentials>;
+export type PasswordResetEmailType = z.infer<typeof PasswordResetEmail>;
 
 // parses Zod Error and displays errors as toasts on screen
-export function displayZodErrorToast<T extends object>(
-  error: z.ZodError<T>
-): void {
+export function displayZodErrorToast<T>(error: z.ZodError<T>): void {
   // parsing error messages
   const errorData = JSON.parse(error.message);
   const errorMessages = errorData.map((error: z.ZodError<T>) => error.message);

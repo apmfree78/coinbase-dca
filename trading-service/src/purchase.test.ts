@@ -1,20 +1,20 @@
-import { accountstatusURL, buyOrderURL } from './mocks/constants';
-import { panic, AppState } from './shared/utils';
-import { purchaseCrypto, submitPurchaseOrdersForAllUsers } from './purchase';
-import { updateOrderFillStatusOnDatabase } from './updateOrderStatus';
-import { server } from './mocks/server';
-import { rest } from 'msw';
-import { checkAccountStatus } from './orders/accountStatus';
-import type { AccountStatusSuccessResponse } from './shared/coin.config';
-import { mockActiveUserOrders, mockPriceDataResponse } from './mocks/mockData';
-import { PurchaseOrder } from './shared/databaseTypes';
+import {accountstatusURL, buyOrderURL} from './mocks/constants';
+import {panic, AppState} from './shared/utils';
+import {purchaseCrypto, submitPurchaseOrdersForAllUsers} from './purchase';
+import {updateOrderFillStatusOnDatabase} from './updateOrderStatus';
+import {server} from './mocks/server';
+import {rest} from 'msw';
+import {checkAccountStatus} from './orders/accountStatus';
+import type {AccountStatusSuccessResponse} from './shared/coin.config';
+import {mockActiveUserOrders, mockPriceDataResponse} from './mocks/mockData';
+import {PurchaseOrder} from './shared/databaseTypes';
 
 describe('submitPurchaseOrderForAllUsers', () => {
   it('correctly returns list of submitted limit orders', async () => {
     const limitOrders = await submitPurchaseOrdersForAllUsers();
 
     // extract expected response from mock data
-    const { dca_orders } = mockActiveUserOrders.items[0].expand as {
+    const {dca_orders} = mockActiveUserOrders.items[0].expand as {
       dca_orders: PurchaseOrder[];
     };
     const orders = dca_orders.filter(
@@ -60,7 +60,7 @@ describe('purchaseCrypto', () => {
   it('should panic when marketBuy fails', async () => {
     server.use(
       rest.post(buyOrderURL, (req, res, ctx) => {
-        return res(ctx.status(400), ctx.json({ message: 'buy failure' }));
+        return res(ctx.status(400), ctx.json({message: 'buy failure'}));
       }),
     );
 
@@ -88,7 +88,7 @@ describe('accountStatus', () => {
   it('should panic on failed call', async () => {
     server.use(
       rest.post(accountstatusURL, (req, res, ctx) => {
-        return res(ctx.status(400), ctx.json({ message: 'request failed' }));
+        return res(ctx.status(400), ctx.json({message: 'request failed'}));
       }),
     );
 

@@ -2,19 +2,19 @@ import {
   CoinbaseCurrency,
   PriceDataSuccessResponse,
 } from '../shared/coin.config';
-import { buyOrderURL, filledOrderURL, productPriceURL } from '../mocks/constants';
-import { panic } from '../shared/utils';
-import { limitOrderBuy } from './limitOrderBuy';
-import { getFilledOrders } from './getFilledOrders';
-import { marketBuy } from './marketBuy';
-import { server } from '../mocks/server';
-import { rest } from 'msw';
-import { getPriceData } from '../orders/getPriceData';
+import {buyOrderURL, filledOrderURL, productPriceURL} from '../mocks/constants';
+import {panic} from '../shared/utils';
+import {limitOrderBuy} from './limitOrderBuy';
+import {getFilledOrders} from './getFilledOrders';
+import {marketBuy} from './marketBuy';
+import {server} from '../mocks/server';
+import {rest} from 'msw';
+import {getPriceData} from '../orders/getPriceData';
 import {
   mockFilledOrderResponse,
   mockPriceDataResponse,
 } from '../mocks/mockData';
-import type { FilledOrder } from '../shared/coin.config';
+import type {FilledOrder} from '../shared/coin.config';
 
 describe('marketBuy', () => {
   it('should return success message on successful buy', async () => {
@@ -31,7 +31,7 @@ describe('marketBuy', () => {
   it('should panic on failed buy', async () => {
     server.use(
       rest.post(buyOrderURL, (req, res, ctx) => {
-        return res(ctx.status(400), ctx.json({ message: 'buy failure' }));
+        return res(ctx.status(400), ctx.json({message: 'buy failure'}));
       }),
     );
 
@@ -60,7 +60,8 @@ describe('limitOrderBuy', () => {
     const result = await limitOrderBuy(coin);
 
     expect(result?.success_message).toEqual(
-      `✅ Limit Order(1) Submitted - For ${coin.funds} of ${coin.productId
+      `✅ Limit Order(1) Submitted - For ${coin.funds} of ${
+        coin.productId
       } at ${limitPrice.toFixed(2)}`,
     );
   });
@@ -68,7 +69,7 @@ describe('limitOrderBuy', () => {
   it('should panic on failed buy', async () => {
     server.use(
       rest.post(buyOrderURL, (req, res, ctx) => {
-        return res(ctx.status(400), ctx.json({ message: 'buy failure' }));
+        return res(ctx.status(400), ctx.json({message: 'buy failure'}));
       }),
     );
 
@@ -90,7 +91,7 @@ describe('getPriceData', () => {
   it('should panic on failed call', async () => {
     server.use(
       rest.post(productPriceURL, (req, res, ctx) => {
-        return res(ctx.status(400), ctx.json({ message: 'request failed' }));
+        return res(ctx.status(400), ctx.json({message: 'request failed'}));
       }),
     );
 
@@ -132,7 +133,7 @@ describe('getFilledOrders', () => {
   it('should panic on failed call', async () => {
     server.use(
       rest.post(filledOrderURL, (req, res, ctx) => {
-        return res(ctx.status(400), ctx.json({ message: 'request failed' }));
+        return res(ctx.status(400), ctx.json({message: 'request failed'}));
       }),
     );
 

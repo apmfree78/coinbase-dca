@@ -1,17 +1,17 @@
-import { AppResult, AppState } from './shared/utils';
+import {AppResult, AppState} from './shared/utils';
 import {
   coins,
   CoinbaseCurrency,
   LimitOrderSubmitted,
 } from './shared/coin.config';
-import { recordLimitOrdersToDatabase } from './connect/recordLimitOrders';
+import {recordLimitOrdersToDatabase} from './connect/recordLimitOrders';
 import type {
   AbbreviatedUserWithOrders,
   PaginationData,
   PurchaseOrder,
 } from './shared/databaseTypes';
-import { getActiveUserWithOrders } from './connect/pocketbase';
-import { limitOrderBuy } from './orders/limitOrderBuy';
+import {getActiveUserWithOrders} from './connect/pocketbase';
+import {limitOrderBuy} from './orders/limitOrderBuy';
 
 export async function submitPurchaseOrdersForAllUsers(): Promise<
   LimitOrderSubmitted[] | null

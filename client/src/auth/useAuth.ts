@@ -1,5 +1,5 @@
-import { AxiosResponse } from 'axios';
 import { axiosInstance } from 'axiosInstance';
+import { AxiosResponse } from 'axios';
 import { setStoredToken, clearStoredToken } from 'user-storage';
 import { User } from 'shared/types';
 import { useAuthContext } from 'auth/authContext';

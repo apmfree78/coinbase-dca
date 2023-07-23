@@ -1,5 +1,5 @@
 import { SubmittedOrder } from 'shared/types';
-import { formatDate } from 'components/formatDate';
+import { formatDate } from 'shared/formatDate';
 
 const PurchaseRow = ({ purchase }: { purchase: SubmittedOrder }) => {
   const date = formatDate(purchase.created);
