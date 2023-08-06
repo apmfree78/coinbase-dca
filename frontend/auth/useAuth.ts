@@ -1,5 +1,5 @@
 import { axiosInstance } from 'axiosInstance';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { setStoredToken, clearStoredToken } from 'user-storage';
 import { User } from 'shared/types';
 import { useAuthContext } from 'auth/authContext';
@@ -35,7 +35,14 @@ export function useAuth(): UseAuth {
     let requestData: object; // body of request , holds email , password etc
 
     // if sign up passwordConfirm exists, other wise it's a user sign in
-    if (passwordConfirm) requestData = { email, password, passwordConfirm };
+    if (passwordConfirm)
+      requestData = {
+        email,
+        password,
+        passwordConfirm,
+        status: 'active',
+        membership: 'free',
+      };
     else requestData = { identity: email, password };
 
     try {
@@ -46,9 +53,19 @@ export function useAuth(): UseAuth {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (status === 400) {
+      if (status !== 200) {
         const message = 'message' in data ? data.message : 'Unauthorized';
         customToast(message, 'is-warning');
+        return;
+      }
+
+      // if new user was created then show success message and exit
+      if (passwordConfirm) {
+        customToast(
+          'sign up successful...go to sign in page to login',
+          'is-success',
+          7000
+        );
         return;
       }
 
@@ -63,14 +80,24 @@ export function useAuth(): UseAuth {
         // add user token to user object
         setStoredToken(data.token);
       }
-    } catch (errorResponse) {
-      customToast('Invalid email / password combo', 'is-warning');
+    } catch (err) {
+      console.info(err);
+      let message: string;
+      if (axios.isAxiosError(err)) {
+        message = err?.response?.data.message;
+      } else if (err instanceof Error) {
+        message = err.message;
+      } else {
+        message = 'unknown error occurred';
+      }
+      customToast(message, 'is-warning');
     }
   }
 
   async function signin(email: string, password: string): Promise<void> {
     authServerCall('/collections/users/auth-with-password', email, password);
   }
+
   async function signup(
     email: string,
     password: string,

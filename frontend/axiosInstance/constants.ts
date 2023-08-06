@@ -1,1 +1,1 @@
-export const baseUrl = `${import.meta.env.VITE_POCKETBASE_URL || ''}/api/`;
+export const baseUrl = `${process.env.NEXT_PUBLIC_POCKETBASE_URL || ''}/api/`;

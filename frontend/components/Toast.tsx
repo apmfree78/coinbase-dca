@@ -1,11 +1,16 @@
-import { toast, ToastType } from "bulma-toast";
+import { toast, ToastType } from 'bulma-toast';
 
 // a wrapper around useToast that has my default options applied
-export function customToast(message: string | HTMLElement, type: ToastType) {
+export function customToast(
+  message: string | HTMLElement,
+  type: ToastType,
+  duration: number = 2000
+) {
   return toast({
     message,
     type,
-    animate: { in: "fadeIn" },
-    position: "bottom-center",
+    animate: { in: 'fadeIn' },
+    position: 'bottom-center',
+    duration,
   });
 }
