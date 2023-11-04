@@ -35,7 +35,14 @@ export function useAuth(): UseAuth {
     let requestData: object; // body of request , holds email , password etc
 
     // if sign up passwordConfirm exists, other wise it's a user sign in
-    if (passwordConfirm) requestData = { email, password, passwordConfirm };
+    if (passwordConfirm)
+      requestData = {
+        email,
+        password,
+        passwordConfirm,
+        status: 'active',
+        membership: 'free',
+      };
     else requestData = { identity: email, password };
 
     try {

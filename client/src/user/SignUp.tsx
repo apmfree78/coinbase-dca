@@ -13,6 +13,7 @@ import {
 import Input from 'components/Input';
 
 const SignUp: React.FC = () => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
